@@ -1,0 +1,676 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"js",
+				"js"
+			],
+			[
+				"background",
+				"background-clip"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"req",
+				"require"
+			],
+			[
+				"fad",
+				"fadeOut  (function)"
+			],
+			[
+				"fund",
+				"fund_amount"
+			],
+			[
+				"fun",
+				"fund_amount"
+			],
+			[
+				"e",
+				"end"
+			],
+			[
+				"write",
+				"writeHead"
+			],
+			[
+				"re",
+				"response"
+			],
+			[
+				"st",
+				"startTime"
+			],
+			[
+				"s",
+				"start"
+			],
+			[
+				"input",
+				"INPUT_FAILURE"
+			],
+			[
+				"tm_",
+				"tm_ptr"
+			],
+			[
+				"chan",
+				"change_amount"
+			],
+			[
+				"ti",
+				"TICKET_ZONE_LEN"
+			],
+			[
+				"tic",
+				"TICKET_TYPE_LEN"
+			],
+			[
+				"in_",
+				"in_type"
+			],
+			[
+				"ticket",
+				"ticket_zone"
+			],
+			[
+				"tm_t",
+				"tm_type_ptr"
+			],
+			[
+				"EX",
+				"EXTRA_CHARS"
+			],
+			[
+				"coin",
+				"coin_file"
+			],
+			[
+				"cle",
+				"clean_lin"
+			],
+			[
+				"del",
+				"delete_from_list"
+			],
+			[
+				"pr",
+				"printf	printf …"
+			],
+			[
+				"add",
+				"add_to_list"
+			],
+			[
+				"print",
+				"print_list"
+			],
+			[
+				"str",
+				"strlen"
+			],
+			[
+				"op",
+				"open_brackets"
+			],
+			[
+				"bre",
+				"brackets_match"
+			],
+			[
+				"bra",
+				"brackets_match"
+			],
+			[
+				"las",
+				"last_bracket_opened"
+			],
+			[
+				"sqr",
+				"sqr_root"
+			],
+			[
+				"sqrt",
+				"sqrt_root"
+			],
+			[
+				"widt",
+				"width_ptr"
+			],
+			[
+				"check",
+				"check_input_ptr"
+			],
+			[
+				"CH",
+				"check_input_ptr"
+			],
+			[
+				"ch",
+				"check_input"
+			],
+			[
+				"test",
+				"test_string"
+			],
+			[
+				"chec",
+				"check_input_ptr"
+			],
+			[
+				"ceck",
+				"check_input"
+			],
+			[
+				"te",
+				"test_string_ptr"
+			],
+			[
+				"che",
+				"check_input_ptr"
+			],
+			[
+				"perf",
+				"perfect_squares_input"
+			],
+			[
+				"option",
+				"option_stats"
+			],
+			[
+				"per",
+				"perfect_squares_input"
+			],
+			[
+				"int",
+				"perfect_squares_input"
+			],
+			[
+				"inc",
+				"include"
+			],
+			[
+				"rea",
+				"read_rest_of_line"
+			],
+			[
+				"c",
+				"characters"
+			],
+			[
+				"opt",
+				"option_stats"
+			],
+			[
+				"i",
+				"include"
+			],
+			[
+				"option_stats_",
+				"option_stats_ptr"
+			],
+			[
+				"tes",
+				"test_string_ptr"
+			],
+			[
+				"C",
+				"CFLAGS"
+			],
+			[
+				"ascii",
+				"ascii_ptr"
+			],
+			[
+				"mat",
+				"matching_brackets"
+			],
+			[
+				"asc",
+				"ascii_to_binary"
+			],
+			[
+				"pe",
+				"perfect_squares"
+			],
+			[
+				"OPTION",
+				"option_choice"
+			],
+			[
+				"tota",
+				"totalSum"
+			],
+			[
+				"ex",
+				"examSum"
+			],
+			[
+				"as",
+				"ass2"
+			],
+			[
+				"ass",
+				"ass2Sum"
+			],
+			[
+				"ASS",
+				"ASS2_WORTH"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/home/thomas/p_gam/spark.org.au/views/mixins/pager.jade",
+			"settings":
+			{
+				"buffer_size": 2386,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/thomas/p_gam/spark.org.au/views/layout.jade",
+			"settings":
+			{
+				"buffer_size": 3110,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"user",
+				"Preferences: Settings - User"
+			],
+			[
+				"synta",
+				"Set Syntax: Jade"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"git commit his",
+				"Git: Commit history"
+			],
+			[
+				"git",
+				"Git: Commit history"
+			],
+			[
+				"git st",
+				"Git: Commit history"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 602.0
+	},
+	"console":
+	{
+		"height": 114.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/thomas/p_gam/boxy/boxy",
+		"/home/thomas/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/thomas/p_gam/boxy/index.js",
+		"/home/thomas/p_gam/boxy/views/boxy.jade",
+		"/home/thomas/p_gam/boxy/views/index.jade",
+		"/home/thomas/p_gam/boxy/public/style.css",
+		"/home/thomas/p_gam/boxy/app.js",
+		"/home/thomas/p_gam/boxy/scripts/boxy/box.js",
+		"/home/thomas/p_gam/boxy/views/layout.jade",
+		"/home/thomas/p_gam/boxy/scripts/boxy/boxy_background.js",
+		"/home/thomas/p_gam/boxy/scripts/boxy/boxy_main.js",
+		"/home/thomas/p_gam/boxy/scripts/boxy/controller.js",
+		"/home/thomas/p_gam/boxy/boxy.sublime-project",
+		"/home/thomas/p_gam/boxy/package.json",
+		"/home/thomas/p_gam/boxy/scripts/boxy/boxy_config.js",
+		"/home/thomas/p_gam/boxy/config.js",
+		"/home/thomas/p_gam/spark.org.au/app.js",
+		"/home/thomas/p_gam/boxy/views/mixins/boxy_scripts.jade",
+		"/home/thomas/p_gam/boxy/views/header.jade",
+		"/home/thomas/p_gam/boxy/view/layout.jade",
+		"/home/thomas/p_gam/boxy/view/index.jade",
+		"/home/thomas/p_gam/boxy/view/header.jade",
+		"/home/thomas/p_gam/boxy/view/index.html",
+		"/home/thomas/p_gam/boxy/stylesheets/style.css",
+		"/home/thomas/p_gam/boxy/requestHandlers.js",
+		"/home/thomas/p_gam/boxy/server.js",
+		"/home/thomas/p_gam/js/index.js",
+		"/home/thomas/p_gam/spark.org.au/notes.txt",
+		"/home/thomas/p_gam/spark.org.au/public/scripts/projects.js",
+		"/home/thomas/p_gam/spark.org.au/views/mixins/donationAmountSelectorTest.jade",
+		"/home/thomas/p_gam/spark.org.au/views/index.jade",
+		"/home/thomas/.bashrc",
+		"/home/thomas/p_gam/spark.org.au/views/mixins/donationForm.jade",
+		"/home/thomas/p_gam/spark.org.au/index.js",
+		"/home/thomas/p_gam/spark.org.au/views/projectDetail.jade",
+		"/home/thomas/p_gam/spark.org.au/views/mixins/donationAmountSelectorTest",
+		"/home/thomas/p_gam/spark.org.au/.gitignore",
+		"/home/thomas/p_gam/spark.org.au/grunt.js",
+		"/home/thomas/p_gam/spark.org.au/lib/donation/braintree.js",
+		"/home/thomas/p_gam/js/router.js",
+		"/home/thomas/p_gam/spark.org.au/node_modules/grunt/node_modules/glob/test/bash-results.json",
+		"/home/thomas/p_gam/spark.org.au/node_modules/nano/node_modules/follow/node_modules/browser-request/index.js",
+		"/home/thomas/p_gam/spark.org.au/doc/backend-workflow.md",
+		"/home/thomas/p_gam/spark.org.au/lib/donation/email-receipt.js",
+		"/home/thomas/p_gam/spark.org.au/lib/donation/braintree-dev-server.js",
+		"/home/thomas/p_gam/spark.org.au/lib/db/user.js",
+		"/home/thomas/p_gam/spark.org.au/lib/db/user-view.js",
+		"/home/thomas/p_gam/spark.org.au/lib/db/salesforce.js",
+		"/home/thomas/p_gam/spark.org.au/lib/db/salesforce-view.js",
+		"/home/thomas/p_gam/spark.org.au/lib/db/project.js",
+		"/home/thomas/p_gam/spark.org.au/lib/db/project-view.js",
+		"/home/thomas/p_gam/spark.org.au/lib/db/donation.js",
+		"/home/thomas/p_gam/spark.org.au/lib/db/changemaker.js",
+		"/home/thomas/p_gam/spark.org.au/lib/db/changemaker-view.js",
+		"/home/thomas/p_gam/spark.org.au/lib/db/accelerator.js",
+		"/home/thomas/p_gam/spark.org.au/lib/db/accelerator-view.js",
+		"/home/thomas/p_gam/spark.org.au/lib/spark.org.au.js",
+		"/home/thomas/p_gam/spark.org.au/lib/schema.js",
+		"/home/thomas/p_gam/spark.org.au/lib/project-helper.js",
+		"/home/thomas/p_gam/spark.org.au/lib/hasher.js",
+		"/home/thomas/p_gam/spark.org.au/lib/email.js",
+		"/home/thomas/p_gam/spark.org.au/lib/db.js",
+		"/home/thomas/p_gam/spark.org.au/lib/countries.json",
+		"/home/thomas/p_gam/spark.org.au/doc/db_schema/user.json",
+		"/home/thomas/p_gam/spark.org.au/doc/db_schema/readme.md",
+		"/home/thomas/p_gam/spark.org.au/doc/db_schema/project.json",
+		"/home/thomas/p_gam/spark.org.au/doc/db_schema/changemaker.json",
+		"/home/thomas/p_gam/spark.org.au/doc/db_schema/accelerator.json",
+		"/home/thomas/p_gam/spark.org.au/doc/salesforce-sync.md",
+		"/home/thomas/p_gam/spark.org.au/doc/directory-structure.md",
+		"/home/thomas/p_gam/spark.org.au/doc/coding-standards.md",
+		"/home/thomas/p_gam/spark.org.au/dev/create-users.js",
+		"/home/thomas/p_gam/spark.org.au/dev/create-projects.js",
+		"/home/thomas/p_gam/spark.org.au/content/oneMillion.js",
+		"/home/thomas/p_gam/spark.org.au/spark.org.au.sublime-project",
+		"/home/thomas/p_gam/spark.org.au/package.json",
+		"/home/thomas/p_gam/spark.org.au/config.js",
+		"/home/thomas/p_gam/spark.org.au/README.md",
+		"/home/thomas/p_gam/spark.org.au/Procfile",
+		"/home/thomas/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/thomas/.config/sublime-text-3/Packages/SideBarEnhancements/Side Bar.sublime-settings",
+		"/home/thomas/p_gam/spark.org.au/spark.org.au/public/scripts/projects.js",
+		"/home/thomas/p_gam/spark.org.au/spark.org.au/public/scripts/facebook.js",
+		"/home/thomas/p_gam/spark.org.au/spark.org.au/views/projectDetail.jade",
+		"/home/thomas/p_gam/spark.org.au/spark.org.au/views/mixins/donationForm.jade",
+		"/home/thomas/p_gam/spark.org.au/spark.org.au/config.js",
+		"/home/thomas/p_gam/spark.org.au/spark.org.au/.gitignore",
+		"/home/thomas/p_gam/js/server.js",
+		"/home/thomas/p_gam/js/requestHandlers.js",
+		"/home/thomas/p_gam/spark.org.au/spark.org.au/grunt.js",
+		"/home/thomas/p_gam/js/helloworld.jade",
+		"/home/thomas/p_gam/js/npm-debug.log",
+		"/home/thomas/p_gam/js/helloworld.fot",
+		"/home/thomas/p_gam/spark.org.au/npm-debug.log",
+		"/opt/sublime_text/changelog.txt",
+		"/home/thomas/uni/pinc/assign2/notes.txt",
+		"/home/thomas/uni/pinc/assign2/tm_options.c",
+		"/home/thomas/uni/pinc/assign2/tm_utility.c",
+		"/home/thomas/uni/pinc/assign2/tm_readme.txt",
+		"/home/thomas/uni/pinc/assign2/tm.c",
+		"/home/thomas/uni/pinc/assign2/tm_stock.c",
+		"/home/thomas/uni/pinc/assign2/Makefile",
+		"/home/thomas/uni/pinc/assign2/tm_utility.h",
+		"/home/thomas/uni/pinc/assign2/utility.c",
+		"/home/thomas/.config/sublime-text-3/Packages/User/Distraction Free.sublime-settings",
+		"/home/thomas/uni/pinc/assign2/thi.c",
+		"/home/thomas/uni/pinc/assign2/tm_coins.h",
+		"/home/thomas/uni/pinc/assign2/tm_stock.h",
+		"/home/thomas/p_gam/c/stuff/assertest.c",
+		"/home/thomas/uni/pinc/assign2/tm.h",
+		"/home/thomas/uni/pinc/assign2/thing.c",
+		"/home/thomas/uni/pinc/assign2/coin.h",
+		"/home/thomas/uni/pinc/assign2/coins.h",
+		"/home/thomas/uni/pinc/assign2/thing",
+		"/home/thomas/uni/pinc/assign2/tm.g",
+		"/home/thomas/p_gam/c/assign1/libpeerconnection.log",
+		"/home/thomas/p_gam/c/towers/main.c",
+		"/home/thomas/p_gam/c/towers/hanoi.h",
+		"/home/thomas/p_gam/c/towers/get.c",
+		"/home/thomas/p_gam/c/towers/move.c",
+		"/home/thomas/p_gam/c/stuff/bubble_sort.c",
+		"/home/thomas/p_gam/c/stuff/llex.c",
+		"/home/thomas/p_gam/c/stuff/fib.c",
+		"/home/thomas/uni/pinc/assign2/coins.csv",
+		"/home/thomas/uni/pinc/assign2/stock.csv",
+		"/home/thomas/uni/pinc/assign2/tm_coins.c",
+		"/home/thomas/uni/pinc/assign2/tm_options.h",
+		"/home/thomas/p_gam/c/towers/makefile"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"click",
+			"fund_amount",
+			"donationamountsele",
+			"donationamountselector",
+			"	\"color_scheme\": \"Packages/Theme - Flatland/Flatland Monokai.tmTheme\"",
+			"distraction",
+			"*",
+			"i"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/home/thomas/p_gam/spark.org.au/views/mixins/pager.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2386,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/thomas/p_gam/spark.org.au/views/layout.jade",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 3110,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								379,
+								379
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 30.0
+	},
+	"input":
+	{
+		"height": 29.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "boxy.sublime-project",
+	"replace":
+	{
+		"height": 56.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"braintre",
+				"lib/donation/braintree.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"~/p_gam/boxy/boxy.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 275.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
