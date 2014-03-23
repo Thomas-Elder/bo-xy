@@ -268,18 +268,18 @@
 	"buffers":
 	[
 		{
-			"file": "/home/thomas/p_gam/spark.org.au/views/mixins/pager.jade",
+			"file": "boxy.sublime-project",
 			"settings":
 			{
-				"buffer_size": 2386,
+				"buffer_size": 73,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/thomas/p_gam/spark.org.au/views/layout.jade",
+			"file": "views/index.jade",
 			"settings":
 			{
-				"buffer_size": 3110,
+				"buffer_size": 139,
 				"line_ending": "Unix"
 			}
 		}
@@ -352,13 +352,19 @@
 	},
 	"file_history":
 	[
+		"/home/thomas/p_gam/boxy/public/boxy.sublime-project",
+		"/home/thomas/p_gam/boxy/app.js",
+		"/home/thomas/p_gam/boxy/.app.js.swp",
+		"/home/thomas/p_gam/spark.org.au/views/mixins/pager.jade",
+		"/home/thomas/p_gam/boxy/boxy.sublime-workspace",
+		"/home/thomas/p_gam/boxy/boxy.sublime-workspace~",
+		"/home/thomas/p_gam/boxy/box",
 		"/home/thomas/p_gam/boxy/boxy",
 		"/home/thomas/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/thomas/p_gam/boxy/index.js",
 		"/home/thomas/p_gam/boxy/views/boxy.jade",
 		"/home/thomas/p_gam/boxy/views/index.jade",
 		"/home/thomas/p_gam/boxy/public/style.css",
-		"/home/thomas/p_gam/boxy/app.js",
 		"/home/thomas/p_gam/boxy/scripts/boxy/box.js",
 		"/home/thomas/p_gam/boxy/views/layout.jade",
 		"/home/thomas/p_gam/boxy/scripts/boxy/boxy_background.js",
@@ -473,17 +479,11 @@
 		"/home/thomas/p_gam/c/towers/get.c",
 		"/home/thomas/p_gam/c/towers/move.c",
 		"/home/thomas/p_gam/c/stuff/bubble_sort.c",
-		"/home/thomas/p_gam/c/stuff/llex.c",
-		"/home/thomas/p_gam/c/stuff/fib.c",
-		"/home/thomas/uni/pinc/assign2/coins.csv",
-		"/home/thomas/uni/pinc/assign2/stock.csv",
-		"/home/thomas/uni/pinc/assign2/tm_coins.c",
-		"/home/thomas/uni/pinc/assign2/tm_options.h",
-		"/home/thomas/p_gam/c/towers/makefile"
+		"/home/thomas/p_gam/c/stuff/llex.c"
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -527,11 +527,11 @@
 			[
 				{
 					"buffer": 0,
-					"file": "/home/thomas/p_gam/spark.org.au/views/mixins/pager.jade",
+					"file": "boxy.sublime-project",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2386,
+						"buffer_size": 73,
 						"regions":
 						{
 						},
@@ -544,9 +544,111 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -557,26 +659,24 @@
 				},
 				{
 					"buffer": 1,
-					"file": "/home/thomas/p_gam/spark.org.au/views/layout.jade",
+					"file": "views/index.jade",
 					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 3110,
+						"buffer_size": 139,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								379,
-								379
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -590,7 +690,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 30.0
+		"height": 23.0
 	},
 	"input":
 	{
@@ -626,7 +726,7 @@
 	"project": "boxy.sublime-project",
 	"replace":
 	{
-		"height": 56.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -648,7 +748,7 @@
 		[
 			[
 				"",
-				"~/p_gam/boxy/boxy.sublime-project"
+				"~/p_gam/spark.org.au/spark.org.au.sublime-project"
 			]
 		],
 		"width": 380.0
