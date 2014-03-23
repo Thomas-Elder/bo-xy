@@ -15,5 +15,9 @@
     "url" : "https://bitbucket.org/thomas_elder/boxy.git"
   },
   "keywords" : ["heroku"],
-  "author" : "thomas elder"
+  "author" : "thomas elder",
+  
+  "engines" : {
+    "node" : "0.8.26"
+  }
 }
