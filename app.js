@@ -21,8 +21,6 @@ app.use(express.logger('dev'));
 // set path for public
 app.use(express.static(path.join(__dirname, 'public')));
 
-popop
-
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
