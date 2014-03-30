@@ -27,6 +27,8 @@ var config = {
     y : 50
   },
 
+  numberOfEnemies : 7,
+
   enemySpeed : 5,
 
   enemySize : {

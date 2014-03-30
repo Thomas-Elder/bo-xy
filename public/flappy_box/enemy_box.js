@@ -1,7 +1,7 @@
 // Defines the EnemyBox type.
-function EnemyBox(config, context) {
-  this.x            = config.enemyStartPos.x ;
-  this.y            = config.enemyStartPos.y ;
+function EnemyBox(x, y, config, context) {
+  this.x            = x;
+  this.y            = y;
   this.width        = config.enemySize.width;
   this.height       = config.enemySize.height;
   this.screenWidth  = config.screenSize.width;
