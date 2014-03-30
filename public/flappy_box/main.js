@@ -1,44 +1,43 @@
 window.onload = function () {
 
   // Get a reference to the canvas element.
-  var myCanvas = document.getElementById('myCanvas');
+  var myCanvas     = document.getElementById('myCanvas');
 
-  // Set up screen width and height.
-  var screenWidth  = 400;
-  var screenHeight = 400;
-  myCanvas.width   = screenWidth;
-  myCanvas.height  = screenHeight;
+  //var difficulty = prompt('Choose your difficulty level :\neasy, medium or hard');
 
-  var dimensions = {
-    screenWidth : 400,
-    screenHeight : 400
-  };
+  //var config = config.easy;
 
-  var gravity = 5;
-  var speed = 10;
+  myCanvas.width   = config.screenSize.width;
+  myCanvas.height  = config.screenSize.height;
 
   // Get the (graphics?) context.
-  var context    = myCanvas.getContext('2d');
+  var context      = myCanvas.getContext('2d');
 
-  var controller = new Controller();
+  var controller   = new Controller();
 
   window.onkeydown = function (event) { controller.keyDown(event); };
   window.onkeyup   = function (event) { controller.keyUp(event); };
 
-  // Instantiate a new instance of type Box.
-  var myBox = new Box(50, 50, 20, 20, screenWidth, screenHeight, speed, gravity, controller, context);
+  // Instantiate a new instance of type BoxManager.
+  var boxManager   = new BoxManager(config, controller, context);
+  boxManager.init();
 
   // Instantiate a new instance of type Background.
-  var background = new Background(screenWidth, screenHeight, 0, context);
+  var background   = new Background(config.screenSize, 0, context);
 
   // Define and initiate the game loop.
   function draw() {
-    context.clearRect(0, 0, screenWidth, screenHeight);
+    context.clearRect(0, 0, config.screenSize.width, config.screenSize.height);
+
+    // Update and draw the background
+    background.update();
     background.draw();
-    myBox.update();
-    myBox.draw();
+
+    // Update and draw the boxes
+    boxManager.update();
+    boxManager.draw();
+
   }
 
-  var fps = 60;
-  setInterval(draw, 1000 / fps);
+  setInterval(draw, 1000 / config.fps);
 };
