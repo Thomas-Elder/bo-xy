@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"ene",
+				"enemyBoxes"
+			],
+			[
+				"enem",
+				"enemyBoxes"
+			],
+			[
+				"prot",
+				"prototype"
+			],
+			[
+				"t",
+				"text"
+			],
+			[
+				"fla",
+				"flappy_box"
+			],
+			[
+				"box",
+				"boxManager"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"Back",
+				"Background"
+			],
+			[
 				"js",
 				"js"
 			],
@@ -268,18 +300,79 @@
 	"buffers":
 	[
 		{
-			"file": "boxy.sublime-project",
+			"contents": "/**\n* Configuration Settings for flappy_box\n*/\n\nvar config = {\n\n  /**\n  * Global Configuration Settings\n  */\n  fps : 120,\n  gravity : 2,\n\n  screenSize : {\n    width : 400,\n    height : 400\n  },\n\n  playerSpeed : 5,\n\n  playerSize : {\n    height : 20,\n    width : 20\n  },\n\n  playerStartPos : {\n    x : 50,\n    y : 50\n  },\n\n  numberOfEnemies : 7,\n\n  enemySpeed : 5,\n\n  enemySize : {\n    height : 20,\n    width : 20\n  },\n\n  enemyStartPos : {\n    x : 100,\n    y : 0\n  },\n\n/**\n* Configuration Settings by difficulty\n*/\n\n  // EASY\n  easy : {\n\n    screenSize : {\n      width : 400,\n      height : 400\n    },\n\n    playerSpeed : 5,\n\n    playerSize : {\n      height : 20,\n      width : 20\n    },\n\n    playerStartPos : {\n      x : 50,\n      y : 50\n    }, \n\n    gravity : 2\n  },\n\n  // MEDIUM\n  medium : {\n\n    screenSize : {\n      width : 800,\n      height : 400\n    },\n\n    playerSpeed : 10,\n\n    playerSize : {\n      height : 30,\n      width : 30\n    },\n\n    playerStartPos : {\n      x : 50,\n      y : 50\n    }\n  },\n\n  // HARD\n  hard : {\n\n    screenSize : {\n      width : 1200,\n      height : 400\n    },\n\n    playerSpeed : 10,\n\n    playerSize : {\n      height : 40,\n      width : 40\n    },\n\n    playerStartPos : {\n      x : 50,\n      y : 50\n    }\n  }\n};\n\n",
+			"file": "public/flappy_box/config.js",
+			"file_size": -1,
+			"file_write_time": -1,
 			"settings":
 			{
-				"buffer_size": 73,
+				"buffer_size": 1243,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "views/index.jade",
+			"contents": "// Defines the Box type.\nfunction PlayerBox(config, controller, context) {\n  this.x            = config.playerStartPos.x ;\n  this.y            = config.playerStartPos.y ;\n  this.width        = config.playerSize.width;\n  this.height       = config.playerSize.height;\n  this.screenWidth  = config.screenSize.width;\n  this.screenHeight = config.screenSize.height;\n  this.speed        = config.playerSpeed;\n  this.gravity      = config.gravity;\n\n  this.controller   = controller;\n  this.context      = context;\n}\n\n// Define the PlayerBox type's draw method.\nPlayerBox.prototype.draw = function() {\n  this.context.fillStyle = '#3399FF';\n  this.context.fillRect(this.x, this.y, this.width, this.height);\n};\n\n// Define the PlayerBox type's update method.\nPlayerBox.prototype.update = function() {\n  if (this.controller.left && this.x > 0) \n    this.x = this.x - this.speed;\n\n  // apply gravity\n  if (this.y + this.height < this.screenHeight)\n    this.y += this.gravity;\n\n  if (this.controller.up && this.y > 0)\n    this.y = this.y - this.speed;\n\n  if (this.controller.right && this.x + this.width < this.screenWidth)\n    this.x = this.x + this.speed;\n\n  if (this.controller.down && this.y + this.height < this.screenHeight)\n    this.y = this.y + this.speed;\n};\n\n",
+			"file": "public/flappy_box/player_box.js",
+			"file_size": -1,
+			"file_write_time": -1,
 			"settings":
 			{
-				"buffer_size": 139,
+				"buffer_size": 1255,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "// Defines the EnemyBox type.\nfunction EnemyBox(x, y, config, context) {\n  this.x            = x;\n  this.y            = y;\n  this.width        = config.enemySize.width;\n  this.height       = config.enemySize.height;\n  this.screenWidth  = config.screenSize.width;\n  this.screenHeight = config.screenSize.height;\n  //this.speed        = config.enemySpeed;\n  this.gravity      = config.gravity;\n\n  this.context      = context;\n\n  this.onScreen     = true;\n}\n\n// Define the EnemyBox type's draw method.\nEnemyBox.prototype.draw = function() {\n  this.context.fillStyle = '#F01F0F';\n  this.context.fillRect(this.x, this.y, this.width, this.height);\n};\n\n// Define the EnemyBox type's update method.\nEnemyBox.prototype.update = function() {\n\n  // Move enemy down the screen\n  if (this.y + this.height < this.screenHeight + this.height)\n    this.y += this.gravity;\n  else\n    this.onScreen = false;\n};\n\nEnemyBox.prototype.isOnScreen = function() {\n  return this.onScreen;\n};",
+			"file": "public/flappy_box/enemy_box.js",
+			"file_size": -1,
+			"file_write_time": -1,
+			"settings":
+			{
+				"buffer_size": 964,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "function BoxManager(config, controller,context) {\n  this.config     = config;\n  this.controller = controller;\n  this.context    = context;\n\n  this.enemyBoxes = new Array(config.numberOfEnemies);\n}\n\nBoxManager.prototype.init = function() {\n\n  // Instantiate a new instance of type PlayerBox.\n  this.playerBox = new PlayerBox(this.config, this.controller, this.context);\n\n  // Instantiate an array of new instances of type EnemyBox.\n  for (var i = 0; i < this.enemyBoxes.length; i++)\n    this.enemyBoxes[i] = new EnemyBox(i * this.enemyBoxes.length * 10, -config.enemySize.height * i, this.config, this.context);\n};\n\nBoxManager.prototype.draw = function() {\n\n  this.playerBox.draw();\n\n  for (var i = 0; i < this.enemyBoxes.length; i++)\n    this.enemyBoxes[i].draw();\n\n};\n\nBoxManager.prototype.update = function() {\n\n  this.playerBox.update();\n\n  for (var i = 0; i < this.enemyBoxes.length; i++) {\n    if (this.enemyBoxes[i].isOnScreen())\n      this.enemyBoxes[i].update();\n    else\n      this.enemyBoxes[i] = new EnemyBox(i * this.enemyBoxes.length * 10, -config.enemySize.height * i, this.config, this.context);\n  }\n};",
+			"file": "public/flappy_box/box_manager.js",
+			"file_size": -1,
+			"file_write_time": -1,
+			"settings":
+			{
+				"buffer_size": 1117,
+				"line_ending": "Unix",
+				"name": "box_manager.js"
+			}
+		},
+		{
+			"file": "/home/thomas/.bashrc",
+			"settings":
+			{
+				"buffer_size": 4064,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/flappy_box/background.js",
+			"settings":
+			{
+				"buffer_size": 422,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/flappy_box/main.js",
+			"settings":
+			{
+				"buffer_size": 1167,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "views/mixins/flappy_scripts.jade",
+			"settings":
+			{
+				"buffer_size": 270,
 				"line_ending": "Unix"
 			}
 		}
@@ -352,26 +445,31 @@
 	},
 	"file_history":
 	[
-		"/home/thomas/p_gam/boxy/public/boxy.sublime-project",
+		"/home/thomas/p_gam/boxy/views/index.jade",
+		"/home/thomas/p_gam/boxy/boxy.sublime-workspace",
+		"/home/thomas/p_gam/spark.org.au/.git/config",
 		"/home/thomas/p_gam/boxy/app.js",
+		"/home/thomas/p_gam/boxy/package.json",
+		"/home/thomas/p_gam/boxy/readme.txt",
+		"/home/thomas/p_gam/boxy/public/flappy_box/box.js",
+		"/home/thomas/p_gam/boxy/public/flappy_box/main.js",
+		"/home/thomas/p_gam/boxy/public/flappy_box/background.js",
+		"/home/thomas/p_gam/boxy/boxy.sublime-project",
+		"/home/thomas/p_gam/boxy/public/boxy.sublime-project",
 		"/home/thomas/p_gam/boxy/.app.js.swp",
 		"/home/thomas/p_gam/spark.org.au/views/mixins/pager.jade",
-		"/home/thomas/p_gam/boxy/boxy.sublime-workspace",
 		"/home/thomas/p_gam/boxy/boxy.sublime-workspace~",
 		"/home/thomas/p_gam/boxy/box",
 		"/home/thomas/p_gam/boxy/boxy",
 		"/home/thomas/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/thomas/p_gam/boxy/index.js",
 		"/home/thomas/p_gam/boxy/views/boxy.jade",
-		"/home/thomas/p_gam/boxy/views/index.jade",
 		"/home/thomas/p_gam/boxy/public/style.css",
 		"/home/thomas/p_gam/boxy/scripts/boxy/box.js",
 		"/home/thomas/p_gam/boxy/views/layout.jade",
 		"/home/thomas/p_gam/boxy/scripts/boxy/boxy_background.js",
 		"/home/thomas/p_gam/boxy/scripts/boxy/boxy_main.js",
 		"/home/thomas/p_gam/boxy/scripts/boxy/controller.js",
-		"/home/thomas/p_gam/boxy/boxy.sublime-project",
-		"/home/thomas/p_gam/boxy/package.json",
 		"/home/thomas/p_gam/boxy/scripts/boxy/boxy_config.js",
 		"/home/thomas/p_gam/boxy/config.js",
 		"/home/thomas/p_gam/spark.org.au/app.js",
@@ -474,16 +572,11 @@
 		"/home/thomas/uni/pinc/assign2/thing",
 		"/home/thomas/uni/pinc/assign2/tm.g",
 		"/home/thomas/p_gam/c/assign1/libpeerconnection.log",
-		"/home/thomas/p_gam/c/towers/main.c",
-		"/home/thomas/p_gam/c/towers/hanoi.h",
-		"/home/thomas/p_gam/c/towers/get.c",
-		"/home/thomas/p_gam/c/towers/move.c",
-		"/home/thomas/p_gam/c/stuff/bubble_sort.c",
-		"/home/thomas/p_gam/c/stuff/llex.c"
+		"/home/thomas/p_gam/c/towers/main.c"
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
@@ -497,6 +590,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"enemyBoxes",
+			"ini",
+			"player",
+			"ini",
+			"playerSpeed",
+			"PlayerBox",
+			"Box",
+			"myBox",
 			"click",
 			"fund_amount",
 			"donationamountsele",
@@ -522,24 +623,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 4,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "boxy.sublime-project",
+					"file": "public/flappy_box/config.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 73,
+						"buffer_size": 1243,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								341,
+								341
 							]
 						],
 						"settings":
@@ -648,7 +749,410 @@
 							},
 							"codeintel_tooltips": "popup",
 							"sublime_auto_complete": true,
-							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 45.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "public/flappy_box/player_box.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1255,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								403,
+								403
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "public/flappy_box/enemy_box.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 964,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								95,
+								95
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "public/flappy_box/box_manager.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1117,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1114,
+								1114
+							]
+						],
+						"settings":
+						{
+							"auto_name": "box_manager.js",
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -658,31 +1162,535 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "views/index.jade",
-					"semi_transient": true,
+					"buffer": 4,
+					"file": "/home/thomas/.bashrc",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 139,
+						"buffer_size": 4064,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								3754,
+								3754
 							]
 						],
 						"settings":
 						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1229.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "public/flappy_box/background.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 422,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								422,
+								422
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "public/flappy_box/main.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1167,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								722,
+								722
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 57.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "views/mixins/flappy_scripts.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 270,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								270,
+								270
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
 							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -748,7 +1756,7 @@
 		[
 			[
 				"",
-				"~/p_gam/spark.org.au/spark.org.au.sublime-project"
+				"~/p_gam/perl/tute/tutorial.sublime-project"
 			]
 		],
 		"width": 380.0
