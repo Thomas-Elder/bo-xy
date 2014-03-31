@@ -11,7 +11,7 @@ var config = {
   gravity : 2,
   backgroundColour : '#1A1A1A',
   numberOfLevels : 4,
-  levelLength: 50,
+  levelLength: 1000,
 
   screenSize : {
     width : 400,
@@ -27,12 +27,7 @@ var config = {
     width : 20
   },
 
-  playerStartPos : {
-    x : 50,
-    y : 50
-  },
-
-  numberOfEnemies : 7,
+  numberOfEnemies : 10,
 
   enemySpeed : [1, 2, 3, 4, 5, 6],
 

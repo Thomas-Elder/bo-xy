@@ -42,18 +42,12 @@ BoxManager.prototype.update = function() {
 
   this.playerBox.update();
 
-  /**
-  * 
-  */
+  // Increment levelCount as long as level won't be over the max level
   if (this.levelCount < (this.config.numberOfLevels * this.config.levelLength))
     this.levelCount++;
 
-  // console.log(this.levelCount);
-
-  /**
-  * For each enemyBox, check if it is on the screen, if so call its update 
-  * method, else initialise a new box.
-  */
+  // For each enemyBox, check if it is on the screen, if so call its update 
+  // method, else initialise a new box.
   for (var i = 0; i < this.enemyBoxes.length; i++) {
 
     if (this.enemyBoxes[i].isOnScreen()) {
@@ -62,13 +56,10 @@ BoxManager.prototype.update = function() {
 
       var level = Math.floor(this.levelCount / this.config.levelLength);
 
-      if (level >= this.enemySpeed.length)
-        level = this.enemySpeed.length;
-
-      //console.log(this.enemySpeed[level]);
       console.log(level);
-      console.log(this.enemySpeed[level]);
+      console.log(this.enemySpeed[4]);
 
+      // Create new enemy box 
       this.enemyBoxes[i] = new EnemyBox(i * this.enemySpacing,
                                         -config.enemySize.height * i,
                                         this.enemySpeed[level],

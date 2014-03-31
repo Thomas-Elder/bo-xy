@@ -1,7 +1,7 @@
 // Defines the Box type.
 function PlayerBox(config, controller, context) {
-  this.x            = config.playerStartPos.x ;
-  this.y            = config.playerStartPos.y ;
+  this.x            = (config.screenSize.width / 2) - (config.playerSize.width / 2);
+  this.y            = config.screenSize.height - config.playerSize.height;
   this.width        = config.playerSize.width;
   this.height       = config.playerSize.height;
   this.screenWidth  = config.screenSize.width;
