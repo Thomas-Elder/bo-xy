@@ -15,7 +15,7 @@ BoxManager.prototype.init = function() {
 
   // Calculate placement of enemy boxes based on width of screen and number of
   // boxes. 
-  this.spacingX = this.config.screenSize.width / this.config.numberOfEnemies;
+  this.spacingX = (this.config.screenSize.width - this.config.enemySize.width) / (this.config.numberOfEnemies - 1);
 
   // Instantiate an array of new instances of type EnemyBox.
   for (var i = 0; i < this.enemyBoxes.length; i++)
