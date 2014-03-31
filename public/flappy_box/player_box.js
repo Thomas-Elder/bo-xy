@@ -1,13 +1,14 @@
 // Defines the Box type.
 function PlayerBox(config, controller, context) {
-  this.x            = config.playerStartPos.x ;
-  this.y            = config.playerStartPos.y ;
+  this.x            = (config.screenSize.width / 2) - (config.playerSize.width / 2);
+  this.y            = config.screenSize.height - config.playerSize.height;
   this.width        = config.playerSize.width;
   this.height       = config.playerSize.height;
   this.screenWidth  = config.screenSize.width;
   this.screenHeight = config.screenSize.height;
   this.speed        = config.playerSpeed;
   this.gravity      = config.gravity;
+  this.colour       = config.playerColour;
 
   this.controller   = controller;
   this.context      = context;
@@ -15,7 +16,7 @@ function PlayerBox(config, controller, context) {
 
 // Define the PlayerBox type's draw method.
 PlayerBox.prototype.draw = function() {
-  this.context.fillStyle = '#3399FF';
+  this.context.fillStyle = this.colour;
   this.context.fillRect(this.x, this.y, this.width, this.height);
 };
 

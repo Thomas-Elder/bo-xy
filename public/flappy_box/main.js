@@ -23,7 +23,7 @@ window.onload = function () {
   boxManager.init();
 
   // Instantiate a new instance of type Background.
-  var background   = new Background(config.screenSize, 0, context);
+  var background   = new Background(config, 0, context);
 
   // Define and initiate the game loop.
   function draw() {

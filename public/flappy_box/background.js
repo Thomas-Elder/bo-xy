@@ -1,7 +1,8 @@
 // Define the Background type.
-function Background(screenSize, speed, context) {
-  this.screenWidth  = screenSize.width;
-  this.screenHeight = screenSize.height;
+function Background(config, speed, context) {
+  this.screenWidth  = config.screenSize.width;
+  this.screenHeight = config.screenSize.height;
+  this.colour       = config.backgroundColour;
 
   this.context      = context;
   this.speed        = speed;
@@ -9,7 +10,7 @@ function Background(screenSize, speed, context) {
 
 // Define the Backgrounds draw method.
 Background.prototype.draw = function() {
-  this.context.fillStyle = '#1A1A1A';
+  this.context.fillStyle = this.colour;
   this.context.fillRect(0, 0, this.screenWidth, this.screenHeight);
 };
 

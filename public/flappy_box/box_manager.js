@@ -4,8 +4,10 @@ function BoxManager(config, controller,context) {
   this.context    = context;
 
   this.enemyBoxes = new Array(this.config.numberOfEnemies);
+  this.enemySpeed = config.enemySpeed;
+  this.levelCount = 0;
 
-  this.spacingX = 0;
+  this.enemySpacing = 0;
 }
 
 BoxManager.prototype.init = function() {
@@ -15,12 +17,17 @@ BoxManager.prototype.init = function() {
 
   // Calculate placement of enemy boxes based on width of screen and number of
   // boxes. 
-  this.spacingX = (this.config.screenSize.width - this.config.enemySize.width) / (this.config.numberOfEnemies - 1);
+  this.enemySpacing = (this.config.screenSize.width - this.config.enemySize.width) / (this.config.numberOfEnemies - 1);
+
 
   // Instantiate an array of new instances of type EnemyBox.
-  for (var i = 0; i < this.enemyBoxes.length; i++)
-    this.enemyBoxes[i] = new EnemyBox(i * this.spacingX, -config.enemySize.height * i, this.config, this.context);
-
+  for (var i = 0; i < this.enemyBoxes.length; i++) {
+    this.enemyBoxes[i] = new EnemyBox(i * this.enemySpacing,
+                                      -config.enemySize.height * i,
+                                      this.enemySpeed[this.levelCount],
+                                      this.config,
+                                      this.context);
+  }
 };
 
 BoxManager.prototype.draw = function() {
@@ -36,10 +43,42 @@ BoxManager.prototype.update = function() {
 
   this.playerBox.update();
 
+  // Increment levelCount as long as level won't be over the max level
+  if (this.levelCount < (this.config.numberOfLevels * this.config.levelLength))
+    this.levelCount++;
+
+  // For each enemyBox, check if it is on the screen, if so call its update 
+  // method, else initialise a new box.
   for (var i = 0; i < this.enemyBoxes.length; i++) {
-    if (this.enemyBoxes[i].isOnScreen())
+
+    if (this.enemyBoxes[i].isOnScreen()) {
       this.enemyBoxes[i].update();
-    else
-      this.enemyBoxes[i] = new EnemyBox(i * this.spacingX, -config.enemySize.height * i, this.config, this.context);
+    } else {
+
+      var level = Math.floor(this.levelCount / this.config.levelLength);
+
+      console.log(level);
+      console.log(this.enemySpeed[4]);
+
+      // Create new enemy box 
+      this.enemyBoxes[i] = new EnemyBox(i * this.enemySpacing,
+                                        -config.enemySize.height * i,
+                                        this.enemySpeed[level],
+                                        this.config,
+                                        this.context);
+    }
   }
 };
+
+
+
+/**
+ * Helper functions for the BoxManager
+ */
+
+/**
+ * Collision Detection
+ */
+function collisionDetection() {
+
+}
