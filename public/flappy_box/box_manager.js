@@ -51,14 +51,13 @@ BoxManager.prototype.update = function() {
   // method, else initialise a new box.
   for (var i = 0; i < this.enemyBoxes.length; i++) {
 
+    collisionDetection(this.playerBox, this.enemyBoxes[i]);
+
     if (this.enemyBoxes[i].isOnScreen()) {
       this.enemyBoxes[i].update();
     } else {
 
       var level = Math.floor(this.levelCount / this.config.levelLength);
-
-      console.log(level);
-      console.log(this.enemySpeed[4]);
 
       // Create new enemy box 
       this.enemyBoxes[i] = new EnemyBox(i * this.enemySpacing,
@@ -79,6 +78,17 @@ BoxManager.prototype.update = function() {
 /**
  * Collision Detection
  */
-function collisionDetection() {
+function collisionDetection(player, enemy) {
+  if ((player.getPosition().x - enemy.getSize().width) < enemy.getPosition().x) {
+    if (enemy.getPosition().x  < (player.getPosition().x + player.getSize().width)) {
+      if ((enemy.getPosition().y + enemy.getSize().height) > player.getPosition().y) {
+        if (enemy.getPosition().y < (player.getPosition().y + player.getSize().height)) {
+          console.log("Hit!");
+          return true;
+        }
+      }
+    }
+  }
 
+  return false;
 }

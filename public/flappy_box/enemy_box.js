@@ -32,6 +32,17 @@ EnemyBox.prototype.update = function() {
     this.onScreen = false;
 };
 
+// 
 EnemyBox.prototype.isOnScreen = function() {
   return this.onScreen;
+};
+
+// Returns an object with x an y coords, the box's current position
+EnemyBox.prototype.getPosition = function() {
+  return {x: this.x, y: this.y};
+};
+
+// Returns an object with width and height of the box
+EnemyBox.prototype.getSize = function() {
+  return {width: this.width, height: this.height};
 };

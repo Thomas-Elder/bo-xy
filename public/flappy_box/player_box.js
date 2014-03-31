@@ -39,3 +39,12 @@ PlayerBox.prototype.update = function() {
     this.y = this.y + this.speed;
 };
 
+// Returns an object with x an y coords, the box's current position
+PlayerBox.prototype.getPosition = function() {
+  return {x: this.x, y: this.y};
+};
+
+// Returns an object with width and height of the box
+PlayerBox.prototype.getSize = function() {
+  return {width: this.width, height: this.height};
+};
