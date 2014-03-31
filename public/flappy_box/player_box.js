@@ -8,6 +8,7 @@ function PlayerBox(config, controller, context) {
   this.screenHeight = config.screenSize.height;
   this.speed        = config.playerSpeed;
   this.gravity      = config.gravity;
+  this.colour       = config.playerColour;
 
   this.controller   = controller;
   this.context      = context;
@@ -15,7 +16,7 @@ function PlayerBox(config, controller, context) {
 
 // Define the PlayerBox type's draw method.
 PlayerBox.prototype.draw = function() {
-  this.context.fillStyle = '#3399FF';
+  this.context.fillStyle = this.colour;
   this.context.fillRect(this.x, this.y, this.width, this.height);
 };
 

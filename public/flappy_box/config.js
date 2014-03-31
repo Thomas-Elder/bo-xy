@@ -9,6 +9,9 @@ var config = {
   */
   fps : 120,
   gravity : 2,
+  backgroundColour : '#1A1A1A',
+  numberOfLevels : 4,
+  levelLength: 50,
 
   screenSize : {
     width : 400,
@@ -16,6 +19,8 @@ var config = {
   },
 
   playerSpeed : 5,
+
+  playerColour : '#3399FF',
 
   playerSize : {
     height : 20,
@@ -29,7 +34,14 @@ var config = {
 
   numberOfEnemies : 7,
 
-  enemySpeed : 5,
+  enemySpeed : [1, 2, 3, 4, 5, 6],
+
+  enemyColour : ['#FFFFFF',
+                '#FFFFAC',
+                '#FFFF56',
+                '#FFAC00',
+                '#FF5600',
+                '#FF0000'],
 
   enemySize : {
     height : 20,
