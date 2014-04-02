@@ -32,9 +32,14 @@ EnemyBox.prototype.update = function() {
     this.onScreen = false;
 };
 
-// 
+// Returns true if the box is currently on the screen
 EnemyBox.prototype.isOnScreen = function() {
   return this.onScreen;
+};
+
+// Set the box onScreen variable to false
+EnemyBox.prototype.setOffScreen = function() {
+  this.onScreen = false;
 };
 
 // Returns an object with x an y coords, the box's current position

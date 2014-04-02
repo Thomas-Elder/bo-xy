@@ -18,6 +18,9 @@ var config = {
     height : 400
   },
 
+  /**
+   * PLAYER CONFIG
+   */
   playerSpeed : 5,
 
   playerColour : '#3399FF',
@@ -27,6 +30,9 @@ var config = {
     width : 20
   },
 
+  /**
+   * ENEMY CONFIG
+   */
   numberOfEnemies : 10,
 
   enemySpeed : [1, 2, 3, 4, 5, 6],
@@ -47,6 +53,21 @@ var config = {
     x : 100,
     y : 0
   },
+
+  /**
+   * EXPLODE CONFIG
+   */
+  explodeSize : {
+    height : 20,
+    width : 20
+  },
+
+  explodeColour : ['#FFFFFF',
+                  '#DDDDDD',
+                  '#BBBBBB',
+                  '#999999',
+                  '#777777',
+                  '#555555'],
 
 /**
 * Configuration Settings by difficulty

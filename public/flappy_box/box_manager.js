@@ -6,8 +6,9 @@ function BoxManager(config, controller,context) {
   this.enemyBoxes = new Array(this.config.numberOfEnemies);
   this.enemySpeed = config.enemySpeed;
   this.levelCount = 0;
-
   this.enemySpacing = 0;
+
+  this.explodeBoxes = [];
 }
 
 BoxManager.prototype.init = function() {
@@ -15,10 +16,11 @@ BoxManager.prototype.init = function() {
   // Instantiate a new instance of type PlayerBox.
   this.playerBox = new PlayerBox(this.config, this.controller, this.context);
 
-  // Calculate placement of enemy boxes based on width of screen and number of
-  // boxes. 
+  /*
+   * Calculate placement of enemy boxes based on width of screen and number of
+   * boxes.
+   */
   this.enemySpacing = (this.config.screenSize.width - this.config.enemySize.width) / (this.config.numberOfEnemies - 1);
-
 
   // Instantiate an array of new instances of type EnemyBox.
   for (var i = 0; i < this.enemyBoxes.length; i++) {
@@ -37,27 +39,58 @@ BoxManager.prototype.draw = function() {
   for (var i = 0; i < this.enemyBoxes.length; i++)
     this.enemyBoxes[i].draw();
 
+  if (this.explodeBoxes.length > 0) {
+
+    for (var j = 0; j < this.explodeBoxes.length; j++) {
+
+      this.explodeBoxes[j].draw();
+    }
+  }
 };
 
 BoxManager.prototype.update = function() {
 
   this.playerBox.update();
 
+  if (this.explodeBoxes.length > 0) {
+    for (var k = 0; k < this.explodeBoxes.length; k++){
+
+      this.explodeBoxes[k].update();
+
+      if (this.explodeBoxes[k].endOfExplode()) {
+        this.explodeBoxes.splice(k, 1);
+      }
+    }
+  }
+
   // Increment levelCount as long as level won't be over the max level
   if (this.levelCount < (this.config.numberOfLevels * this.config.levelLength))
     this.levelCount++;
 
-  // For each enemyBox, check if it is on the screen, if so call its update 
-  // method, else initialise a new box.
-  for (var i = 0; i < this.enemyBoxes.length; i++) {
+  var level = Math.floor(this.levelCount / this.config.levelLength);
 
-    collisionDetection(this.playerBox, this.enemyBoxes[i]);
+  /*
+   * For each enemyBox, check if it is on the screen, if so call its update 
+   * method, else initialise a new box.
+   */
+  for (var i = 0; i < this.enemyBoxes.length; i++) {
 
     if (this.enemyBoxes[i].isOnScreen()) {
       this.enemyBoxes[i].update();
-    } else {
 
-      var level = Math.floor(this.levelCount / this.config.levelLength);
+      /*
+       * If there's a collision, get rid of the enemy hit, and push 
+       * a new explodeBox into the explodeBoxes array
+       */
+      if (collisionDetection(this.playerBox, this.enemyBoxes[i])) {
+        this.enemyBoxes[i].setOffScreen();
+        this.explodeBoxes.push(new ExplodeBox(this.enemyBoxes[i].getPosition().x,
+                       this.enemyBoxes[i].getPosition().y,
+                       this.config,
+                       this.context));
+      }
+
+    } else {
 
       // Create new enemy box 
       this.enemyBoxes[i] = new EnemyBox(i * this.enemySpacing,
@@ -76,6 +109,13 @@ BoxManager.prototype.update = function() {
  */
 
 /**
+ * Update enemy boxes
+ */
+function updateEnemyBoxes(player, enemy) {
+
+}
+
+/**
  * Collision Detection
  */
 function collisionDetection(player, enemy) {
@@ -83,7 +123,6 @@ function collisionDetection(player, enemy) {
     if (enemy.getPosition().x  < (player.getPosition().x + player.getSize().width)) {
       if ((enemy.getPosition().y + enemy.getSize().height) > player.getPosition().y) {
         if (enemy.getPosition().y < (player.getPosition().y + player.getSize().height)) {
-          console.log("Hit!");
           return true;
         }
       }
@@ -92,3 +131,7 @@ function collisionDetection(player, enemy) {
 
   return false;
 }
+
+/**
+ * 
+ */
