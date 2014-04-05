@@ -1,14 +1,20 @@
-function BoxManager(config, controller,context) {
+function BoxManager(config, controller, context) {
   this.config     = config;
   this.controller = controller;
   this.context    = context;
 
-  this.enemyBoxes = new Array(this.config.numberOfEnemies);
-  this.enemySpeed = config.enemySpeed;
-  this.levelCount = 0;
+  this.enemyBoxes   = new Array(this.config.numberOfEnemies);
+  this.enemySpeed   = config.enemySpeed;
+  this.levelCount   = 0;
   this.enemySpacing = 0;
-
+  
   this.explodeBoxes = [];
+  
+  this.total_score  = 0;
+  this.level_score  = 0;
+  this.level        = 0;
+
+  this.max_level    = this.config.numberOfLevels;
 }
 
 BoxManager.prototype.init = function() {
@@ -63,11 +69,20 @@ BoxManager.prototype.update = function() {
     }
   }
 
-  // Increment levelCount as long as level won't be over the max level
+  if (this.level_score === 10) {
+    this.level_score = 0;
+
+    if (this.level < this.max_level) {
+      this.level++;
+    }
+  }
+
+  /* Increment levelCount as long as level won't be over the max level
   if (this.levelCount < (this.config.numberOfLevels * this.config.levelLength))
     this.levelCount++;
 
   var level = Math.floor(this.levelCount / this.config.levelLength);
+  */
 
   /*
    * For each enemyBox, check if it is on the screen, if so call its update 
@@ -83,6 +98,10 @@ BoxManager.prototype.update = function() {
        * a new explodeBox into the explodeBoxes array
        */
       if (collisionDetection(this.playerBox, this.enemyBoxes[i])) {
+
+        this.level_score++;
+        this.total_score++;
+
         this.enemyBoxes[i].setOffScreen();
         this.explodeBoxes.push(new ExplodeBox(this.enemyBoxes[i].getPosition().x,
                        this.enemyBoxes[i].getPosition().y,
@@ -95,14 +114,16 @@ BoxManager.prototype.update = function() {
       // Create new enemy box 
       this.enemyBoxes[i] = new EnemyBox(i * this.enemySpacing,
                                         -config.enemySize.height * i,
-                                        this.enemySpeed[level],
+                                        this.enemySpeed[this.level],
                                         this.config,
                                         this.context);
     }
   }
 };
 
-
+BoxManager.prototype.getScore = function() {
+  return this.total_score;
+};
 
 /**
  * Helper functions for the BoxManager

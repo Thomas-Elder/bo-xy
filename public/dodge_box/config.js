@@ -13,6 +13,13 @@ var config = {
   numberOfLevels : 4,
   levelLength: 1000,
 
+  hudSize : {
+    width : 400,
+    height : 50
+  },
+
+  hudTextColour : '#3399FF',
+
   screenSize : {
     width : 400,
     height : 400

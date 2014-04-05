@@ -1,13 +1,19 @@
 window.onload = function () {
 
   // Get a reference to the canvas element.
-  var myCanvas     = document.getElementById('myCanvas');
+  var game_canvas  = document.getElementById('game_canvas');
 
-  myCanvas.width   = config.screenSize.width;
-  myCanvas.height  = config.screenSize.height;
+  game_canvas.width   = config.screenSize.width;
+  game_canvas.height  = config.screenSize.height;
+
+  // Get a reference to the hud
+  var hud_canvas   = document.getElementById('hud_canvas');
 
   // Get the (graphics?) context.
-  var context      = myCanvas.getContext('2d');
+  var game_context = game_canvas.getContext('2d');
+
+  var hud_context  = hud_canvas.getContext('2d');
+
 
   var controller   = new Controller();
 
@@ -15,15 +21,18 @@ window.onload = function () {
   window.onkeyup   = function (event) { controller.keyUp(event); };
 
   // Instantiate a new instance of type BoxManager.
-  var boxManager   = new BoxManager(config, controller, context);
+  var boxManager   = new BoxManager(config, controller, game_context);
   boxManager.init();
 
   // Instantiate a new instance of type Background.
-  var background   = new Background(config, 0, context);
+  var background   = new Background(config, 0, game_context);
+  
+  var hud          = new Hud(config, hud_context);
 
   // Define and initiate the game loop.
   function draw() {
-    context.clearRect(0, 0, config.screenSize.width, config.screenSize.height);
+    game_context.clearRect(0, 0, config.screenSize.width, config.screenSize.height);
+    hud_context.clearRect(0, 0, config.hudSize.width, config.hudSize.height);
 
     // Update and draw the background
     background.update();
@@ -32,6 +41,10 @@ window.onload = function () {
     // Update and draw the boxes
     boxManager.update();
     boxManager.draw();
+
+    // Update and draw the hud
+    hud.update(boxManager.getScore());
+    hud.draw();
 
   }
 

@@ -12,6 +12,8 @@ function Controller() {
 // Define the Controller type's keyDown method.
 Controller.prototype.keyDown = function(event) {
 
+  event.preventDefault();
+
   var keyCode = event.which || event.keyCode;
 
   if (keyCode == 37)
