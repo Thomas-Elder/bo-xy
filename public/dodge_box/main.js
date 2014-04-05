@@ -27,7 +27,7 @@ window.onload = function () {
   // Instantiate a new instance of type Background.
   var background   = new Background(config, 0, game_context);
   
-  var hud          = new Hud(config, hud_context);
+  var hud          = new Hud(config, hud_context);  
 
   // Define and initiate the game loop.
   function draw() {

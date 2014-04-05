@@ -106,7 +106,7 @@ BoxManager.prototype.update = function() {
 
       // Create new enemy box 
       this.enemyBoxes[i] = new EnemyBox(i * this.enemySpacing,
-                                        -config.enemySize.height * i,
+        -((this.config.screenSize.height - this.enemyBoxes[i].getPosition().y) + config.enemySize.height),
                                         this.enemySpeed[this.level],
                                         this.config,
                                         this.context);
@@ -129,8 +129,8 @@ BoxManager.prototype.getLevel = function() {
 /**
  * Update enemy boxes
  */
-function updateEnemyBoxes(player, enemy) {
-
+function update_enemy_box(player, enemy, level) {
+  
 }
 
 /**

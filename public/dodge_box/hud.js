@@ -14,7 +14,7 @@ Hud.prototype.draw = function() {
 
   this.context.fillStyle = '#3399FF';
   this.context.fillText(scoreString, 10, 20);
-  this.context.fillText(levelString, 100, 20);
+  this.context.fillText(levelString, 150, 20);
 };
 
 Hud.prototype.update = function(score, level) {
