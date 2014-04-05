@@ -43,7 +43,7 @@ window.onload = function () {
     boxManager.draw();
 
     // Update and draw the hud
-    hud.update(boxManager.getScore());
+    hud.update(boxManager.getScore(), boxManager.getLevel());
     hud.draw();
 
   }

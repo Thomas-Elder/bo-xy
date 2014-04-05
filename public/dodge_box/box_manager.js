@@ -77,13 +77,6 @@ BoxManager.prototype.update = function() {
     }
   }
 
-  /* Increment levelCount as long as level won't be over the max level
-  if (this.levelCount < (this.config.numberOfLevels * this.config.levelLength))
-    this.levelCount++;
-
-  var level = Math.floor(this.levelCount / this.config.levelLength);
-  */
-
   /*
    * For each enemyBox, check if it is on the screen, if so call its update 
    * method, else initialise a new box.
@@ -123,6 +116,10 @@ BoxManager.prototype.update = function() {
 
 BoxManager.prototype.getScore = function() {
   return this.total_score;
+};
+
+BoxManager.prototype.getLevel = function() {
+  return this.level;
 };
 
 /**
