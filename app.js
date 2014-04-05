@@ -30,6 +30,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/boxy', routes.boxy);
 app.get('/flappy_box', routes.flappy_box);
+app.get('/dodge_box', routes.dodge_box);
 app.get('*', routes.none);
 
 http.createServer(app).listen(app.get('port'), function(){
