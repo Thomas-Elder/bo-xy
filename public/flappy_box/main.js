@@ -3,10 +3,6 @@ window.onload = function () {
   // Get a reference to the canvas element.
   var myCanvas     = document.getElementById('myCanvas');
 
-  //var difficulty = prompt('Choose your difficulty level :\neasy, medium or hard');
-
-  //var config = config.easy;
-
   myCanvas.width   = config.screenSize.width;
   myCanvas.height  = config.screenSize.height;
 

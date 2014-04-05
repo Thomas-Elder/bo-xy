@@ -1,4 +1,8 @@
 doctype html
+
+include mixins/header
+include mixins/footer
+
 html
   head
     title= title
@@ -7,4 +11,8 @@ html
     block scripts
 
   body
-  block content
+    block header
+      mixin header()
+    block content
+    block footer
+      mixin footer()

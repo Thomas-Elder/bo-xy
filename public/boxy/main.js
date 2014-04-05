@@ -19,8 +19,6 @@ window.onload = function () {
       break;
   }
 
-  
-
   myCanvas.width   = ini.screenSize.width;
   myCanvas.height  = ini.screenSize.height;
 
