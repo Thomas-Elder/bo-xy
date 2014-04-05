@@ -11,8 +11,9 @@ html
     block scripts
 
   body
-    block header
-      mixin header()
-    block content
-    block footer
-      mixin footer()
+    div(class='container')
+      block header
+        mixin header()
+      block content
+      block footer
+        mixin footer()
