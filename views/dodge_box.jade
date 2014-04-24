@@ -1,0 +1,27 @@
+extends layout
+
+include mixins/dodge_scripts
+
+block scripts
+  mixin dodge_scripts()
+
+block content
+  h2= title
+
+  p
+    a(href='/')= 'home'
+
+  div(class='game')
+    canvas(
+      id="game_canvas"
+      style="border: 1px solid #000000;"
+      width="400"
+      height="400"
+      )
+
+    canvas(
+      id="hud_canvas"
+      style="border: 1px solid #000000;"
+      width="400"
+      height="50"
+      )
