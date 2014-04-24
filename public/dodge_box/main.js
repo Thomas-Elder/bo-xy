@@ -14,11 +14,39 @@ window.onload = function () {
 
   var hud_context  = hud_canvas.getContext('2d');
 
-  var splash = new Splash(config, game_context);
 
-  splash.draw();
+  var controller   = new Controller();
 
-  var game = new Game();
+  window.onkeydown = function (event) { controller.keyDown(event); };
+  window.onkeyup   = function (event) { controller.keyUp(event); };
 
-  game.run();
+  // Instantiate a new instance of type BoxManager.
+  var boxManager   = new BoxManager(config, controller, game_context);
+  boxManager.init();
+
+  // Instantiate a new instance of type Background.
+  var background   = new Background(config, 0, game_context);
+  
+  var hud          = new Hud(config, hud_context);  
+
+  // Define and initiate the game loop.
+  function draw() {
+    game_context.clearRect(0, 0, config.screenSize.width, config.screenSize.height);
+    hud_context.clearRect(0, 0, config.hudSize.width, config.hudSize.height);
+
+    // Update and draw the background
+    background.update();
+    background.draw();
+
+    // Update and draw the boxes
+    boxManager.update();
+    boxManager.draw();
+
+    // Update and draw the hud
+    hud.update(boxManager.getScore(), boxManager.getLevel());
+    hud.draw();
+
+  }
+
+  setInterval(draw, 1000 / config.fps);
 };
