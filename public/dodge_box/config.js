@@ -10,6 +10,12 @@ var config = {
   fps : 120,
   gravity : 2,
   backgroundColour : '#1A1A1A',
+  startColour : '#3399FF',
+  startSize : {
+    width : 60,
+    height : 20
+  },
+
   numberOfLevels : 4,
   levelLength: 1000,
 
