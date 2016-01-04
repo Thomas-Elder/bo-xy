@@ -69,7 +69,7 @@ BoxManager.prototype.update = function() {
     }
   }
 
-  if (this.level_score === 10) {
+  if (this.level_score === 100) {
     this.level_score = 0;
 
     if (this.level < this.max_level) {
@@ -92,9 +92,6 @@ BoxManager.prototype.update = function() {
        */
       if (collisionDetection(this.playerBox, this.enemyBoxes[i])) {
 
-        this.level_score++;
-        this.total_score++;
-
         this.enemyBoxes[i].setOffScreen();
         this.explodeBoxes.push(new ExplodeBox(this.enemyBoxes[i].getPosition().x,
                        this.enemyBoxes[i].getPosition().y,
@@ -103,6 +100,10 @@ BoxManager.prototype.update = function() {
       }
 
     } else {
+
+      // We've dodged a box! Have a point!
+      this.level_score++;
+      this.total_score++;
 
       // Create new enemy box 
       this.enemyBoxes[i] = new EnemyBox(i * this.enemySpacing,

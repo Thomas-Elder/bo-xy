@@ -1,5 +1,6 @@
 // Defines the Box type.
 function Box(ini, controller, context) {
+  
   this.x            = ini.playerStartPos.x ;
   this.y            = ini.playerStartPos.y ;
   this.width        = ini.playerSize.width;
@@ -14,12 +15,14 @@ function Box(ini, controller, context) {
 
 // Define the Box type's draw method.
 Box.prototype.draw = function() {
+
   this.context.fillStyle = '#3399FF';
   this.context.fillRect(this.x, this.y, this.width, this.height);
 };
 
 // Define the Box type's update method.
 Box.prototype.update = function() {
+
   if (this.controller.left && this.x > 0) 
     this.x = this.x - this.speed;
   

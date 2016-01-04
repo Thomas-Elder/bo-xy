@@ -52,6 +52,9 @@ BoxManager.prototype.update = function() {
 
   this.playerBox.update();
 
+  /*
+   * Update all explodeBoxes, and splice finished explosions.
+   */
   if (this.explodeBoxes.length > 0) {
     for (var k = 0; k < this.explodeBoxes.length; k++){
 
@@ -81,6 +84,8 @@ BoxManager.prototype.update = function() {
       /*
        * If there's a collision, get rid of the enemy hit, and push 
        * a new explodeBox into the explodeBoxes array
+       *
+       * Also decrement the levelCount.
        */
       if (collisionDetection(this.playerBox, this.enemyBoxes[i])) {
         this.enemyBoxes[i].setOffScreen();
@@ -89,6 +94,8 @@ BoxManager.prototype.update = function() {
                        this.config,
                        this.context));
       }
+
+
 
     } else {
 

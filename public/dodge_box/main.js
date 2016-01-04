@@ -46,7 +46,11 @@ window.onload = function () {
     hud.update(boxManager.getScore(), boxManager.getLevel());
     hud.draw();
 
+    if (boxManager.getLevel() === config.numberOfLevels) {
+      alert("Game over!");
+      clearInterval(gameLoop);
+    }
   }
 
-  setInterval(draw, 1000 / config.fps);
+  var gameLoop = setInterval(draw, 1000 / config.fps);
 };

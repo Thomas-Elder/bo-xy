@@ -2,11 +2,11 @@ extends layout
 
 block content
   h1= title
-  p Welcome to box_land with boxy and flappy_box!
+  p Welcome to box_land with boxes!
 
-  p
-    a(href='boxy')= 'boxy'
-  p
-    a(href='flappy_box')= 'flappy_boxy'
-  p
-    a(href='dodge_box')= 'dodge_box'
+  .menu
+    a(class="button-link" href='boxy')= 'boxy'
+  .menu
+    a(class="button-link" href='flappy_box')= 'flappy_box'
+  .menu
+    a(class="button-link" href='dodge_box')= 'dodge_box'

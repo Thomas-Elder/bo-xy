@@ -9,6 +9,7 @@ function Controller() {
 // Define the Controller type's keyDown method.
 Controller.prototype.keyDown = function(event) {
 
+  // Prevents keys scrolling the screen
   event.preventDefault();
 
   var keyCode = event.which || event.keyCode;
