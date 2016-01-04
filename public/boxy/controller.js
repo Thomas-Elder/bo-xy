@@ -8,7 +8,11 @@ function Controller() {
 
 // Define the Controller type's keyDown method.
 Controller.prototype.keyDown = function(event) {
+
+  event.preventDefault();
+
   var keyCode = event.which || event.keyCode;
+  
   if (keyCode == 37)
     this.left = true;
   else if (keyCode == 38)
@@ -21,7 +25,9 @@ Controller.prototype.keyDown = function(event) {
 
 // Define the Controller type's keyUp method.
 Controller.prototype.keyUp = function(event) {
+
   var keyCode = event.which || event.keyCode;
+  
   if (keyCode == 37)
     this.left = false;
   else if (keyCode == 38)

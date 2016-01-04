@@ -12,12 +12,12 @@
   },
   "repository" : {
     "type" : "git",
-    "url" : "https://bitbucket.org/thomas_elder/boxy.git"
+    "url" : "https://github.com/Thomas-Elder/Boxy"
   },
   "keywords" : ["heroku"],
   "author" : "thomas elder",
   
   "engines" : {
-    "node" : "0.8.26"
+    "node" : "4.2.4"
   }
 }
