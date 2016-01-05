@@ -3,24 +3,127 @@
 	{
 		"selected_items":
 		[
-			
+			[
+				"get",
+				"getLevel"
+			],
+			[
+				"bo",
+				"boxManager"
+			],
+			[
+				"level",
+				"levelCount"
+			],
+			[
+				"padding",
+				"padding-bottom"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"O",
+				"OBJ"
+			],
+			[
+				"AD",
+				"addprefix"
+			],
+			[
+				"OBJ",
+				"OBJ_DIR"
+			],
+			[
+				"U",
+				"utility"
+			],
+			[
+				"d",
+				"d"
+			],
+			[
+				"re",
+				"result"
+			],
+			[
+				"sq",
+				"squaresum"
+			],
+			[
+				"sum",
+				"sumsquare"
+			],
+			[
+				"rev",
+				"reverse"
+			],
+			[
+				"revere",
+				"reverse_int"
+			],
+			[
+				"rever",
+				"reverse_int"
+			],
+			[
+				"for",
+				"forward"
+			],
+			[
+				"squa",
+				"square_root"
+			],
+			[
+				"s",
+				"square_root"
+			],
+			[
+				"pr",
+				"printf"
+			],
+			[
+				"librar",
+				"library_manager"
+			],
+			[
+				"recu",
+				"recursion"
+			],
+			[
+				"C",
+				"CFLAGS"
+			],
+			[
+				"rec",
+				"recursion"
+			],
+			[
+				"recus",
+				"recursive_functions"
+			],
+			[
+				"READ",
+				"read_rest_of_line"
+			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "newrelic.js",
+			"file": "public/dodge_box/box_manager.js",
 			"settings":
 			{
-				"buffer_size": 636,
+				"buffer_size": 4043,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "README.md",
+			"file": "public/dodge_box/main.js",
 			"settings":
 			{
-				"buffer_size": 252,
+				"buffer_size": 1651,
 				"line_ending": "Windows"
 			}
 		}
@@ -80,14 +183,149 @@
 	},
 	"expanded_folders":
 	[
-		"/E/js/boxy"
+		"/E/js/boxy",
+		"/E/js/boxy/node_modules",
+		"/E/js/boxy/public",
+		"/E/js/boxy/public/boxy",
+		"/E/js/boxy/public/dodge_box",
+		"/E/js/boxy/public/stylesheets",
+		"/E/js/boxy/views",
+		"/E/js/boxy/views/mixins"
 	],
 	"file_history":
 	[
+		"/E/js/boxy/views/boxy.jade",
+		"/E/js/boxy/node_modules/jade-bootstrap/components/navs.jade",
+		"/E/js/boxy/public/stylesheets/style.css",
+		"/E/js/boxy/views/index.jade",
+		"/E/js/boxy/views/layout.jade",
+		"/E/js/boxy/views/dodge_box.jade",
+		"/E/js/boxy/public/flappy_box/box_manager.js",
+		"/E/js/boxy/README.md",
+		"/E/js/boxy/package.json",
+		"/E/js/boxy/views/mixins/header.jade",
+		"/E/js/boxy/views/mixins/footer.jade",
+		"/C/Users/Thomas/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Thomas/AppData/Roaming/Sublime Text 3/Packages/User/Plain text.sublime-settings",
+		"/E/js/boxy/public/boxy/box.js",
+		"/E/js/boxy/public/boxy/controller.js",
+		"/E/js/boxy/public/boxy/main.js",
+		"/E/js/boxy/public/boxy/background.js",
+		"/E/js/boxy/public/dodge_box/controller.js",
+		"/E/js/boxy/app.js",
+		"/C/Users/Thomas/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/E/js/boxy/boxy.sublime-workspace",
+		"/C/Users/Thomas/Documents/Visual Studio 2013/Projects/HospitalAdministrationApplication/.git/config",
+		"/E/uni/Document Markup Languages/cosc2467.assignment-one/assignment-one.sublime-project",
+		"/C/Users/Thomas/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/Thomas/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/E/uni/Document Markup Languages/cosc2467.assignment-one/Patient.dtd",
+		"/E/uni/Document Markup Languages/cosc2467.assignment-one/DatabaseInventory.dtd",
+		"/E/uni/Document Markup Languages/cosc2467.assignment-one/doc/cpt374Assignment1.pdf",
+		"/E/uni/Document Markup Languages/cosc2467.assignment-one/DatabaseInventory.xml",
+		"/E/c/assign1/assign1.h",
+		"/E/c/assign1/assign1.c",
+		"/E/c/assign1/options1.c",
+		"/E/c/assign1/utility1.c",
+		"/E/c/practice/thing.c",
+		"/E/c/practice/Project Euler/doc/project_euler_problems.txt",
+		"/E/c/practice/Project Euler/doc/problem_8_series.txt",
+		"/E/c/practice/Project Euler/src/project_euler.c",
+		"/E/c/practice/Project Euler/src/solutions/solutions.h",
+		"/E/c/practice/Project Euler/makefile",
+		"/E/c/practice/Project Euler/doc/makefile_notes.txt",
+		"/E/c/practice/Project Euler/src/solutions/solutions.c",
+		"/E/c/practice/Project Euler/src/utility/utility.h",
+		"/E/c/practice/Project Euler/src/project_euler.h",
+		"/E/c/practice/Project Euler/README.md",
+		"/E/c/practice/Project Euler/doc/README.md",
+		"/E/c/practice/Project Euler/src/utility/utility.c",
+		"/E/c/practice/Project Euler/utility.h",
+		"/E/c/practice/Project Euler/utility.c",
+		"/E/c/practice/Project Euler/solutions.c",
+		"/E/c/practice/Project Euler/project_euler.c",
+		"/E/c/practice/Project Euler/solutions.h",
+		"/E/c/practice/Project Euler/project_euler.h",
+		"/C/Users/Thomas/Documents/Visual Studio 2013/Projects/TurnBasedDoto/TurnBasedDoto/bin/Debug/res/User/PlayerData.json",
+		"/E/c/practice/Project Euler/.gitignore",
+		"/E/c/practice/Buffer/buffer_and_size.c",
+		"/C/Users/Thomas/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1",
+		"/E/c/practice/Library Management/dinesh.c",
+		"/E/c/practice/Library Management/Bibek.dat",
+		"/E/c/practice/Library Management/Library Management.sublime-workspace",
+		"/E/c/practice/Library Management/dinesh.exe",
+		"/E/c/practice/Library Management/dinesh.o",
+		"/E/c/practice/Library Management/Library Management.sublime-project",
+		"/E/c/practice/Recursion/recursion.c",
+		"/C/Users/Thomas/Desktop/db",
+		"/C/Users/Thomas/Desktop/c.bat",
+		"/C/Users/Thomas/Documents/Imp/Internet/pass.json",
+		"/C/Users/Thomas/Documents/Visual Studio 2013/Projects/TurnBasedDoto/TurnBasedDoto.Data/bin/Debug/res/User/PlayerData.json",
+		"/C/Users/Thomas/Desktop/coopers.bsmx",
+		"/C/Users/Thomas/Desktop/coopers.bmsx",
+		"/C/Users/Thomas/Downloads/Payment Summary.html",
+		"/C/Users/Thomas/Documents/Visual Studio 2013/Projects/TurnBasedDoto/TurnBasedDoto/App.config",
+		"/C/Users/Thomas/Documents/Visual Studio 2013/Projects/TurnBasedDoto/TurnBasedDoto/bin/Debug/TurnBasedDoto.XML",
+		"/C/Users/Thomas/Documents/Visual Studio 2013/Projects/TurnBasedDoto/TurnBasedDoto/bin/Debug/App.config",
+		"/C/Users/Thomas/Documents/Visual Studio 2013/Projects/TurnBasedDoto/TurnBasedDoto/bin/Debug/res/Heroes/HeroData.json",
+		"/C/Users/Thomas/Documents/Visual Studio 2013/Projects/TurnBasedDoto/TurnBasedDoto/bin/Debug/res/PlayerData.json",
+		"/C/Users/Thomas/Documents/Imp/Internet/Router Config Backup.xml",
+		"/C/Users/Thomas/Documents/pass.json",
+		"/E/c/practice/Recursion/recursive_functions.c",
+		"/E/c/practice/Recursion/recursive_functions.h",
+		"/C/Users/Thomas/Documents/Visual Studio 2013/Projects/TurnBasedDoto/.gitignore",
+		"/E/c/practice/Recursion/.gitignore",
+		"/E/c/practice/Recursion/README.md",
+		"/E/c/practice/Recursion/makefile",
+		"/C/Users/Thomas/Downloads/Programming Assignment 1_ Percolation.html",
+		"/E/eclipse64/Java_Workspaces/Tutorials/Algorithms Part 1/.classpath",
+		"/C/Users/Thomas/.git-credentials",
+		"/C/Users/Thomas/.gitconfig",
+		"/E/c/practice/testgit/test.c",
+		"/E/c/practice/Recursion/recursive_functions.h.gch",
+		"/E/c/practice/testgit/git",
+		"/C/Users/Thomas/Desktop/Pinglog.txt",
+		"/E/c/practice/~/.git-config",
+		"/E/c/practice/~/.git-credentials",
+		"/E/c/practice/testgit/.gitignore",
+		"/E/c/practice/testgit/config",
+		"/E/c/practice/Recursion/make",
+		"/E/c/practice/Recursion/Recursive_Functions.h",
+		"/E/c/practice/Recursion/Recursion.c",
+		"/E/c/practice/buffer_and_size.c",
+		"/E/c/practice/recursion.c",
+		"/E/c/practice/add.c",
+		"/C/MinGW/msys/1.0/etc/fstab",
+		"/C/Users/Thomas/Desktop/Ping.bat",
+		"/C/Users/Thomas/Desktop/Assignment 2 - Milestone 1 Readme",
+		"/C/Users/Thomas/.ssh/known_hosts",
+		"/C/Users/Thomas/.ssh/id_rsa",
+		"/C/Users/Thomas/Documents/Visual Studio 2013/Projects/HospitalAdministrationApplication/Assignment 2 - Milestone 1 Readme",
+		"/C/Users/Thomas/Documents/Visual Studio 2013/Projects/TestMVCWebApplication/TestMVCWebApplication/Scripts/knockout-2.2.0.js",
+		"/C/Users/Thomas/.bashrc",
+		"/E/dotNET/notes/tl3/Ex1.3.cs",
+		"/C/Users/Thomas/Documents/Visual Studio 2013/Projects/AssignmentOne/ShoppingCartApp/bin/Debug/product.inventory.txt",
+		"/E/dotNET/notes/Week 5 Examples/l5/example04.cs",
+		"/E/dotNET/notes/Week 5 Examples/l5/example01.cs",
+		"/E/dotNET/notes/Week 5 Examples/l5/example02.cs",
+		"/E/dotNET/notes/Week 5 Examples/l5/example03.cs",
+		"/E/dotNET/notes/Week 5 Examples/l5/example05.cs",
+		"/E/dotNET/notes/Week 5 Examples/l5/log",
+		"/C/Users/Thomas/Desktop/product.inventory.txt",
+		"/C/Users/Thomas/Documents/Visual Studio 2013/Projects/AssignmentOne/AssignmentOneTest/bin/Debug/product.inventory.test.txt",
+		"/C/Users/Thomas/Documents/Questions for Andrej",
+		"/E/dotNET/notes/l4/UsingCodeBehind.aspx.cs",
+		"/E/dotNET/notes/l2/l2/example37.cs",
+		"/E/dotNET/notes/l3/assembly/HowToExecute.txt",
+		"/E/dotNET/notes/l3/assembly/Add.cs",
+		"/C/Users/Thomas/Documents/Visual Studio 2013/Projects/XmlFun/XmlFun/bin/Debug/books.xml",
+		"/E/dotNET/notes/l3/assembly/Mult.cs",
+		"/E/dotNET/notes/l3/example39.cs",
+		"/E/dotNET/notes/l2/l2/Iterators.cs"
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 55.0
 	},
 	"find_in_files":
 	{
@@ -101,6 +339,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"workspace",
 			"format",
 			"squaresum",
 			"num",
@@ -133,19 +372,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "newrelic.js",
-					"semi_transient": true,
+					"file": "public/dodge_box/box_manager.js",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 636,
+						"buffer_size": 4043,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								3536,
+								3536
 							]
 						],
 						"settings":
@@ -155,7 +394,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1170.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -163,26 +402,28 @@
 				},
 				{
 					"buffer": 1,
-					"file": "README.md",
+					"file": "public/dodge_box/main.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 252,
+						"buffer_size": 1651,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								252,
-								252
+								1648,
+								1648
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
+						"translation.x": -0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
