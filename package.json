@@ -1,5 +1,5 @@
 {
-  "name": "boxy",
+  "name": "bo-xy",
   "version": "0.0.2",
   "description" : "A practice app for nodejs and heroku.",
   "private": true,
@@ -12,7 +12,7 @@
   },
   "repository" : {
     "type" : "git",
-    "url" : "https://github.com/Thomas-Elder/Boxy"
+    "url" : "https://github.com/Thomas-Elder/bo-xy"
   },
   "keywords" : ["heroku"],
   "author" : "thomas elder",
