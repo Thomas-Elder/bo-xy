@@ -6,13 +6,13 @@ The app is hosted on Heroku, there is a bo-xy pipeline with 3 apps, dev, staging
 These three apps are linked to similarly named branches in this repo and commits are automatically deployed once pushed to github.
 
 dev:
-Heroku app: bo-xy-dev
-Github branch: dev
+* Heroku app: bo-xy-dev
+* Github branch: dev
 
 staging:
-Heroku app: bo-xy-staging
-Github branch: staging
+* Heroku app: bo-xy-staging
+* Github branch: staging
 
 production:
-Heroku app: bo-xy
-Github branch: master
+* Heroku app: bo-xy
+* Github branch: master
