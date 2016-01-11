@@ -31,7 +31,7 @@ BoxManager.prototype.init = function() {
   // Instantiate an array of new instances of type EnemyBox.
   for (var i = 0; i < this.enemyBoxes.length; i++) {
     this.enemyBoxes[i] = new EnemyBox(i * this.enemySpacing,
-                                      -config.enemySize.height * i,
+    -((this.config.screenSize.height - Math.floor(Math.random() * this.config.screenSize.height))),
                                       this.enemySpeed[this.levelCount],
                                       this.config,
                                       this.context);
@@ -107,7 +107,7 @@ BoxManager.prototype.update = function() {
 
       // Create new enemy box 
       this.enemyBoxes[i] = new EnemyBox(i * this.enemySpacing,
-        -((this.config.screenSize.height - this.enemyBoxes[i].getPosition().y) + config.enemySize.height),
+        -((this.config.screenSize.height - Math.floor(Math.random() * this.config.screenSize.height))),
                                         this.enemySpeed[this.level],
                                         this.config,
                                         this.context);
@@ -126,13 +126,6 @@ BoxManager.prototype.getLevel = function() {
 /**
  * Helper functions for the BoxManager
  */
-
-/**
- * Update enemy boxes
- */
-function update_enemy_box(player, enemy, level) {
-  
-}
 
 /**
  * Collision Detection
