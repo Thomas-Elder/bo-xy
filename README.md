@@ -1,10 +1,18 @@
-# Boxy
+# bo-xy
 Learning some node.js
 
-The app is hosted on Heroku, there are two apps boxy-123-dev and boxy-123-prod. 
+The app is hosted on Heroku, there is a bo-xy pipeline with 3 apps, dev, staging and production.
 
-Heroku remotes:
-* staging : boxy-123-dev, 
-  URL : boxy-123-dev.herokuapp.com
-* production : boxy-123-prod, 
-  URL : boxy-123-prod.herokuapp.com
+These three apps are linked to similarly named branches in this repo and commits are automatically deployed once pushed to github.
+
+dev:
+Heroku app: bo-xy-dev
+Github branch: dev
+
+staging:
+Heroku app: bo-xy-staging
+Github branch: staging
+
+production:
+Heroku app: bo-xy
+Github branch: master
