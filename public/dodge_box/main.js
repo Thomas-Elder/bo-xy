@@ -43,10 +43,11 @@ window.onload = function () {
     boxManager.draw();
 
     // Update and draw the hud
-    hud.update(boxManager.getScore(), boxManager.getLevel());
+    hud.update(boxManager.getScore(), boxManager.getLevel(), boxManager.getLives());
     hud.draw();
 
-    if (boxManager.getLevel() === config.numberOfLevels) {
+    if (boxManager.getLevel() === config.numberOfLevels ||
+      boxManager.getLives() === 0) {
       alert("Game over!");
       clearInterval(gameLoop);
     }

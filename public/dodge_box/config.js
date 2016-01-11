@@ -29,6 +29,7 @@ var config = {
    * PLAYER CONFIG
    */
   playerSpeed : 5,
+  playerLives : 3,
 
   playerColour : '#3399FF',
 

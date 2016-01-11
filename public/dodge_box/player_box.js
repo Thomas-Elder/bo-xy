@@ -9,6 +9,7 @@ function PlayerBox(config, controller, context) {
   this.speed        = config.playerSpeed;
   this.gravity      = config.gravity;
   this.colour       = config.playerColour;
+  this.lives        = config.playerLives;
 
   this.controller   = controller;
   this.context      = context;

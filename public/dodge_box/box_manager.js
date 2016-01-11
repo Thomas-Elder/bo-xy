@@ -102,6 +102,9 @@ BoxManager.prototype.update = function() {
                        this.enemyBoxes[i].getPosition().y,
                        this.config,
                        this.context));
+
+        // Lose a life
+        this.playerBox.lives--;
       }
 
     } else {
@@ -130,6 +133,11 @@ BoxManager.prototype.getScore = function() {
 BoxManager.prototype.getLevel = function() {
   return this.level;
 };
+
+BoxManager.prototype.getLives = function() {
+  return this.playerBox.lives;
+};
+
 
 /**
  * Helper functions for the BoxManager
