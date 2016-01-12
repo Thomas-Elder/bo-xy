@@ -1,18 +1,22 @@
 // Defines the Box type.
 function Box(config, controller, context) {
-  this.x            = (config.screenSize.width / 2) - (config.playerSize.width / 2);
-  this.y            = config.screenSize.height - config.playerSize.height;
-  this.width        = config.playerSize.width;
-  this.height       = config.playerSize.height;
+  this.x            = (config.screenSize.width / 2) - (config.size.width / 2);
+  this.y            = config.screenSize.height - config.size.height;
+  this.width        = config.size.width;
+  this.height       = config.size.height;
   this.screenWidth  = config.screenSize.width;
   this.screenHeight = config.screenSize.height;
-  this.speed        = config.playerSpeed;
+
+  this.speed        = config.speed;
   this.gravity      = config.gravity;
-  this.colour       = config.playerColour;
-  this.lives        = config.playerLives;
+
+  this.colour       = config.colour;
+  this.lives        = config.lives;
 
   this.controller   = controller;
   this.context      = context;
+
+  this.onScreen     = true;
 }
 
 // Define the PlayerBox type's draw method.
@@ -22,22 +26,10 @@ Box.prototype.draw = function() {
 };
 
 // Define the PlayerBox type's update method.
-Box.prototype.update = function() {
-  if (this.controller.left && this.x > 0) 
-    this.x = this.x - this.speed;
+Box.prototype.update = function(location) {
 
-  // apply gravity
-  if (this.y + this.height < this.screenHeight)
-    this.y += this.gravity;
-
-  if (this.controller.up && this.y > 0)
-    this.y = this.y - this.speed;
-
-  if (this.controller.right && this.x + this.width < this.screenWidth)
-    this.x = this.x + this.speed;
-
-  if (this.controller.down && this.y + this.height < this.screenHeight)
-    this.y = this.y + this.speed;
+  this.x = location.x;
+  this.y = location.y;
 };
 
 // Returns an object with x an y coords, the box's current position
@@ -48,4 +40,14 @@ Box.prototype.getPosition = function() {
 // Returns an object with width and height of the box
 Box.prototype.getSize = function() {
   return {width: this.width, height: this.height};
+};
+
+// Returns true if the box is currently on the screen
+Box.prototype.isOnScreen = function() {
+  return this.onScreen;
+};
+
+// Set the box onScreen variable to false
+Box.prototype.setOffScreen = function() {
+  this.onScreen = false;
 };
