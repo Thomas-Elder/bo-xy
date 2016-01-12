@@ -2,12 +2,12 @@
 function ExplodeBox(x, y, config, context) {
   this.x            = x;
   this.y            = y;
-  this.width        = config.explodeSize.width;
-  this.height       = config.explodeSize.height;
+  this.width        = config.box.explode.size.width;
+  this.height       = config.box.explode.size.height;
 
   this.context      = context;
 
-  this.colour       = config.explodeColour;
+  this.colour       = config.box.explode.colour;
 
   this.end          = false;
 

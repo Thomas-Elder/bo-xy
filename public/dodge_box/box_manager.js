@@ -4,7 +4,7 @@ function BoxManager(config, controller, context) {
   this.context    = context;
 
   this.enemyBoxes   = new Array(this.config.numberOfEnemies);
-  this.enemySpeed   = config.enemySpeed;
+  this.enemySpeed   = config.box.enemy.speed;
   this.levelCount   = 0;
   this.enemySpacing = 0;
   
@@ -26,7 +26,7 @@ BoxManager.prototype.init = function() {
    * Calculate placement of enemy boxes based on width of screen and number of
    * boxes.
    */
-  this.enemySpacing = (this.config.screenSize.width - this.config.enemySize.width) / (this.config.numberOfEnemies - 1);
+  this.enemySpacing = (this.config.screenSize.width - this.config.box.enemy.size.width) / (this.config.numberOfEnemies - 1);
 
   // Instantiate an array of new instances of type EnemyBox.
   for (var i = 0; i < this.enemyBoxes.length; i++) {
@@ -114,7 +114,6 @@ BoxManager.prototype.update = function() {
       this.total_score++;
 
       var location = newEnemyLocation(this.config);
-      console.log(location);
 
       // Create new enemy box 
       this.enemyBoxes[i] = new EnemyBox(location.x,

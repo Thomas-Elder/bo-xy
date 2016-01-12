@@ -12,6 +12,7 @@ var config = {
   backgroundColour : '#1A1A1A',
   numberOfLevels : 4,
   levelLength: 1000,
+  numberOfEnemies : 10,
 
   hudSize : {
     width : 400,
@@ -25,62 +26,68 @@ var config = {
     height : 400
   },
 
-  /**
-   * PLAYER CONFIG
-   */
-  playerSpeed : 5,
-  playerLives : 3,
+  box : {
 
-  playerColour : '#3399FF',
+    /**
+     * PLAYER CONFIG
+     */
+    player : {
+      speed : 5,
+      lives : 3,
 
-  playerSize : {
-    height : 20,
-    width : 20
+      colour : '#3399FF',
+
+      size : {
+        height : 20,
+        width : 20
+      }
+    },
+
+    /**
+     * ENEMY CONFIG
+     */
+    enemy : {
+      speed : [1, 2, 3, 4, 5, 6],
+
+      colour : ['#FFFFFF',
+                    '#FFFFAC',
+                    '#FFFF56',
+                    '#FFAC00',
+                    '#FF5600',
+                    '#FF0000'],
+
+      size : {
+        height : 20,
+        width : 20
+      },
+
+      startPos : {
+        x : 100,
+        y : 0
+      }
+    },
+
+    /**
+     * EXPLODE CONFIG
+     */
+    explode : {
+      size : {
+        height : 20,
+        width : 20
+      },
+
+      colour : ['#FFFFFF',
+                      '#DDDDDD',
+                      '#BBBBBB',
+                      '#999999',
+                      '#777777',
+                      '#555555']
+    }
   },
-
-  /**
-   * ENEMY CONFIG
-   */
-  numberOfEnemies : 10,
-
-  enemySpeed : [1, 2, 3, 4, 5, 6],
-
-  enemyColour : ['#FFFFFF',
-                '#FFFFAC',
-                '#FFFF56',
-                '#FFAC00',
-                '#FF5600',
-                '#FF0000'],
-
-  enemySize : {
-    height : 20,
-    width : 20
-  },
-
-  enemyStartPos : {
-    x : 100,
-    y : 0
-  },
-
-  /**
-   * EXPLODE CONFIG
-   */
-  explodeSize : {
-    height : 20,
-    width : 20
-  },
-
-  explodeColour : ['#FFFFFF',
-                  '#DDDDDD',
-                  '#BBBBBB',
-                  '#999999',
-                  '#777777',
-                  '#555555'],
 
 /**
 * Configuration Settings by difficulty
 */
-
   // EASY
   easy : {
 

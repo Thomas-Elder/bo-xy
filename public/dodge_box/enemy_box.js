@@ -2,18 +2,18 @@
 function EnemyBox(x, y, level, config, context) {
   this.x            = x;
   this.y            = y;
-  this.width        = config.enemySize.width;
-  this.height       = config.enemySize.height;
+  this.width        = config.box.enemy.size.width;
+  this.height       = config.box.enemy.size.height;
   this.screenWidth  = config.screenSize.width;
   this.screenHeight = config.screenSize.height;
-  this.colour       = config.enemyColour[0];
+  this.colour       = config.box.enemy.colour[0];
   
   this.context      = context;
   
   this.onScreen     = true;
   
-  this.speed        = config.enemySpeed[level];
-  this.colour       = config.enemyColour[level];
+  this.speed        = config.box.enemy.speed[level];
+  this.colour       = config.box.enemy.colour[level];
 }
 
 // Define the EnemyBox type's draw method.
