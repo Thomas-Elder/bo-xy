@@ -3,6 +3,9 @@ function BoxManager(config, controller, context) {
   this.controller = controller;
   this.context    = context;
 
+  this.screen = {width: config.screenSize.width,
+                 height: config.screenSize.height};
+
   this.enemyBoxes   = new Array(this.config.numberOfEnemies);
   this.enemySpeed   = config.box.enemy.speed;
   this.levelCount   = 0;
@@ -33,7 +36,6 @@ BoxManager.prototype.init = function() {
 
     // Get a new enemy location
     var location = newEnemyLocation(this.config);
-      console.log(location);
 
     this.enemyBoxes[i] = new EnemyBox(location.x,
                                       location.y,
@@ -61,7 +63,7 @@ BoxManager.prototype.draw = function() {
 
 BoxManager.prototype.update = function() {
 
-  this.playerBox.update();
+  this.updatePlayer();
 
   if (this.explodeBoxes.length > 0) {
     for (var k = 0; k < this.explodeBoxes.length; k++){
@@ -137,6 +139,36 @@ BoxManager.prototype.getLives = function() {
   return this.playerBox.lives;
 };
 
+BoxManager.prototype.updatePlayer = function() {
+
+  var currentPosition = this.playerBox.getPosition();
+  var newPosition = {x: currentPosition.x, y: currentPosition.y};
+
+  // apply gravity
+  if (currentPosition.y + this.playerBox.getSize().height < this.screen.height)
+    newPosition.y = currentPosition.y + this.config.gravity;
+
+  // move left
+  if (this.controller.left && currentPosition.x > 0)
+    newPosition.x = currentPosition.x - this.playerBox.getSpeed();
+
+  // move up
+  if (this.controller.up && currentPosition.y > 0)
+    newPosition.y = currentPosition.y - this.playerBox.getSpeed();
+
+  // move right
+  if (this.controller.right &&
+      this.playerBox.x + this.playerBox.getSize().width < this.screen.width)
+    newPosition.x = currentPosition.x + this.playerBox.getSpeed();
+
+  // move down
+  if (this.controller.down &&
+      this.playerBox.y + this.playerBox.getSize().height < this.screen.height)
+    newPosition.y = currentPosition.y + this.playerBox.getSpeed();
+
+  this.playerBox.update(newPosition);
+};
+
 
 /**
  * Helper functions for the BoxManager
@@ -164,6 +196,6 @@ function collisionDetection(a, b) {
  */
 function newEnemyLocation(config) {
 
-  return {x: Math.floor(Math.random() * (config.screenSize.width - config.box.enemy.size.width)),
+  return {x: Math.floor(Math.random() * config.screenSize.width - config.box.enemy.size.width),
     y: -((this.config.screenSize.height - Math.floor(Math.random() * this.config.screenSize.height)))};
 }

@@ -22,7 +22,15 @@ PlayerBox.prototype.draw = function() {
 };
 
 // Define the PlayerBox type's update method.
-PlayerBox.prototype.update = function() {
+PlayerBox.prototype.update = function(newLocation) {
+  
+  console.log("inside update player");
+  console.log(newLocation);
+
+  this.x = newLocation.x;
+  this.y = newLocation.y;
+
+  /*
   if (this.controller.left && this.x > 0) 
     this.x = this.x - this.speed;
 
@@ -37,7 +45,7 @@ PlayerBox.prototype.update = function() {
     this.x = this.x + this.speed;
 
   if (this.controller.down && this.y + this.height < this.screenHeight)
-    this.y = this.y + this.speed;
+    this.y = this.y + this.speed;*/
 };
 
 // Returns an object with x an y coords, the box's current position
@@ -48,4 +56,9 @@ PlayerBox.prototype.getPosition = function() {
 // Returns an object with width and height of the box
 PlayerBox.prototype.getSize = function() {
   return {width: this.width, height: this.height};
+};
+
+// Returns a the speed of the playerbox
+PlayerBox.prototype.getSpeed = function() {
+  return this.speed;
 };

@@ -51,3 +51,8 @@ Box.prototype.isOnScreen = function() {
 Box.prototype.setOffScreen = function() {
   this.onScreen = false;
 };
+
+// Returns a the speed of the box
+PlayerBox.prototype.getSpeed = function() {
+  return this.speed;
+};
