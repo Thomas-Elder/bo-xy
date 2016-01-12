@@ -26,7 +26,7 @@ Box.prototype.draw = function() {
 };
 
 // Define the PlayerBox type's update method.
-Box.prototype.update = function(location) {
+Box.prototype.update = function(newLocation) {
 
   this.x = location.x;
   this.y = location.y;

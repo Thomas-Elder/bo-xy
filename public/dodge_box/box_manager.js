@@ -65,16 +65,7 @@ BoxManager.prototype.update = function() {
 
   this.updatePlayer();
 
-  if (this.explodeBoxes.length > 0) {
-    for (var k = 0; k < this.explodeBoxes.length; k++){
-
-      this.explodeBoxes[k].update();
-
-      if (this.explodeBoxes[k].endOfExplode()) {
-        this.explodeBoxes.splice(k, 1);
-      }
-    }
-  }
+  this.updateExplodes();
 
   if (this.level_score === 100) {
     this.level_score = 0;
@@ -91,7 +82,8 @@ BoxManager.prototype.update = function() {
   for (var i = 0; i < this.enemyBoxes.length; i++) {
 
     if (this.enemyBoxes[i].isOnScreen()) {
-      this.enemyBoxes[i].update();
+
+      this.updateEnemy(this.enemyBoxes[i]);
 
       /*
        * If there's a collision, get rid of the enemy hit, and push 
@@ -168,6 +160,38 @@ BoxManager.prototype.updatePlayer = function() {
 
   this.playerBox.update(newPosition);
 };
+
+BoxManager.prototype.updateExplodes = function() {
+
+  if (this.explodeBoxes.length > 0) {
+    for (var k = 0; k < this.explodeBoxes.length; k++){
+
+      this.explodeBoxes[k].update();
+
+      if (this.explodeBoxes[k].endOfExplode()) {
+        this.explodeBoxes.splice(k, 1);
+      }
+    }
+  }
+};
+
+BoxManager.prototype.updateEnemy = function(enemy) {
+
+    if (enemy.isOnScreen()) {
+
+      var currentPosition = enemy.getPosition();
+      var newPosition = currentPosition;
+
+      // Move enemy down the screen
+      if (currentPosition.y + enemy.getSize().height < this.screen.height + enemy.getSize().height)
+        newPosition.y += enemy.getSpeed();
+      else
+        enemy.setOffScreen();
+
+      enemy.update(newPosition);
+    }
+};
+
 
 
 /**
