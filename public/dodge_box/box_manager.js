@@ -145,11 +145,11 @@ BoxManager.prototype.getLives = function() {
 /**
  * Collision Detection
  */
-function collisionDetection(player, enemy) {
-  if ((player.getPosition().x - enemy.getSize().width) < enemy.getPosition().x) {
-    if (enemy.getPosition().x  < (player.getPosition().x + player.getSize().width)) {
-      if ((enemy.getPosition().y + enemy.getSize().height) > player.getPosition().y) {
-        if (enemy.getPosition().y < (player.getPosition().y + player.getSize().height)) {
+function collisionDetection(a, b) {
+  if ((a.getPosition().x - b.getSize().width) < b.getPosition().x) {
+    if (b.getPosition().x  < (a.getPosition().x + a.getSize().width)) {
+      if ((b.getPosition().y + b.getSize().height) > a.getPosition().y) {
+        if (b.getPosition().y < (a.getPosition().y + a.getSize().height)) {
           return true;
         }
       }
@@ -164,6 +164,6 @@ function collisionDetection(player, enemy) {
  */
 function newEnemyLocation(config) {
 
-  return {x: Math.floor(Math.random() * config.screenSize.width), 
+  return {x: Math.floor(Math.random() * (config.screenSize.width - config.box.enemy.size.width)),
     y: -((this.config.screenSize.height - Math.floor(Math.random() * this.config.screenSize.height)))};
 }
