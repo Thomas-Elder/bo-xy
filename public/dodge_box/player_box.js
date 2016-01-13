@@ -1,7 +1,7 @@
 // Defines the Box type.
 function PlayerBox(config, controller, context) {
-  this.x            = (config.screenSize.width / 2) - (config.playerSize.width / 2);
-  this.y            = config.screenSize.height - config.playerSize.height;
+  this.x            = (config.screenSize.width / 2) - (config.box.player.size.width / 2);
+  this.y            = config.screenSize.height - config.box.player.size.height;
   this.width        = config.box.player.size.width;
   this.height       = config.box.player.size.height;
   this.screenWidth  = config.screenSize.width;
