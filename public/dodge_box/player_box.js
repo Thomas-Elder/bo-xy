@@ -1,15 +1,15 @@
 // Defines the Box type.
-function PlayerBox(config, controller, context) {
+function PlayerBox(x, y, config, controller, context) {
 
-  this.x            = (config.screenSize.width / 2) - (config.box.player.size.width / 2);
-  this.y            = config.screenSize.height - config.box.player.size.height;
-  this.width        = config.box.player.size.width;
-  this.height       = config.box.player.size.height;
+  this.x            = x;
+  this.y            = y;
+  this.width        = config.size.width;
+  this.height       = config.size.height;
 
-  this.speed        = config.box.player.speed;
-  this.gravity      = config.gravity;
-  this.colour       = config.box.player.colour;
-  this.lives        = config.box.player.lives;
+  this.speed        = config.speed;
+
+  this.colour       = config.colour;
+  this.lives        = config.lives;
 
   this.controller   = controller;
   this.context      = context;

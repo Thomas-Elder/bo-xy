@@ -23,7 +23,11 @@ function BoxManager(config, controller, context) {
 BoxManager.prototype.init = function() {
 
   // Instantiate a new instance of type PlayerBox.
-  this.playerBox = new PlayerBox(this.config, this.controller, this.context);
+  this.playerBox = new Box((this.config.screenSize.width / 2) - (this.config.box.player.size.width / 2),
+                                 this.config.screenSize.height - this.config.box.player.size.height,
+                                 this.config.box.player,
+                                 this.controller,
+                                 this.context);
 
   /*
    * Calculate placement of enemy boxes based on width of screen and number of
