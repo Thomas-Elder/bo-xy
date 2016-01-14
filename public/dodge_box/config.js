@@ -12,7 +12,7 @@ var config = {
   backgroundColour : '#1A1A1A',
   numberOfLevels : 4,
   levelLength: 1000,
-  numberOfEnemies : 10,
+  numberOfEnemies : 20,
 
   hudSize : {
     width : 400,
@@ -22,8 +22,8 @@ var config = {
   hudTextColour : '#3399FF',
 
   screenSize : {
-    width : 400,
-    height : 400
+    width : 800,
+    height : 800
   },
 
   box : {
@@ -77,11 +77,11 @@ var config = {
       },
 
       colour : ['#FFFFFF',
-                      '#DDDDDD',
-                      '#BBBBBB',
-                      '#999999',
-                      '#777777',
-                      '#555555']
+                '#DDDDDD',
+                '#BBBBBB',
+                '#999999',
+                '#777777',
+                '#555555']
     }
   },
 

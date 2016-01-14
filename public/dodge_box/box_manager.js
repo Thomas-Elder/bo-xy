@@ -164,6 +164,8 @@ function collisionDetection(player, enemy) {
  */
 function newEnemyLocation(config) {
 
-  return {x: Math.floor(Math.random() * config.screenSize.width), 
-    y: -((this.config.screenSize.height - Math.floor(Math.random() * this.config.screenSize.height)))};
+  return {
+    x: Math.floor(Math.random() * config.screenSize.width), 
+    y: -((this.config.screenSize.height - Math.floor(Math.random() * this.config.screenSize.height)))
+  };
 }
