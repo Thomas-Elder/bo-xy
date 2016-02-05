@@ -1,0 +1,9 @@
+todo
+
+-create views for pre/post game
+-create top score view 
+-create in memory top scores list
+
+-will have to send info from the game to the server to render the post game view. 
+-would be good to have the current top score displayed while playing too, 
+ so will need to get data from the server to the game also. 
