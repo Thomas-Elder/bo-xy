@@ -48,8 +48,12 @@ window.onload = function () {
 
     if (boxManager.getLevel() === config.numberOfLevels ||
       boxManager.getLives() === 0) {
-      alert("Game over!");
-      clearInterval(gameLoop);
+        game_context.clearRect(0, 0, config.screenSize.width, config.screenSize.height);
+        hud_context.clearRect(0, 0, config.hudSize.width, config.hudSize.height);
+        
+        boxManager.endGame();
+          
+        clearInterval(gameLoop);
     }
   }
 

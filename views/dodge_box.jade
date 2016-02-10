@@ -2,9 +2,6 @@ extends layout
 
 include mixins/dodge_scripts
 
-block scripts
-  mixin dodge_scripts()
-
 block content
   h2= title
 
@@ -25,3 +22,6 @@ block content
       width="400"
       height="50"
       )
+      
+  block scripts
+    mixin dodge_scripts()
