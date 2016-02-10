@@ -18,3 +18,11 @@ Background.prototype.draw = function() {
 Background.prototype.update = function() {
   
 };
+
+function newStarLocation(config) {
+
+  return {
+    x: Math.floor(Math.random() * config.screenSize.width), 
+    y: -((this.config.screenSize.height - Math.floor(Math.random() * this.config.screenSize.height)))
+  };
+}
