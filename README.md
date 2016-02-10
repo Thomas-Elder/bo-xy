@@ -1,5 +1,6 @@
 # bo-xy
 [![Build Status](https://travis-ci.org/Thomas-Elder/bo-xy.svg?branch=master)](https://travis-ci.org/Thomas-Elder/bo-xy)
+
 Learning some node.js
 
 The app is hosted on Heroku, there is a bo-xy pipeline with 3 apps, dev, staging and production.
