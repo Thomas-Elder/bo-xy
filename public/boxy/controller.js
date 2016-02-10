@@ -1,5 +1,6 @@
 // Define the Controller type.
-function Controller() {
+function Controller(socket) {
+  this.socket = socket;
   this.up    = false;
   this.down  = false;
   this.left  = false;
@@ -22,6 +23,14 @@ Controller.prototype.keyDown = function(event) {
     this.right = true;
   else if (keyCode == 40)
     this.down = true;
+    
+  this.socket.emit('keyDown',
+    {
+    'left':this.left,
+    'up':this.up,
+    'right':this.right,
+    'down':this.down
+  });
 };
 
 // Define the Controller type's keyUp method.
@@ -37,4 +46,12 @@ Controller.prototype.keyUp = function(event) {
     this.right = false;
   else if (keyCode == 40)
     this.down = false;
+    
+  this.socket.emit('keyUp',
+    {
+    'left':this.left,
+    'up':this.up,
+    'right':this.right,
+    'down':this.down
+  });
 };

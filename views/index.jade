@@ -1,12 +1,18 @@
 extends layout
 
+include mixins/boxy_scripts
+
+block scripts
+  mixin boxy_scripts()
+
 block content
   h1= title
   p Welcome to box_land with boxes!
-
-  .menu
-    a(class="button-link" href='boxy')= 'boxy'
-  .menu
-    a(class="button-link" href='flappy_box')= 'flappy_box'
-  .menu
-    a(class="button-link" href='dodge_box')= 'dodge_box'
+  p
+    a(href='/')= 'home'
+  canvas(
+    id="myCanvas"
+    style="border: 1px solid #000000;"
+    width="400"
+    height="400"
+    )

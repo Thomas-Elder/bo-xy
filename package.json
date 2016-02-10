@@ -5,12 +5,7 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "test": "jasmine-node --verbose --captureExceptions --forceexit ./spec"
-  },
-  "dependencies": {
-    "express": "3.4.8",
-    "jade": "*",
-    "socket.io": "^1.4.5"
+    "test" : "jasmine-node --verbose --captureExceptions --forceexit ./spec"
   },
   "repository": {
     "type": "git",
@@ -22,6 +17,11 @@
   "author": "thomas elder",
   "engines": {
     "node": "4.2.4"
+  },
+  "dependencies": {
+    "express": "3.4.8",
+    "jade": "*",
+    "socket.io": "^1.4.5"
   },
   "devDependencies": {
     "jasmine-node": "^1.14.5",
