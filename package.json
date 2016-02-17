@@ -1,19 +1,13 @@
 {
-  "name": "bo-xy",
-  "version": "0.0.2",
-  "description": "A practice app for nodejs and heroku.",
+  "name": "bo-xy-redux",
+  "version": "0.0.1",
+  "description": "",
   "private": true,
   "scripts": {
     "start": "node app.js",
     "test" : "jasmine-node --verbose --captureExceptions --forceexit ./spec"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Thomas-Elder/bo-xy"
-  },
-  "keywords": [
-    "heroku"
-  ],
+
   "author": "thomas elder",
   "engines": {
     "node": "4.2.4"
@@ -26,6 +20,7 @@
   "devDependencies": {
     "jasmine-node": "^1.14.5",
     "request": "^2.69.0",
-    "socket.io-client": "^1.4.5"
+    "socket.io-client": "^1.4.5",
+    "typings": "^0.6.6"
   }
 }

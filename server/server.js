@@ -2,50 +2,73 @@
 /**
  * Module dependencies.
  */
-var routes = require('../routes');
+var controllers = require('./controllers/controllers');
 var config = require('./config');
-var Events = require('./events')
+var Events = require('./events');
 
-var express = require('express');
 var path = require('path');
 
+/**
+ * Server
+ * @param httpServer
+ * @param express
+ * @param app
+ * 
+ */
 var Server = function(httpServer, express, app){
-
-  this.express = express;
-  this.app = app;
   
-  this.events = new Events();
-  this.server = httpServer;
+  // get instance references for these to use in start()
+  this.app = app;
+  this.server = httpServer;  
+  this.io = require('socket.io')(httpServer);
 
-  // all environments
-  this.app.set('port', process.env.PORT || config.port);
-  this.app.set('views', path.join(__dirname, '../views'));
-  this.app.set('view engine', 'jade');
+  // set port, view dir and engine
+  app.set('port', process.env.PORT || config.port);
+  app.set('views', path.join(__dirname, './views'));
+  app.set('view engine', 'jade');
+  
+  app.use(express.logger('dev'));
 
-  this.app.use(express.logger('dev'));
-
-  // set path for public
-  this.app.use(express.static(path.join(__dirname, '../public')));
-
-  // development only
-  if ('development' == this.app.get('env')) {
-    this.app.use(express.errorHandler());
+  if ('development' == app.get('env')) {
+    app.use(express.errorHandler());
   }
 
+  // set path for static files
+  app.use(express.static(path.join(__dirname, '../client')));
+
   // setting up routes 
-  this.app.get('/', routes.index);
-  this.app.get('*', routes.none);
+  app.get('/', controllers.index);
+  app.get('/dodge', controllers.dodge);
+  app.get('/highscores', controllers.highscores);
+  app.get('/lobbies', controllers.lobbies);
+  app.get('*', controllers.none);
 };
 
+/**
+ * start
+ * 
+ * Starts the server listening
+ */
 Server.prototype.start = function(){
-  // assign event handlers
-  this.events.setEventHandlers(this.server);
+  
+  var events = new Events(this.io);
+  
+  var port = this.app.get('port');
 
   // start listening!
-  this.server.listen(this.app.get('port'), 
+  this.server.listen(port,
     function(){
-      console.log('Express server listening on port ' + '8888');
+      console.log('Express server listening on port: ' + port);
   });
+};
+
+/**
+ * stop
+ * 
+ * Stops the server recieving any further requests.
+ */
+Server.prototype.stop = function(){
+  this.server.close();
 };
 
 module.exports = Server;

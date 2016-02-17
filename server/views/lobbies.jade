@@ -1,0 +1,40 @@
+extends layout
+
+include mixins/lobbyScripts
+
+block content
+  h1= title
+  p These lobbies are currently happening
+  
+  button(id="new" class="btn") N E W
+  
+  div#lobby-list
+    ul.lobby-ulist
+      each lobby in lobbies
+        li
+          div= 'L O B B Y : ' + lobby.name
+            div.button-case
+              button(id="join" class="btn") J O I N
+  
+  div#lobby-create
+    p C R E A T E
+    
+    div.new-lobby
+      label N A M E:
+        input(type="text")
+        
+      div.button-case
+        button(id="open" class="btn") O P E N
+  
+  div#lobby
+    p W E L C O M E
+    
+    div.lobby
+      label L O B B Y N A M E
+    
+      div.button-case
+        button(id="bail" class="btn") B A I L
+        button(id="start" class="btn") S T A R T
+        
+block scripts
+  mixin lobbyScripts()

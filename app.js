@@ -7,4 +7,5 @@ var httpServer = http.createServer(app);
 
 var server = new Server(httpServer, express, app);
 
+console.log('starting server... ');
 server.start();
