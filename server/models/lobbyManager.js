@@ -27,7 +27,11 @@ LobbyManager.prototype.add = function(lobby){
  * @param key the lobby to be removed
  */
 LobbyManager.prototype.remove = function(key){
-  
+  this.lobbies.forEach(function(lobby) {
+    if(lobby.id === key) {
+      this.lobbies.pop(lobby);
+    }    
+  });
 };
 
 /**
@@ -36,7 +40,11 @@ LobbyManager.prototype.remove = function(key){
  * @return lobby
  */
 LobbyManager.prototype.get = function(key){
-  
+  this.lobbies.forEach(function(lobby) {
+    if(lobby.id === key) {
+      return lobby;
+    }    
+  });
 };
 
 /**

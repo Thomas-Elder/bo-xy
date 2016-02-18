@@ -5,6 +5,7 @@
 var controllers = require('./controllers/controllers');
 var config = require('./config');
 var Events = require('./events');
+var LobbyManager = require('./models/lobbyManager');
 
 var path = require('path');
 
@@ -35,7 +36,14 @@ var Server = function(httpServer, express, app){
 
   // set path for static files
   app.use(express.static(path.join(__dirname, '../client')));
-
+  
+  // set lobby manager
+  var lobbyManager = new LobbyManager();
+  controllers.setLobbyManager(lobbyManager);
+  
+  // Create new events instance
+  var events = new Events(this.io, lobbyManager);
+  
   // setting up routes 
   app.get('/', controllers.index);
   app.get('/dodge', controllers.dodge);
@@ -50,8 +58,6 @@ var Server = function(httpServer, express, app){
  * Starts the server listening
  */
 Server.prototype.start = function(){
-  
-  var events = new Events(this.io);
   
   var port = this.app.get('port');
 
