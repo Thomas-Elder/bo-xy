@@ -53,9 +53,11 @@ window.onload = function(){
     $('#lobbies').show();
     $('#lobby').show();
     
-    // save the lobbyID and name
-    lobby.id = socket.id;
+    // pass the name back to server for rooming
     lobby.name = $('#name').val();
+    
+    console.log(lobby.id);
+    console.log(lobby.name);
     
     // emit open to the server with details
     socket.emit('open', lobby);

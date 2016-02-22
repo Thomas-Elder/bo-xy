@@ -6,7 +6,7 @@
  * Contains several functions for adding, removing and 
  * returning score information.
  */
-var Highscores = function(){
+var HighscoreManager = function(){
   this.highscores = [];
 };
 
@@ -18,7 +18,9 @@ var Highscores = function(){
  * array before sorting in descending order. 
  * 
  */
-Highscores.prototype.add = function(score){
+HighscoreManager.prototype.add = function(score){
+  
+  // Push the new score, and sort descending order by score
   this.highscores.push(score);
   this.highscores.sort(
     function(a, b){
@@ -30,7 +32,7 @@ Highscores.prototype.add = function(score){
  * remove
  * @param key
  */
-Highscores.prototype.remove = function(key){
+HighscoreManager.prototype.remove = function(key){
   
 };
 
@@ -38,7 +40,7 @@ Highscores.prototype.remove = function(key){
  * get
  * @param key
  */
-Highscores.prototype.get = function(key){
+HighscoreManager.prototype.get = function(key){
   
 };
 
@@ -47,8 +49,8 @@ Highscores.prototype.get = function(key){
  * 
  * Returns an array of score objects.
  */
-Highscores.prototype.getAll = function(){
+HighscoreManager.prototype.getAll = function(){
   return this.highscores;
 };
 
-module.exports = Highscores;
+module.exports = HighscoreManager;

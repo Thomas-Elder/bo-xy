@@ -1,5 +1,7 @@
 
-var Events = function(io, lm){
+var Events = function(){};
+
+Events.prototype.lobbyEvents = function(io, lm){
   var lobbyManager = lm;
   var lobbyNamespace = io.of('/lobby');
 
@@ -12,15 +14,17 @@ var Events = function(io, lm){
       
       // create new lobby using the name passed from client
       socket.on('open',
-        function(name){
-          var lobby = {};
+        function(lobby){
+          
+          lobby.users = [];
           lobby.id = socket.id;
-          lobby.name = name;
+          lobby.users.push(socket.id);
           lobbyManager.add(lobby);
           
           // create new room and assign this socket to it.
           socket.join(lobby.id);
           
+          console.log(lobby);
           // let the lobbyNamespace know about the new lobby
           lobbyNamespace.emit('newLobby', lobby);
       });
@@ -33,6 +37,10 @@ var Events = function(io, lm){
           
           // join room
           socket.join(lobby.id);
+          console.log(lobbyManager.get(lobby.id));
+          
+          
+          //lobbyManager.get(lobby.id).users.push(socket.id);
           
           // let the room know you've joined
           lobbyNamespace.to(lobby.id).emit('newPlayer', 'A player has joined!');
@@ -44,6 +52,7 @@ var Events = function(io, lm){
           
           // leave room
           socket.leave(lobby.id);
+          lobby.users.pop(socket.id);
           
           /// let the lobbyNamespace know about the lobby bailage
           lobbyNamespace.emit('bailLobby', lobby);

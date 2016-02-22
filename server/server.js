@@ -42,7 +42,8 @@ var Server = function(httpServer, express, app){
   controllers.setLobbyManager(lobbyManager);
   
   // Create new events instance
-  var events = new Events(this.io, lobbyManager);
+  var events = new Events();
+  events.lobbyEvents(this.io, lobbyManager);
   
   // setting up routes 
   app.get('/', controllers.index);

@@ -1,4 +1,4 @@
-var Scores = require('../models/highscores');
+var Scores = require('../models/highscoreManager');
 
 // game page
 exports.highscores = function(req, res){
