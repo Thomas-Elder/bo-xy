@@ -4,7 +4,7 @@
  */
 var controllers = require('./controllers/controllers');
 var config = require('./config');
-var Events = require('./events');
+var EventManager = require('./events');
 var LobbyManager = require('./models/lobbyManager');
 
 var path = require('path');
@@ -42,8 +42,8 @@ var Server = function(httpServer, express, app){
   controllers.setLobbyManager(lobbyManager);
   
   // Create new events instance
-  var events = new Events();
-  events.lobbyEvents(this.io, lobbyManager);
+  var eventManager = new EventManager();
+  eventManager.lobbyEvents(this.io, lobbyManager);
   
   // setting up routes 
   app.get('/', controllers.index);

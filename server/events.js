@@ -1,7 +1,7 @@
 
-var Events = function(){};
+var EventManager = function(){};
 
-Events.prototype.lobbyEvents = function(io, lm){
+EventManager.prototype.lobbyEvents = function(io, lm){
   var lobbyManager = lm;
   var lobbyNamespace = io.of('/lobby');
 
@@ -60,4 +60,4 @@ Events.prototype.lobbyEvents = function(io, lm){
   });
 };
 
-module.exports = Events;
+module.exports = EventManager;

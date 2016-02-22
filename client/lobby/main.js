@@ -80,13 +80,15 @@ window.onload = function(){
     $('#lobby-create').hide();
     $('#lobby-list').show();
     
-    // emit bail to the server with id
-    socket.emit('bail', lobby.id);
+    // emit bail to the server with lobby
+    socket.emit('bail', lobby);
   });
   
   // START
   $('#start').click(function(){
-    window.location.replace("http://localhost:8888/dodge");
+    
+    socket.emit('start', lobby);
+    //window.location.replace("http://localhost:8888/dodge");
   });
   
   
