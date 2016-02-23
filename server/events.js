@@ -57,6 +57,11 @@ EventManager.prototype.lobbyEvents = function(io, lm){
           /// let the lobbyNamespace know about the lobby bailage
           lobbyNamespace.emit('bailLobby', lobby);
       });
+      
+      socket.on('start',
+        function(lobby){
+          lobbyNamespace.to(lobby.id).emit('start', 'Starting the game... ');
+      });
   });
 };
 
