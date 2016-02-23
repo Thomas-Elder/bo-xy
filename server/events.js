@@ -37,11 +37,9 @@ EventManager.prototype.lobbyEvents = function(io, lm){
           
           // join room
           socket.join(lobby.id);
+          lobbyManager.get(lobby.id).users.push(socket.id);
           console.log(lobbyManager.get(lobby.id));
-          
-          
-          //lobbyManager.get(lobby.id).users.push(socket.id);
-          
+                
           // let the room know you've joined
           lobbyNamespace.to(lobby.id).emit('newPlayer', 'A player has joined!');
       });
@@ -52,7 +50,8 @@ EventManager.prototype.lobbyEvents = function(io, lm){
           
           // leave room
           socket.leave(lobby.id);
-          lobby.users.pop(socket.id);
+          lobbyManager.get(lobby.id).users.pop(socket.id);
+          console.log(lobbyManager.get(lobby.id));
           
           /// let the lobbyNamespace know about the lobby bailage
           lobbyNamespace.emit('bailLobby', lobby);

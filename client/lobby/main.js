@@ -107,6 +107,12 @@ window.onload = function(){
   
   socket.on('bailLobby', 
     function(lobby){
-      
+      $("li:has(button[id=" + lobby.id + "])").remove();
+  });
+  
+  socket.on('start',
+    function(lobby){
+    
   });
 };
+
