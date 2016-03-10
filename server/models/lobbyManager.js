@@ -14,7 +14,7 @@ var LobbyManager = function(){
 
 /**
  * add
- * @param lobby
+ * @param {object} lobby The lobby to be added.
  * 
  * Add a lobby object to the array.
  */
@@ -24,7 +24,7 @@ LobbyManager.prototype.add = function(lobby){
 
 /**
  * remove
- * @param key the lobby to be removed
+ * @param {string} key The lobby to be removed.
  */
 LobbyManager.prototype.remove = function(key){
   var self = this;
@@ -38,8 +38,8 @@ LobbyManager.prototype.remove = function(key){
 
 /**
  * get
- * @param key the lobby to be returned
- * @return lobby
+ * @param {string} key the lobby to be returned.
+ * @return {object} lobby The lobby being returned.
  */
 LobbyManager.prototype.get = function(key){
   
@@ -56,7 +56,7 @@ LobbyManager.prototype.get = function(key){
 
 /**
  * getAll
- * @return array of lobbies
+ * @return {array} array of lobbies
  */
 LobbyManager.prototype.getAll = function () {
   return this.lobbies;

@@ -49,7 +49,7 @@ EventManager.prototype.lobbyEvents = function(io, lm){
         function(lobby){
           
           // leave room
-          socket.leave(lobby.id);
+          socket.leave(lobby.id); 
           lobbyManager.get(lobby.id).users.pop(socket.id);
           console.log(lobbyManager.get(lobby.id));
           
