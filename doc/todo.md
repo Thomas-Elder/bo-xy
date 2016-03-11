@@ -1,4 +1,6 @@
-TODO
+# TODO
+
+## STRUCTURE
 
 Ok so the bo-xy project is getting a bit messy and needs a re-do, with some engineering 
 this time.
@@ -39,9 +41,7 @@ root/
       box/
         playerBox.js
         enemyBox.js
-        buffBox.js
-
-  
+        buffBox.js 
 
   spec/
     // test things.
@@ -78,7 +78,6 @@ Then shown.
 
 Ok at this point I think we'll then redirect users to a new page when they hit play.
 Like /dodge. Then it loads the scripts for the game and the game canvas etc. 
-
 
 
 # Milestone 1.0
