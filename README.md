@@ -1,4 +1,7 @@
 # bo-xy
+
+[![Build Status](https://travis-ci.org/Thomas-Elder/bo-xy.svg?branch=master)](https://travis-ci.org/Thomas-Elder/bo-xy)
+
 Learning some node.js
 
 This app is basically to serve a Javascript game currently called Dodge. I'm pretty new to node.js so creating a website around this simple game seemed like a good place to start.
