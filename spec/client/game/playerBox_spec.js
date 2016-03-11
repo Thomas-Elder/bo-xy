@@ -19,7 +19,6 @@ describe('PlayerBox',
         it('', 
           function(done){
                 done();
-            });
         });
         
         it('',

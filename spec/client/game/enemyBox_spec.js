@@ -16,10 +16,10 @@ describe('EnemyBox',
     
     describe('', 
       function(){        
+        
         it('', 
           function(done){
                 done();
-            });
         });
         
         it('',
@@ -36,5 +36,5 @@ describe('EnemyBox',
           function(done){
             done();
         });  
-    });  
+    });
 });
