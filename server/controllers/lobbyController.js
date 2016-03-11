@@ -13,3 +13,8 @@ exports.lobbies = function(req, res){
         lobbies: lobbyManager.getAll()
         });
   };
+
+exports.mingle = function(req, res){
+ 
+    res.render('mingle', {title: 'M I N G L E'});
+  };

@@ -88,7 +88,7 @@ window.onload = function(){
   $('#start').click(function(){
     
     socket.emit('start', lobby);
-    //window.location.replace("http://localhost:8888/dodge");
+    window.location.replace("http://localhost:8888/dodge");
   });
   
   
@@ -112,7 +112,7 @@ window.onload = function(){
   
   socket.on('start',
     function(lobby){
-    
+      window.location.replace("http://localhost:8888/dodge");
   });
 };
 

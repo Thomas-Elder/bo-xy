@@ -14,6 +14,8 @@ exports.none = function(req, res){
 
 exports.index = index.index;
 exports.dodge = dodge.dodge;
+exports.singleDodge = dodge.singleDodge;
 exports.highscores = highscores.highscores;
 
 exports.lobbies = lobbies.lobbies;
+exports.mingle = lobbies.mingle;
