@@ -35,7 +35,7 @@ var Server = function(httpServer, express, app){
   }
 
   // set path for static files
-  app.use(express.static(path.join(__dirname, '../client')));
+  app.use('/static', express.static(path.join(__dirname, '../client')));
   
   // set lobby manager
   var lobbyManager = new LobbyManager();
@@ -49,7 +49,7 @@ var Server = function(httpServer, express, app){
   app.get('/', controllers.index);
   app.get('/dodge', controllers.dodge);
   app.get('/highscores', controllers.highscores);
-  app.get('/lobbies', controllers.lobbies);
+  app.get('/lobby', controllers.lobbies);
   app.get('*', controllers.none);
 };
 

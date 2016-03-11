@@ -79,5 +79,26 @@ Then shown.
 Ok at this point I think we'll then redirect users to a new page when they hit play.
 Like /dodge. Then it loads the scripts for the game and the game canvas etc. 
 
-                                
-                                    
+
+
+# Milestone 1.0
+
+## Goals
+
+Ok so I need to focus on 1.0 and what should be included. I've gotten a bit carried
+away with sockets and multiplayer and it's gone a bit haywire.
+
+After a bit of a break, I've decided 1.0 should re-scoped to only include single player dodge
+box, with a highscore page. Potentially adding some more game features... potentially.
+
+How this is achieved is a separate matter. I think it might be an idea to maintain
+server-controlled enemies, to make the transition to multiplayer a bit easier. I've also made
+a lot of progress on the lobby page and functionality, so I don't want that thrown out or 
+compromised. 
+
+The structure of the game is going to be a bit different, but most of the code will just be copy
+pasted over so, shouldn't be a lot of work. 
+
+Testing for the game code is essential. 
+
+ 
