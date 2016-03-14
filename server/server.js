@@ -47,8 +47,7 @@ var Server = function(httpServer, express, app){
   
   // setting up routes 
   app.get('/', controllers.index);
-  app.get('/dodge', controllers.dodge);
-  app.get('/single', controllers.singleDodge);
+  app.get('/single', controllers.single);
   app.get('/highscores', controllers.highscores);
   app.get('/mingle', controllers.mingle);
   app.get('*', controllers.none);

@@ -15,15 +15,15 @@ var config = {
   numberOfEnemies : 20,
 
   hudSize : {
-    width : 400,
+    width : 600,
     height : 50
   },
 
   hudTextColour : '#3399FF',
 
   screenSize : {
-    width : 800,
-    height : 800
+    width : 600,
+    height : 600
   },
 
   box : {

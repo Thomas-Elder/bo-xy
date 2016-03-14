@@ -1,5 +1,5 @@
 var index = require('./indexController');
-var dodge = require('./dodgeController');
+var game = require('./gameController');
 var highscores = require('./highscoresController');
 
 var lobbies = require('./lobbyController');
@@ -13,8 +13,8 @@ exports.none = function(req, res){
 };
 
 exports.index = index.index;
-exports.dodge = dodge.dodge;
-exports.singleDodge = dodge.singleDodge;
+exports.single = game.single;
+exports.mingle = game.mingle;
 exports.highscores = highscores.highscores;
 
 exports.lobbies = lobbies.lobbies;

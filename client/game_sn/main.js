@@ -9,6 +9,9 @@ window.onload = function () {
   // Get a reference to the hud
   var hud_canvas   = document.getElementById('hud_canvas');
 
+  hud_canvas.width   = config.hudSize.width;
+  hud_canvas.height  = config.hudSize.height;
+
   // Get the (graphics?) context.
   var game_context = game_canvas.getContext('2d');
 
