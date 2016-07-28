@@ -1,6 +1,6 @@
 
-var config = require('../../../client/game_sn/config');
-var ExplodeBox = require('../../../client/game_sn/box/explode_box');
+var config = require('../../../../client/game_sn/config');
+var ExplodeBox = require('../../../../client/game_sn/box/explode_box');
 
 var explode;
 

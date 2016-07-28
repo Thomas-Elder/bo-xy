@@ -1,6 +1,6 @@
 
-var config = require('../../../client/game_sn/config');
-var PlayerBox = require('../../../client/game_sn/box/player_box');
+var config = require('../../../../client/game_sn/config');
+var PlayerBox = require('../../../../client/game_sn/box/player_box');
 
 var player;
 var controller;
