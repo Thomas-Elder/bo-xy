@@ -24,12 +24,9 @@ PlayerBox.prototype.draw = function() {
 
 // Define the PlayerBox type's update method.
 PlayerBox.prototype.update = function() {
+
   if (this.controller.left && this.x > 0) 
     this.x = this.x - this.speed;
-
-  // apply gravity
-  if (this.y + this.height < this.screenHeight)
-    this.y += this.gravity;
 
   if (this.controller.up && this.y > 0)
     this.y = this.y - this.speed;
@@ -39,6 +36,10 @@ PlayerBox.prototype.update = function() {
 
   if (this.controller.down && this.y + this.height < this.screenHeight)
     this.y = this.y + this.speed;
+    
+  // apply gravity
+  if (this.y + this.height < this.screenHeight)
+    this.y += this.gravity;
 };
 
 // Returns an object with x an y coords, the box's current position
