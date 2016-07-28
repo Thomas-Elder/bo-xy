@@ -1,5 +1,6 @@
+
 // Define the Background type.
-function Background(config, speed, context) {
+var Background = function(config, speed, context) {
   this.screenWidth  = config.screenSize.width;
   this.screenHeight = config.screenSize.height;
   this.colour       = config.backgroundColour;
@@ -18,3 +19,6 @@ Background.prototype.draw = function() {
 Background.prototype.update = function() {
   
 };
+
+
+module.exports = Background;

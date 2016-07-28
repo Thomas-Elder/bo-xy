@@ -1,3 +1,11 @@
+
+var config = require('./config.js');
+
+var Hud = require('./hud.js');
+var Background = require('./background.js');
+var Controller = require('./controller.js');
+var BoxManager = require('./box/box_manager.js');
+
 window.onload = function () {
 
   // Get a reference to the canvas element.

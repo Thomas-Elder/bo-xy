@@ -1,5 +1,6 @@
+
 // Defines the ExplodeBox type.
-function ExplodeBox(x, y, config, context) {
+var ExplodeBox = function(x, y, config, context) {
   this.x            = x;
   this.y            = y;
   this.width        = config.box.explode.size.width;
@@ -42,3 +43,6 @@ ExplodeBox.prototype.endOfExplode = function() {
 
   return this.end;
 };
+
+
+module.exports = ExplodeBox;

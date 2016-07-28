@@ -1,12 +1,11 @@
 
 // Define the Controller type.
-function Controller() {
+var Controller = function() {
 
   this.up    = false;
   this.down  = false;
   this.left  = false;
   this.right = false;
-
 }
 
 // Define the Controller type's keyDown method.
@@ -42,3 +41,6 @@ Controller.prototype.keyUp = function(event) {
     this.down = false;
 
 };
+
+
+module.exports = Controller;

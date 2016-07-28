@@ -5,6 +5,9 @@ bo-xy.sublime-workspace
 # VSCode extension files
 .vscode/
 
+# Browserify bundles
+client/game_sn.js
+
 # Logs
 logs
 *.log

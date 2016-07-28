@@ -1,4 +1,9 @@
-function BoxManager(config, controller, context) {
+
+var PlayerBox = require('./player_box.js');
+var EnemyBox = require('./enemy_box.js');
+var ExplodeBox = require('./explode_box.js');
+
+var BoxManager = function (config, controller, context) {
   this.config     = config;
   this.controller = controller;
   this.context    = context;
@@ -9,7 +14,7 @@ function BoxManager(config, controller, context) {
   this.enemySpacing = 0;
   
   this.explodeBoxes = [];
-  this.powerBoxes   = [];
+  //this.powerBoxes   = [];
   
   this.total_score  = 0;
   this.level_score  = 0;
@@ -35,7 +40,7 @@ BoxManager.prototype.init = function() {
   for (var i = 0; i < this.enemyBoxes.length; i++) {
 
     // Get a new enemy location
-    var location = newEnemyLocation(this.config);
+    var location = this.newEnemyLocation(this.config);
 
     this.enemyBoxes[i] = new EnemyBox(location.x,
                                       location.y,
@@ -44,16 +49,16 @@ BoxManager.prototype.init = function() {
                                       this.context);
   }
   
-  this.powerBoxes.push(new PowerBox(200, 0, this.config, this.context));
+  //this.powerBoxes.push(new PowerBox(200, 0, this.config, this.context));
 };
 
 BoxManager.prototype.draw = function() {
   
   this.playerBox.draw();
 
-  this.powerBoxes.forEach(function(powerBox) {
+  /*this.powerBoxes.forEach(function(powerBox) {
     powerBox.draw(); 
-  });
+  });*/
   
   for (var i = 0; i < this.enemyBoxes.length; i++)
     this.enemyBoxes[i].draw();
@@ -69,6 +74,7 @@ BoxManager.prototype.update = function() {
   this.playerBox.update();
   var self = this;
   
+  /*
   this.powerBoxes.forEach(function(powerBox){
     if (powerBox.isOnScreen())
       powerBox.update();
@@ -82,7 +88,7 @@ BoxManager.prototype.update = function() {
                        this.config,
                        this.context));
     this.powerBox.setOffScreen();
-  }
+  }*/
 
   if (this.explodeBoxes.length > 0) {
     for (var k = 0; k < this.explodeBoxes.length; k++){
@@ -103,6 +109,7 @@ BoxManager.prototype.update = function() {
     }
   }
 
+  /*
   powerBoxes.forEach(function(powerBox){
     if (collisionDetection(self.playerBox, powerBox)) {
       self.explodeBoxes.push(new ExplodeBox(self.enemyBoxes[i].getPosition().x,
@@ -114,7 +121,7 @@ BoxManager.prototype.update = function() {
       powerBox.setOffScreen();
     }
   });
-
+  */
   
 
   /*
@@ -130,7 +137,7 @@ BoxManager.prototype.update = function() {
        * If there's a collision, get rid of the enemy hit, and push 
        * a new explodeBox into the explodeBoxes array
        */
-      if (collisionDetection(this.playerBox, this.enemyBoxes[i])) {
+      if (this.collisionDetection(this.playerBox, this.enemyBoxes[i])) {
 
         this.enemyBoxes[i].setOffScreen();
         this.explodeBoxes.push(new ExplodeBox(this.enemyBoxes[i].getPosition().x,
@@ -148,7 +155,7 @@ BoxManager.prototype.update = function() {
       this.level_score++;
       this.total_score++;
 
-      var location = newEnemyLocation(this.config);
+      var location = this.newEnemyLocation(this.config);
 
       // Create new enemy box 
       this.enemyBoxes[i] = new EnemyBox(location.x,
@@ -185,6 +192,7 @@ BoxManager.prototype.endGame = function() {
   this.context.fillText(levelString, 250, 20);
 }
 
+
 /**
  * Helper functions for the BoxManager
  */
@@ -192,7 +200,7 @@ BoxManager.prototype.endGame = function() {
 /**
  * Collision Detection
  */
-function collisionDetection(a, b) {
+BoxManager.prototype.collisionDetection = function(a, b) {
   if ((a.getPosition().x - b.getSize().width) < b.getPosition().x) {
     if (b.getPosition().x  < (a.getPosition().x + a.getSize().width)) {
       if ((b.getPosition().y + b.getSize().height) > a.getPosition().y) {
@@ -204,15 +212,19 @@ function collisionDetection(a, b) {
   }
 
   return false;
-}
+};
 
 /**
  * 
  */
-function newEnemyLocation(config) {
+BoxManager.prototype.newEnemyLocation = function(config) {
 
   return {
     x: Math.floor(Math.random() * config.screenSize.width), 
     y: -((this.config.screenSize.height - Math.floor(Math.random() * this.config.screenSize.height)))
   };
-}
+};
+
+
+
+module.exports = BoxManager;

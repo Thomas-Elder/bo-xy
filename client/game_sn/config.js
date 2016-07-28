@@ -1,7 +1,6 @@
 /**
 * Configuration Settings for flappy_box
 */
-
 var config = {
 
   /**
@@ -170,3 +169,6 @@ var config = {
   }
 };
 
+
+
+module.exports = config;
