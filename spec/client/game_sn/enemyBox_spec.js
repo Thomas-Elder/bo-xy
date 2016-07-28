@@ -1,3 +1,4 @@
+
 var config = require('../../../client/game_sn/config');
 var EnemyBox = require('../../../client/game_sn/box/enemy_box');
 
