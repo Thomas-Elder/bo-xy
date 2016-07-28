@@ -2,6 +2,9 @@
 bo-xy.sublime-project
 bo-xy.sublime-workspace
 
+# VSCode extension files
+.vscode/
+
 # Logs
 logs
 *.log

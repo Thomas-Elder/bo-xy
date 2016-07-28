@@ -12,10 +12,10 @@ exports.none = function(req, res){
   res.render('notFound', { title: 'N O T H I N G'});
 };
 
-exports.index = index.index;
-exports.single = game.single;
-exports.mingle = game.mingle;
+exports.index      = index.index;
+exports.single     = game.single;
+exports.mingle     = game.mingle;
 exports.highscores = highscores.highscores;
 
-exports.lobbies = lobbies.lobbies;
-exports.mingle = lobbies.mingle;
+exports.lobbies    = lobbies.lobbies;
+exports.mingle     = lobbies.mingle;

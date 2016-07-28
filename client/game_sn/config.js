@@ -82,6 +82,22 @@ var config = {
                 '#999999',
                 '#777777',
                 '#555555']
+    },
+    
+    /**
+     * POWER CONFIG
+     */
+    power : {
+      speed : 1,
+      size : {
+        height : 20,
+        width : 20
+      },
+      
+      colour : [
+        '#00B789',
+        '#88B789'
+      ]
     }
   },
 

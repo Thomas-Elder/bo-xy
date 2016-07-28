@@ -9,6 +9,7 @@ function BoxManager(config, controller, context) {
   this.enemySpacing = 0;
   
   this.explodeBoxes = [];
+  this.powerBoxes   = [];
   
   this.total_score  = 0;
   this.level_score  = 0;
@@ -23,7 +24,7 @@ BoxManager.prototype.init = function() {
 
   // Instantiate a new instance of type PlayerBox.
   this.playerBox = new PlayerBox(this.config, this.controller, this.context);
-
+  
   /*
    * Calculate placement of enemy boxes based on width of screen and number of
    * boxes.
@@ -35,7 +36,6 @@ BoxManager.prototype.init = function() {
 
     // Get a new enemy location
     var location = newEnemyLocation(this.config);
-      console.log(location);
 
     this.enemyBoxes[i] = new EnemyBox(location.x,
                                       location.y,
@@ -43,27 +43,46 @@ BoxManager.prototype.init = function() {
                                       this.config,
                                       this.context);
   }
+  
+  this.powerBoxes.push(new PowerBox(200, 0, this.config, this.context));
 };
 
 BoxManager.prototype.draw = function() {
-
+  
   this.playerBox.draw();
 
+  this.powerBoxes.forEach(function(powerBox) {
+    powerBox.draw(); 
+  });
+  
   for (var i = 0; i < this.enemyBoxes.length; i++)
     this.enemyBoxes[i].draw();
 
   if (this.explodeBoxes.length > 0) {
-
-    for (var j = 0; j < this.explodeBoxes.length; j++) {
-
+    for (var j = 0; j < this.explodeBoxes.length; j++)
       this.explodeBoxes[j].draw();
-    }
   }
 };
 
 BoxManager.prototype.update = function() {
-
+ 
   this.playerBox.update();
+  var self = this;
+  
+  this.powerBoxes.forEach(function(powerBox){
+    if (powerBox.isOnScreen())
+      powerBox.update();
+    else
+      self.powerBoxes.pop(powerBox);
+  });
+
+  if (collisionDetection(this.playerBox, this.powerBox)) {
+    this.explodeBoxes.push(new ExplodeBox(this.enemyBoxes[i].getPosition().x,
+                       this.enemyBoxes[i].getPosition().y,
+                       this.config,
+                       this.context));
+    this.powerBox.setOffScreen();
+  }
 
   if (this.explodeBoxes.length > 0) {
     for (var k = 0; k < this.explodeBoxes.length; k++){
@@ -83,6 +102,20 @@ BoxManager.prototype.update = function() {
       this.level++;
     }
   }
+
+  powerBoxes.forEach(function(powerBox){
+    if (collisionDetection(self.playerBox, powerBox)) {
+      self.explodeBoxes.push(new ExplodeBox(self.enemyBoxes[i].getPosition().x,
+                        self.enemyBoxes[i].getPosition().y,
+                        self.config,
+                        self.context));
+      
+      self.level_score += 50;
+      powerBox.setOffScreen();
+    }
+  });
+
+  
 
   /*
    * For each enemyBox, check if it is on the screen, if so call its update 
@@ -159,11 +192,11 @@ BoxManager.prototype.endGame = function() {
 /**
  * Collision Detection
  */
-function collisionDetection(player, enemy) {
-  if ((player.getPosition().x - enemy.getSize().width) < enemy.getPosition().x) {
-    if (enemy.getPosition().x  < (player.getPosition().x + player.getSize().width)) {
-      if ((enemy.getPosition().y + enemy.getSize().height) > player.getPosition().y) {
-        if (enemy.getPosition().y < (player.getPosition().y + player.getSize().height)) {
+function collisionDetection(a, b) {
+  if ((a.getPosition().x - b.getSize().width) < b.getPosition().x) {
+    if (b.getPosition().x  < (a.getPosition().x + a.getSize().width)) {
+      if ((b.getPosition().y + b.getSize().height) > a.getPosition().y) {
+        if (b.getPosition().y < (a.getPosition().y + a.getSize().height)) {
           return true;
         }
       }
