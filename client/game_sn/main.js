@@ -20,7 +20,7 @@ window.onload = function () {
   hud_canvas.width   = config.hudSize.width;
   hud_canvas.height  = config.hudSize.height;
 
-  // Get the (graphics?) context.
+  // Get the context.
   var game_context = game_canvas.getContext('2d');
 
   var hud_context  = hud_canvas.getContext('2d');
