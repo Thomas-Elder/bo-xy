@@ -1,5 +1,6 @@
+
 // Defines the EnemyBox type.
-function EnemyBox(x, y, level, config, context) {
+var EnemyBox = function (x, y, level, config, context) {
   this.x            = x;
   this.y            = y;
   this.width        = config.box.enemy.size.width;
@@ -51,3 +52,6 @@ EnemyBox.prototype.getPosition = function() {
 EnemyBox.prototype.getSize = function() {
   return {width: this.width, height: this.height};
 };
+
+
+module.exports = EnemyBox;

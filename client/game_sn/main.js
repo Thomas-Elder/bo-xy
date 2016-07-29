@@ -1,3 +1,11 @@
+
+var config = require('./config.js');
+
+var Hud = require('./hud.js');
+var Background = require('./background.js');
+var Controller = require('./controller.js');
+var BoxManager = require('./box/box_manager.js');
+
 window.onload = function () {
 
   // Get a reference to the canvas element.
@@ -12,7 +20,7 @@ window.onload = function () {
   hud_canvas.width   = config.hudSize.width;
   hud_canvas.height  = config.hudSize.height;
 
-  // Get the (graphics?) context.
+  // Get the context.
   var game_context = game_canvas.getContext('2d');
 
   var hud_context  = hud_canvas.getContext('2d');

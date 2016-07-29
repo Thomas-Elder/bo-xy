@@ -1,5 +1,6 @@
+
 // Defines the Box type.
-function PlayerBox(config, controller, context) {
+var PlayerBox = function(config, controller, context) {
   this.x            = (config.screenSize.width / 2) - (config.box.player.size.width / 2);
   this.y            = config.screenSize.height - config.box.player.size.height;
   this.width        = config.box.player.size.width;
@@ -23,12 +24,9 @@ PlayerBox.prototype.draw = function() {
 
 // Define the PlayerBox type's update method.
 PlayerBox.prototype.update = function() {
+
   if (this.controller.left && this.x > 0) 
     this.x = this.x - this.speed;
-
-  // apply gravity
-  if (this.y + this.height < this.screenHeight)
-    this.y += this.gravity;
 
   if (this.controller.up && this.y > 0)
     this.y = this.y - this.speed;
@@ -38,6 +36,10 @@ PlayerBox.prototype.update = function() {
 
   if (this.controller.down && this.y + this.height < this.screenHeight)
     this.y = this.y + this.speed;
+    
+  // apply gravity
+  if (this.y + this.height < this.screenHeight)
+    this.y += this.gravity;
 };
 
 // Returns an object with x an y coords, the box's current position
@@ -49,3 +51,6 @@ PlayerBox.prototype.getPosition = function() {
 PlayerBox.prototype.getSize = function() {
   return {width: this.width, height: this.height};
 };
+
+
+module.exports = PlayerBox;

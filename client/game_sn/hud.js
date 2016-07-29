@@ -1,4 +1,5 @@
-function Hud(config, context) {
+
+Hud = function(config, context) {
   this.config  = config;
   this.context = context;
 
@@ -25,3 +26,6 @@ Hud.prototype.update = function(score, level, lives) {
   this.level = level;
   this.lives = lives;
 };
+
+
+module.exports = Hud;
