@@ -1,6 +1,6 @@
 # bo-xy
 
-[![Build Status](https://travis-ci.org/Thomas-Elder/bo-xy.svg?branch=master)](https://travis-ci.org/Thomas-Elder/bo-xy)
+[![Build Status](https://travis-ci.org/Thomas-Elder/hobby.node.bo-xy.svg?branch=master)](https://travis-ci.org/Thomas-Elder/bo-xy)
 
 Learning some node.js
 
