@@ -3,10 +3,12 @@ var PlayerBox = require('./player_box.js');
 var EnemyBox = require('./enemy_box.js');
 var ExplodeBox = require('./explode_box.js');
 
-var BoxManager = function (config, controller, context) {
+var Interaction = require('../interaction');
+
+var BoxManager = function (config, controller) {
+
   this.config     = config;
   this.controller = controller;
-  this.context    = context;
 
   this.enemyBoxes   = new Array(this.config.numberOfEnemies);
   this.enemySpeed   = config.box.enemy.speed;
@@ -14,18 +16,17 @@ var BoxManager = function (config, controller, context) {
   this.enemySpacing = 0;
   
   this.explodeBoxes = [];
-  //this.powerBoxes   = [];
   
   this.total_score  = 0;
   this.level_score  = 0;
   this.level        = 0;
 
   this.max_level    = this.config.numberOfLevels;
-  
-  //this.socket = io();
 }
 
 BoxManager.prototype.init = function() {
+
+  this.interaction = new Interaction();
 
   // Instantiate a new instance of type PlayerBox.
   this.playerBox = new PlayerBox(this.config, this.controller, this.context);
@@ -48,47 +49,12 @@ BoxManager.prototype.init = function() {
                                       this.config,
                                       this.context);
   }
-  
-  //this.powerBoxes.push(new PowerBox(200, 0, this.config, this.context));
-};
-
-BoxManager.prototype.draw = function() {
-  
-  this.playerBox.draw();
-
-  /*this.powerBoxes.forEach(function(powerBox) {
-    powerBox.draw(); 
-  });*/
-  
-  for (var i = 0; i < this.enemyBoxes.length; i++)
-    this.enemyBoxes[i].draw();
-
-  if (this.explodeBoxes.length > 0) {
-    for (var j = 0; j < this.explodeBoxes.length; j++)
-      this.explodeBoxes[j].draw();
-  }
 };
 
 BoxManager.prototype.update = function() {
  
   this.playerBox.update();
   var self = this;
-  
-  /*
-  this.powerBoxes.forEach(function(powerBox){
-    if (powerBox.isOnScreen())
-      powerBox.update();
-    else
-      self.powerBoxes.pop(powerBox);
-  });
-
-  if (collisionDetection(this.playerBox, this.powerBox)) {
-    this.explodeBoxes.push(new ExplodeBox(this.enemyBoxes[i].getPosition().x,
-                       this.enemyBoxes[i].getPosition().y,
-                       this.config,
-                       this.context));
-    this.powerBox.setOffScreen();
-  }*/
 
   if (this.explodeBoxes.length > 0) {
     for (var k = 0; k < this.explodeBoxes.length; k++){
@@ -110,21 +76,6 @@ BoxManager.prototype.update = function() {
   }
 
   /*
-  powerBoxes.forEach(function(powerBox){
-    if (collisionDetection(self.playerBox, powerBox)) {
-      self.explodeBoxes.push(new ExplodeBox(self.enemyBoxes[i].getPosition().x,
-                        self.enemyBoxes[i].getPosition().y,
-                        self.config,
-                        self.context));
-      
-      self.level_score += 50;
-      powerBox.setOffScreen();
-    }
-  });
-  */
-  
-
-  /*
    * For each enemyBox, check if it is on the screen, if so call its update 
    * method, else initialise a new box.
    */
@@ -137,7 +88,7 @@ BoxManager.prototype.update = function() {
        * If there's a collision, get rid of the enemy hit, and push 
        * a new explodeBox into the explodeBoxes array
        */
-      if (this.collisionDetection(this.playerBox, this.enemyBoxes[i])) {
+      if (this.interaction.collision(this.playerBox, this.enemyBoxes[i])) {
 
         this.enemyBoxes[i].setOffScreen();
         this.explodeBoxes.push(new ExplodeBox(this.enemyBoxes[i].getPosition().x,
@@ -196,23 +147,6 @@ BoxManager.prototype.endGame = function() {
 /**
  * Helper functions for the BoxManager
  */
-
-/**
- * Collision Detection
- */
-BoxManager.prototype.collisionDetection = function(a, b) {
-  if ((a.getPosition().x - b.getSize().width) < b.getPosition().x) {
-    if (b.getPosition().x  < (a.getPosition().x + a.getSize().width)) {
-      if ((b.getPosition().y + b.getSize().height) > a.getPosition().y) {
-        if (b.getPosition().y < (a.getPosition().y + a.getSize().height)) {
-          return true;
-        }
-      }
-    }
-  }
-
-  return false;
-};
 
 /**
  * 

@@ -57,9 +57,9 @@ Engine.prototype.run = function(){
     self.draw();
 
     // Check if game is over and clearInterval if so
-    if (boxManager.getLevel() === config.numberOfLevels ||
-      boxManager.getLives() === 0) {
-        boxManager.endGame();          
+    if (self.boxManager.getLevel() === config.numberOfLevels ||
+      self.boxManager.getLives() === 0) {
+        self.endGame();          
         clearInterval(gameLoop);
     }
   }
@@ -98,12 +98,9 @@ Engine.prototype.draw = function(){
 /**
  * 
  */
-Engine.prototype.newEnemyLocation = function(config) {
+Engine.prototype.endGame = function(){
 
-  return {
-    x: Math.floor(Math.random() * config.screenSize.width), 
-    y: -((this.config.screenSize.height - Math.floor(Math.random() * this.config.screenSize.height)))
-  };
+  // call display.end();
 };
 
 
