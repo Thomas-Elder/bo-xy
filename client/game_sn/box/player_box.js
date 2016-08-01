@@ -1,6 +1,6 @@
 
 // Defines the Box type.
-var PlayerBox = function(config, controller, context) {
+var PlayerBox = function(config, controller) {
   this.x            = (config.screenSize.width / 2) - (config.box.player.size.width / 2);
   this.y            = config.screenSize.height - config.box.player.size.height;
   this.width        = config.box.player.size.width;
@@ -13,14 +13,7 @@ var PlayerBox = function(config, controller, context) {
   this.lives        = config.box.player.lives;
 
   this.controller   = controller;
-  this.context      = context;
 }
-
-// Define the PlayerBox type's draw method.
-PlayerBox.prototype.draw = function() {
-  this.context.fillStyle = this.colour;
-  this.context.fillRect(this.x, this.y, this.width, this.height);
-};
 
 // Define the PlayerBox type's update method.
 PlayerBox.prototype.update = function() {

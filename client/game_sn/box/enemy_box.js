@@ -1,6 +1,6 @@
 
 // Defines the EnemyBox type.
-var EnemyBox = function (x, y, level, config, context) {
+var EnemyBox = function (x, y, level, config) {
   this.x            = x;
   this.y            = y;
   this.width        = config.box.enemy.size.width;
@@ -8,20 +8,12 @@ var EnemyBox = function (x, y, level, config, context) {
   this.screenWidth  = config.screenSize.width;
   this.screenHeight = config.screenSize.height;
   this.colour       = config.box.enemy.colour[0];
-  
-  this.context      = context;
-  
+
   this.onScreen     = true;
   
   this.speed        = config.box.enemy.speed[level];
   this.colour       = config.box.enemy.colour[level];
 }
-
-// Define the EnemyBox type's draw method.
-EnemyBox.prototype.draw = function() {
-  this.context.fillStyle = this.colour;
-  this.context.fillRect(this.x, this.y, this.width, this.height);
-};
 
 // Define the EnemyBox type's update method.
 EnemyBox.prototype.update = function() {

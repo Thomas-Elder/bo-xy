@@ -1,12 +1,10 @@
 
 // Defines the ExplodeBox type.
-var ExplodeBox = function(x, y, config, context) {
+var ExplodeBox = function(x, y, config) {
   this.x            = x;
   this.y            = y;
   this.width        = config.box.explode.size.width;
   this.height       = config.box.explode.size.height;
-
-  this.context      = context;
 
   this.colour       = config.box.explode.colour;
   this.currentColour= config.box.explode.colour[0];
@@ -15,16 +13,6 @@ var ExplodeBox = function(x, y, config, context) {
 
   this.count        = 0;
 }
-
-// Define the ExplodeBox type's draw method.
-ExplodeBox.prototype.draw = function () {
-
-  this.context.fillStyle = this.currentColour;
-  this.context.fillRect(this.x,
-                        this.y,
-                        this.width,
-                        this.height);
-};
 
 // Define the ExplodeBox type's update method.
 ExplodeBox.prototype.update = function() {

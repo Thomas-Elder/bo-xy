@@ -29,7 +29,7 @@ BoxManager.prototype.init = function() {
   this.interaction = new Interaction();
 
   // Instantiate a new instance of type PlayerBox.
-  this.playerBox = new PlayerBox(this.config, this.controller, this.context);
+  this.playerBox = new PlayerBox(this.config, this.controller);
   
   /*
    * Calculate placement of enemy boxes based on width of screen and number of
@@ -46,16 +46,16 @@ BoxManager.prototype.init = function() {
     this.enemyBoxes[i] = new EnemyBox(location.x,
                                       location.y,
                                       this.enemySpeed[this.levelCount],
-                                      this.config,
-                                      this.context);
+                                      this.config);
   }
 };
 
 BoxManager.prototype.update = function() {
  
-  this.playerBox.update();
   var self = this;
 
+  this.playerBox.update();
+  
   if (this.explodeBoxes.length > 0) {
     for (var k = 0; k < this.explodeBoxes.length; k++){
 
@@ -93,8 +93,7 @@ BoxManager.prototype.update = function() {
         this.enemyBoxes[i].setOffScreen();
         this.explodeBoxes.push(new ExplodeBox(this.enemyBoxes[i].getPosition().x,
                        this.enemyBoxes[i].getPosition().y,
-                       this.config,
-                       this.context));
+                       this.config));
 
         // Lose a life
         this.playerBox.lives--;
@@ -112,8 +111,7 @@ BoxManager.prototype.update = function() {
       this.enemyBoxes[i] = new EnemyBox(location.x,
                                         location.y,
                                         this.enemySpeed[this.level],
-                                        this.config,
-                                        this.context);
+                                        this.config);
     }
   }
 };

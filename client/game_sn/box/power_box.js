@@ -1,5 +1,5 @@
 // Defines the PowerBox type.
-function PowerBox(x, y, config, context) {
+function PowerBox(x, y, config) {
   this.x            = x;
   this.y            = y;
   this.width        = config.box.power.size.width;
@@ -7,8 +7,7 @@ function PowerBox(x, y, config, context) {
   this.speed        = config.box.power.speed;
   this.screenWidth  = config.screenSize.width;
   this.screenHeight = config.screenSize.height;
-  
-  this.context      = context;
+
   this.colour       = config.box.power.colour;
   
   this.onScreen     = true;
@@ -16,16 +15,6 @@ function PowerBox(x, y, config, context) {
   this.count        = 0;
   this.colourIndex  = 0;
 }
-
-// Define the PowerBox type's draw method.
-PowerBox.prototype.draw = function () {
-
-  this.context.fillStyle = this.colour[this.colourIndex];
-  this.context.fillRect(this.x,
-                        this.y,
-                        this.width,
-                        this.height);
-};
 
 // Define the PowerBox type's update method.
 PowerBox.prototype.update = function() {
