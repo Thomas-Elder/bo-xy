@@ -50,7 +50,9 @@ var Server = function(httpServer, express, app){
   app.get('/single', controllers.single);
   app.get('/highscores', controllers.highscores);
   app.get('/mingle', controllers.mingle);
+  app.get('/lobbies', controllers.lobbies);
   app.get('*', controllers.none);
+ 
 };
 
 /**
