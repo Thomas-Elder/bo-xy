@@ -27,11 +27,10 @@ var Server = function(httpServer, express, app){
   app.set('port', process.env.PORT || config.port);
   app.set('views', path.join(__dirname, './views'));
   app.set('view engine', 'jade');
-  
-  app.use(express.logger('dev'));
 
   if ('development' == app.get('env')) {
     app.use(express.errorHandler());
+    app.use(express.logger('dev'));
   }
 
   // set path for static files
