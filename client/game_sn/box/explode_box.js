@@ -9,6 +9,7 @@ var ExplodeBox = function(x, y, config, context) {
   this.context      = context;
 
   this.colour       = config.box.explode.colour;
+  this.currentColour= config.box.explode.colour[0];
 
   this.end          = false;
 
@@ -18,9 +19,7 @@ var ExplodeBox = function(x, y, config, context) {
 // Define the ExplodeBox type's draw method.
 ExplodeBox.prototype.draw = function () {
 
-  var i = Math.floor(this.count / 10);
-
-  this.context.fillStyle = this.colour[i];
+  this.context.fillStyle = this.currentColour;
   this.context.fillRect(this.x,
                         this.y,
                         this.width,
@@ -33,6 +32,8 @@ ExplodeBox.prototype.update = function() {
   this.count++;
   this.width += 2;
   this.height += 2;
+
+  this.currentColour = this.colour[Math.floor(this.count / 10)];
 
   if (this.count == 50) {
     this.end = true;

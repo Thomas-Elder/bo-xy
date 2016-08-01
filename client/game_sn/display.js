@@ -3,27 +3,22 @@
 /**
  * A class for handling calling any draw functions.
  */
-var Display = function(config){
+var Display = function(config, contexts){
   this.config = config;
+  this.contexts = contexts;
 };
 
 Display.prototype.init = function(){
+ 
+  this.contexts.game_canvas.width   = this.config.screenSize.width;
+  this.contexts.game_canvas.height  = this.config.screenSize.height;
 
-  // Get a reference to the canvas element.
-  var game_canvas = $('#game_canvas');
+  this.contexts.hud_canvas.width   = this.config.hudSize.width;
+  this.contexts.hud_canvas.height  = this.config.hudSize.height;
 
-  game_canvas.width   = config.screenSize.width;
-  game_canvas.height  = config.screenSize.height;
+  this.game_context = this.contexts.game_context;
+  this.hud_context = this.contexts.hud_context;
 
-  // Get a reference to the hud
-  var hud_canvas = $('#hud_canvas');
-
-  hud_canvas.width   = config.hudSize.width;
-  hud_canvas.height  = config.hudSize.height;
-
-  // Get the context.
-  this.game_context = game_canvas.getContext('2d');
-  this.hud_context  = hud_canvas.getContext('2d');
 };
 
 /**
@@ -40,6 +35,8 @@ Display.prototype.init = function(){
  * 
  */
 Display.prototype.draw = function(state){
+
+  var self = this;
 
   // Clear the contexts for redraw
   this.game_context.clearRect(0, 0, 
@@ -65,8 +62,8 @@ Display.prototype.draw = function(state){
 
   // Draw the enemy boxes
   state.enemies.forEach(function(enemy){
-    this.game_context.fillStyle = enemy.colour;
-    this.game_context.fillRect(enemy.x, 
+    self.game_context.fillStyle = enemy.colour;
+    self.game_context.fillRect(enemy.x, 
                           enemy.y, 
                           enemy.width, 
                           enemy.height);
@@ -74,8 +71,8 @@ Display.prototype.draw = function(state){
 
   // Draw the explosions, if any
   state.explosions.forEach(function(explosion){
-    this.game_context.fillStyle = explosion.colour;
-    this.game_context.fillRect(explosion.x, 
+    self.game_context.fillStyle = explosion.currentColour;
+    self.game_context.fillRect(explosion.x, 
                           explosion.y, 
                           explosion.width, 
                           explosion.height);
@@ -83,8 +80,8 @@ Display.prototype.draw = function(state){
 
   // Draw the powerboxes, if any
   state.powerboxes.forEach(function(powerboxes){
-    this.game_context.fillStyle = powerboxes.colour;
-    this.game_context.fillRect(powerboxes.x, 
+    self.game_context.fillStyle = powerboxes.colour;
+    self.game_context.fillRect(powerboxes.x, 
                           powerboxes.y, 
                           powerboxes.width, 
                           powerboxes.height);
