@@ -131,26 +131,12 @@ BoxManager.prototype.getLives = function() {
   return this.playerBox.lives;
 };
 
-BoxManager.prototype.endGame = function() {
-  
-  this.context.font = '20px sans-serif';
-
-  var scoreString = 'score: ' + this.total_score;
-  var levelString = 'level: ' + this.level;
-  
-  this.context.fillStyle = '#3399FF';
-  this.context.fillText('Game over', 10, 20);
-  this.context.fillText(scoreString, 130, 20);
-  this.context.fillText(levelString, 250, 20);
-}
-
-
 /**
  * Helper functions for the BoxManager
  */
 
 /**
- * 
+ * newEnemyLocation
  */
 BoxManager.prototype.newEnemyLocation = function(config) {
 

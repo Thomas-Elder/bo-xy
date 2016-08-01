@@ -34,7 +34,7 @@ Display.prototype.init = function(){
  * powerboxes: an array of PowerBox objects
  * 
  */
-Display.prototype.draw = function(state){
+Display.prototype.drawGame = function(state){
 
   var self = this;
 
@@ -86,6 +86,34 @@ Display.prototype.draw = function(state){
                           powerboxes.width, 
                           powerboxes.height);
   });
+};
+
+Display.prototype.drawHud = function(hudState){
+
+  this.hud_context.font = '20px sans-serif';
+
+  var scoreString = 'score: ' + hudState.score;
+  var levelString = 'level: ' + hudState.level;
+  var livesString = 'lives: ' + hudState.lives;
+
+  this.hud_context.fillStyle = '#3399FF';
+  this.hud_context.fillText(scoreString, 10, 20);
+  this.hud_context.fillText(levelString, 130, 20);
+  this.hud_context.fillText(livesString, 250, 20);
+
+};
+
+Display.prototype.end = function(score, level){
+
+  this.game_context.font = '20px sans-serif';
+
+  var scoreString = 'score: ' + score;
+  var levelString = 'level: ' + level;
+  
+  this.game_context.fillStyle = '#3399FF';
+  this.game_context.fillText('Game over', 10, 20);
+  this.game_context.fillText(scoreString, 130, 20);
+  this.game_context.fillText(levelString, 250, 20);
 };
 
 module.exports = Display;

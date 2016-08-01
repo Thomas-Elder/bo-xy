@@ -85,13 +85,19 @@ Engine.prototype.update = function(){
 Engine.prototype.draw = function(){
 
   // draw
-  this.display.draw({
+  this.display.drawGame({
     background: this.background,
     hud: this.hud,
     player: this.boxManager.playerBox, 
     enemies: this.boxManager.enemyBoxes,
     explosions: this.boxManager.explodeBoxes,
     powerboxes: []
+  });
+
+  this.display.drawHud({
+    score: this.boxManager.getScore(),
+    level: this.boxManager.getLevel(),
+    lives: this.boxManager.getLives()
   });
 };
 
@@ -100,7 +106,7 @@ Engine.prototype.draw = function(){
  */
 Engine.prototype.endGame = function(){
 
-  // call display.end();
+  this.display.end(this.boxManager.getScore(), this.boxManager.getLevel());
 };
 
 
