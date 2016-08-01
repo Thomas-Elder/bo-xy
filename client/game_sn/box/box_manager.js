@@ -5,6 +5,9 @@ var ExplodeBox = require('./explode_box.js');
 
 var Interaction = require('../interaction');
 
+/**
+ * BoxManager
+ */
 var BoxManager = function (config, controller) {
 
   this.config     = config;
