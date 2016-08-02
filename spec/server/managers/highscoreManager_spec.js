@@ -11,7 +11,7 @@ describe('Highscore Manager',
         done();
     });
     
-    it('should add the given lobby to the HighscoreManager',
+    it('should add the given score to the HighscoreManager',
       function(done){
         var expected = [{name: 'Bill',
                         score: 1000 }];
