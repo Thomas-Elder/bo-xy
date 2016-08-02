@@ -38,16 +38,9 @@ window.onload = function () {
     $("#new-player").hide();
     $("#game").show();
 
-    engine = new Engine();
+    engine = new Engine(socket);
 
     engine.init(contexts);
     engine.run();
-
-    gameDetails.playerName = $("#name").val();
-    gameDetails.level = engine.level;
-    gameDetails.score = engine.score;
-  });
-
-  // Emit event with game details object to add to highscores
-  socket.emit('score', gameDetails);
+  }); 
 };

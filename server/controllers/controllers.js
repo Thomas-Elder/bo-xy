@@ -1,11 +1,14 @@
 var index = require('./indexController');
 var game = require('./gameController');
 var highscores = require('./highscoresController');
-
 var lobbies = require('./lobbyController');
 
 exports.setLobbyManager = function(lobbyManager){  
   lobbies.setLobbyManager(lobbyManager);
+};
+
+exports.setHighscoreManager = function(highscoreManager){  
+  highscores.setHighscoreManager(highscoreManager);
 };
 
 exports.none = function(req, res){

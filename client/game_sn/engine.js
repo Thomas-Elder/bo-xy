@@ -19,8 +19,9 @@ var config = require('./config');
 /**
  * A class for managing the game.
  */
-var Engine = function(){
+var Engine = function(socket){
 
+  this.socket       = socket;
   this.total_score  = 0;
   this.level_score  = 0;
   this.level        = 0;
@@ -120,7 +121,15 @@ Engine.prototype.draw = function(){
 Engine.prototype.endGame = function(){
 
   this.display.end(this.score, this.level);
-};
 
+  var gameDetails = {};
+
+  gameDetails.playerName = $("#name").val();
+  gameDetails.level = this.level;
+  gameDetails.score = this.score;
+
+  // Emit event with game details object to add to highscores
+  this.socket.emit('score', gameDetails);
+};
 
 module.exports = Engine;

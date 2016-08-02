@@ -64,4 +64,25 @@ EventManager.prototype.lobbyEvents = function(io, lm){
   });
 };
 
+EventManager.prototype.singleEvents = function(io, hm){
+
+  var highscoreManager = hm;
+  var singleNamespace = io.of('/single');
+
+  singleNamespace.on('connection',
+    function(socket){
+      socket.on('connected',
+        function(msg){
+          console.log(msg.msg);
+      });
+      
+      // create new lobby using the name passed from client
+      socket.on('score',
+        function(gameDetails){
+          console.log('Adding game score to highscores... ');
+          highscoreManager.add({name:gameDetails.playerName, score:gameDetails.score});
+      });
+    });
+};
+
 module.exports = EventManager;
