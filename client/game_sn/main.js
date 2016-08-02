@@ -14,13 +14,9 @@ window.onload = function () {
   // before the page is loaded, and the contexts don't exist yet.
   var contexts = {};
 
-  // Get a reference to the canvas element.
   var game_canvas = document.getElementById('game_canvas');
-
-  // Get a reference to the hud
   var hud_canvas = document.getElementById('hud_canvas');
 
-  // Get the context.
   contexts = {
     game_canvas: game_canvas,
     hud_canvas: hud_canvas,
@@ -28,8 +24,19 @@ window.onload = function () {
     hud_context: hud_canvas.getContext('2d')
   }
 
-  engine = new Engine();
+  // Initially show the new player input field
+  $("#new-player").show();
+  $("#game").hide();
 
-  engine.init(contexts);
-  engine.run();
+  $("#box").click(function(){
+    $("#new-player").hide();
+    $("#game").show();
+
+    engine = new Engine();
+
+    engine.init(contexts);
+    engine.run();
+  });
+
+  // get the final score from the game, and send it to the server.
 };

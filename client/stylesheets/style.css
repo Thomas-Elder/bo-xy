@@ -98,6 +98,13 @@ div.button-case {
   clear: both;
 }
 
+div.new-player {
+  background-color: #1F1F1F; 
+  padding: 8px 16px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 .header {
   color: #1A1A1A;
   background-color: #3399FF;
