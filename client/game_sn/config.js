@@ -9,7 +9,7 @@ var config = {
   fps : 120,
   gravity : 2,
   backgroundColour : '#1A1A1A',
-  numberOfLevels : 4,
+  numberOfLevels : 5,
   levelLength: 1000,
   numberOfEnemies : 20,
 

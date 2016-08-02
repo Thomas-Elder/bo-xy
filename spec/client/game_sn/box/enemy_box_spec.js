@@ -9,7 +9,7 @@ describe('EnemyBox',
 
     beforeEach(
       function(done){
-        enemy = new EnemyBox(1, 1, 0, config, {});
+        enemy = new EnemyBox({x:1,y:1}, 0, config);
         done();
     });
     
@@ -73,7 +73,7 @@ describe('EnemyBox',
 
             var expected = true;
 
-            var result = enemy.isOnScreen();
+            var result = enemy.onScreen;
 
             expect(result).toEqual(expected);
 
@@ -88,21 +88,7 @@ describe('EnemyBox',
             for (var i = 0; i <= config.screenSize.height; i++)
               enemy.update();
 
-            var result = enemy.isOnScreen();
-
-            expect(result).toEqual(expected);
-
-            done();
-        });
-
-        it('should return false when setOffScreen is called', 
-          function(done){
-
-            var expected = false;
-
-            enemy.setOffScreen();
-
-            var result = enemy.isOnScreen();
+            var result = enemy.onScreen;
 
             expect(result).toEqual(expected);
 

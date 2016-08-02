@@ -19,7 +19,15 @@ var config = require('./config');
 /**
  * A class for managing the game.
  */
-var Engine = function(){};
+var Engine = function(){
+
+  this.total_score  = 0;
+  this.level_score  = 0;
+  this.level        = 0;
+  this.lives        = config.box.player.lives;
+
+  this.max_level    = config.numberOfLevels;
+};
 
 /**
  * 
@@ -57,10 +65,9 @@ Engine.prototype.run = function(){
     self.draw();
 
     // Check if game is over and clearInterval if so
-    if (self.boxManager.getLevel() === config.numberOfLevels ||
-      self.boxManager.getLives() === 0) {
-        self.endGame();          
-        clearInterval(gameLoop);
+    if (self.lives === 0 || self.level === config.numberOfLevels) {
+      self.endGame();          
+      clearInterval(gameLoop);
     }
   }
 
@@ -75,7 +82,13 @@ Engine.prototype.update = function(){
   // update all
   this.background.update();
   this.hud.update();
-  this.boxManager.update();
+  this.boxManager.update(this.level);
+
+  this.boxManager.enemyHit()
+  this.lives = config.box.player.lives - this.boxManager.enemiesHit;
+  
+  this.level = Math.floor(this.boxManager.enemiesDodged / 100);
+  this.score = this.boxManager.enemiesDodged;
 
 };
 
@@ -95,9 +108,9 @@ Engine.prototype.draw = function(){
   });
 
   this.display.drawHud({
-    score: this.boxManager.getScore(),
-    level: this.boxManager.getLevel(),
-    lives: this.boxManager.getLives()
+    score: this.score,
+    level: this.level,
+    lives: this.lives
   });
 };
 
@@ -106,7 +119,7 @@ Engine.prototype.draw = function(){
  */
 Engine.prototype.endGame = function(){
 
-  this.display.end(this.boxManager.getScore(), this.boxManager.getLevel());
+  this.display.end(this.score, this.level);
 };
 
 

@@ -1,18 +1,21 @@
 
 // Defines the EnemyBox type.
-var EnemyBox = function (x, y, level, config) {
-  this.x            = x;
-  this.y            = y;
+var EnemyBox = function (location, level, config) {
+  this.x            = location.x;
+  this.y            = location.y;
+  
   this.width        = config.box.enemy.size.width;
   this.height       = config.box.enemy.size.height;
+
   this.screenWidth  = config.screenSize.width;
   this.screenHeight = config.screenSize.height;
-  this.colour       = config.box.enemy.colour[0];
 
-  this.onScreen     = true;
-  
+  this.colour       = config.box.enemy.colour[level];
   this.speed        = config.box.enemy.speed[level];
   this.colour       = config.box.enemy.colour[level];
+
+  this.onScreen     = true;
+  this.hit          = false;
 }
 
 // Define the EnemyBox type's update method.
@@ -23,16 +26,6 @@ EnemyBox.prototype.update = function() {
     this.y += this.speed;
   else
     this.onScreen = false;
-};
-
-// Returns true if the box is currently on the screen
-EnemyBox.prototype.isOnScreen = function() {
-  return this.onScreen;
-};
-
-// Set the box onScreen variable to false
-EnemyBox.prototype.setOffScreen = function() {
-  this.onScreen = false;
 };
 
 // Returns an object with x an y coords, the box's current position

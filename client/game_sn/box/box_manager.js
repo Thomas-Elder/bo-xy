@@ -15,16 +15,12 @@ var BoxManager = function (config, controller) {
 
   this.enemyBoxes   = new Array(this.config.numberOfEnemies);
   this.enemySpeed   = config.box.enemy.speed;
-  this.levelCount   = 0;
   this.enemySpacing = 0;
   
   this.explodeBoxes = [];
   
-  this.total_score  = 0;
-  this.level_score  = 0;
-  this.level        = 0;
-
-  this.max_level    = this.config.numberOfLevels;
+  this.enemiesDodged= 0;
+  this.enemiesHit   = 0;
 }
 
 BoxManager.prototype.init = function() {
@@ -34,26 +30,20 @@ BoxManager.prototype.init = function() {
   // Instantiate a new instance of type PlayerBox.
   this.playerBox = new PlayerBox(this.config, this.controller);
   
-  /*
-   * Calculate placement of enemy boxes based on width of screen and number of
+  
+  /* Calculate placement of enemy boxes based on width of screen and number of
    * boxes.
    */
   this.enemySpacing = (this.config.screenSize.width - this.config.box.enemy.size.width) / (this.config.numberOfEnemies - 1);
 
   // Instantiate an array of new instances of type EnemyBox.
   for (var i = 0; i < this.enemyBoxes.length; i++) {
-
-    // Get a new enemy location
     var location = this.newEnemyLocation(this.config);
-
-    this.enemyBoxes[i] = new EnemyBox(location.x,
-                                      location.y,
-                                      this.enemySpeed[this.levelCount],
-                                      this.config);
+    this.enemyBoxes[i] = new EnemyBox(location, 0, this.config);
   }
 };
 
-BoxManager.prototype.update = function() {
+BoxManager.prototype.update = function(level) {
  
   var self = this;
 
@@ -70,65 +60,39 @@ BoxManager.prototype.update = function() {
     }
   }
 
-  if (this.level_score === 100) {
-    this.level_score = 0;
+  for (var i = 0; i < this.enemyBoxes.length; i++){
 
-    if (this.level < this.max_level) {
-      this.level++;
-    }
-  }
-
-  /*
-   * For each enemyBox, check if it is on the screen, if so call its update 
-   * method, else initialise a new box.
-   */
-  for (var i = 0; i < this.enemyBoxes.length; i++) {
-
-    if (this.enemyBoxes[i].isOnScreen()) {
+    if(this.enemyBoxes[i].onScreen)
       this.enemyBoxes[i].update();
 
-      /*
-       * If there's a collision, get rid of the enemy hit, and push 
-       * a new explodeBox into the explodeBoxes array
-       */
-      if (this.interaction.collision(this.playerBox, this.enemyBoxes[i])) {
-
-        this.enemyBoxes[i].setOffScreen();
-        this.explodeBoxes.push(new ExplodeBox(this.enemyBoxes[i].getPosition().x,
-                       this.enemyBoxes[i].getPosition().y,
-                       this.config));
-
-        // Lose a life
-        this.playerBox.lives--;
-      }
-
-    } else {
-
-      // We've dodged a box! Have a point!
-      this.level_score++;
-      this.total_score++;
-
+    if (!this.enemyBoxes[i].onScreen){
+      if (!this.enemyBoxes[i].hit)
+        this.enemiesDodged++;
+      
       var location = this.newEnemyLocation(this.config);
-
-      // Create new enemy box 
-      this.enemyBoxes[i] = new EnemyBox(location.x,
-                                        location.y,
-                                        this.enemySpeed[this.level],
-                                        this.config);
+      this.enemyBoxes[i] = new EnemyBox(location, level, this.config);
     }
   }
 };
 
-BoxManager.prototype.getScore = function() {
-  return this.total_score;
-};
+BoxManager.prototype.enemyHit = function() {
 
-BoxManager.prototype.getLevel = function() {
-  return this.level;
-};
+  var self = this;
 
-BoxManager.prototype.getLives = function() {
-  return this.playerBox.lives;
+  this.enemyBoxes.forEach(function(enemy) {
+    if (enemy.onScreen){
+      if (self.interaction.collision(self.playerBox, enemy)) {
+
+        enemy.hit = true;
+        enemy.onScreen = false;
+        self.explodeBoxes.push(new ExplodeBox(enemy.getPosition().x,
+                                              enemy.getPosition().y,
+                                              self.config));
+
+        self.enemiesHit++;
+      }
+    }
+  });
 };
 
 /**
