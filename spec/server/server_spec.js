@@ -37,7 +37,7 @@ describe('Server',
             
             request.get(
             {
-              'url':url
+              'url':url + "/"
             },
             function(err, res){
 
