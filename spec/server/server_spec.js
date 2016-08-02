@@ -50,18 +50,51 @@ describe('Server',
         });
     });
     
-    it('',
+    it('should return OK statusCode to a request for "/single"',
       function(done){
-        done();
+        request.get(
+              {
+                'url':url + "/single"
+              },
+              function(err, res){
+
+                if(res === undefined)
+                  throw new Error('Server not responding.');
+                
+                expect(res.statusCode).toBe(200);
+                done();
+            });
     });
     
-    it('',
+    it('should return OK statusCode to a request for "/mingle"',
       function(done){
-        done();
+        request.get(
+              {
+                'url':url + "/mingle"
+              },
+              function(err, res){
+
+                if(res === undefined)
+                  throw new Error('Server not responding.');
+                
+                expect(res.statusCode).toBe(200);
+                done();
+            });
     });
     
-    it('',
+    it('should return OK statusCode to a request for "/highscores"',
       function(done){
-        done();
+        request.get(
+              {
+                'url':url + "/highscores"
+              },
+              function(err, res){
+
+                if(res === undefined)
+                  throw new Error('Server not responding.');
+                
+                expect(res.statusCode).toBe(200);
+                done();
+            });
     });    
 });
