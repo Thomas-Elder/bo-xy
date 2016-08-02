@@ -122,7 +122,7 @@ Engine.prototype.endGame = function(){
 
   this.display.end(this.score, this.level);
 
-  var gameDetails = {};
+  var gameDetails = {}; 
 
   gameDetails.playerName = $("#name").val();
   gameDetails.level = this.level;

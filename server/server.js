@@ -5,8 +5,8 @@
 var controllers = require('./controllers/controllers');
 var config = require('./config');
 var EventManager = require('./events');
-var LobbyManager = require('./models/lobbyManager');
-var HighscoreManager = require('./models/highscoreManager');
+var LobbyManager = require('./managers/lobbyManager');
+var HighscoreManager = require('./managers/highscoreManager');
 
 var path = require('path');
 

@@ -1,4 +1,4 @@
-var Scores = require('../models/highscoreManager');
+var Scores = require('../managers/highscoreManager');
 
 var highscoresManager;
 

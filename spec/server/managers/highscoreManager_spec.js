@@ -1,4 +1,4 @@
-var HighscoreManager = require('../../../server/models/highscoreManager');
+var HighscoreManager = require('../../../server/managers/highscoreManager');
 
 describe('Highscore Manager', 
   function(){

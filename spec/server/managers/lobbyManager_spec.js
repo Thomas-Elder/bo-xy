@@ -1,4 +1,4 @@
-var LobbyManager = require('../../../server/models/lobbyManager');
+var LobbyManager = require('../../../server/managers/lobbyManager');
 
 describe('Lobby Manager', 
   function(){
