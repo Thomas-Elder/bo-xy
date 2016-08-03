@@ -35,11 +35,14 @@ var config = {
       lives : 3,
 
       colour : '#3399FF',
+      invColour: '#AAA',
 
       size : {
         height : 20,
         width : 20
-      }
+      },
+
+      invulnerability : 500
     },
 
     /**

@@ -106,4 +106,19 @@ describe('PlayerBox',
             done();
         });
     });
+
+    describe('Display', 
+      function(){
+
+        it('should have isBlinking > 0 when newly created',
+          function(done){
+
+            var expected = true;
+
+            var result = player.isBlinking > 0;
+
+            expect(result).toEqual(expected);
+            done();
+        });
+    });
 });

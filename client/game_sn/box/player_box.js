@@ -10,7 +10,9 @@ var PlayerBox = function(config, controller) {
   this.speed        = config.box.player.speed;
   this.gravity      = config.gravity;
   this.colour       = config.box.player.colour;
+  this.invColour    = config.box.player.invColour;
   this.lives        = config.box.player.lives;
+  this.isBlinking   = config.box.player.invulnerability;
 
   this.controller   = controller;
 }
@@ -33,6 +35,9 @@ PlayerBox.prototype.update = function() {
   // apply gravity
   if (this.y + this.height < this.screenHeight)
     this.y += this.gravity;
+
+  if (this.isBlinking > 0)
+    this.isBlinking--;
 };
 
 // Returns an object with x an y coords, the box's current position

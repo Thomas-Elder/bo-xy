@@ -79,20 +79,22 @@ BoxManager.prototype.enemyHit = function() {
 
   var self = this;
 
-  this.enemyBoxes.forEach(function(enemy) {
-    if (enemy.onScreen){
-      if (self.interaction.collision(self.playerBox, enemy)) {
+  if (!this.playerBox.isBlinking){
+    this.enemyBoxes.forEach(function(enemy) {
+      if (enemy.onScreen){
+        if (self.interaction.collision(self.playerBox, enemy)) {
 
-        enemy.hit = true;
-        enemy.onScreen = false;
-        self.explodeBoxes.push(new ExplodeBox(enemy.getPosition().x,
-                                              enemy.getPosition().y,
-                                              self.config));
+          enemy.hit = true;
+          enemy.onScreen = false;
+          self.explodeBoxes.push(new ExplodeBox(enemy.getPosition().x,
+                                                enemy.getPosition().y,
+                                                self.config));
 
-        self.enemiesHit++;
+          self.enemiesHit++;
+        }
       }
-    }
-  });
+    });
+  }
 };
 
 /**

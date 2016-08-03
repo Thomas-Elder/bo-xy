@@ -6,6 +6,8 @@
 var Display = function(config, contexts){
   this.config = config;
   this.contexts = contexts;
+
+  this.tick = 0;
 };
 
 Display.prototype.init = function(){
@@ -38,6 +40,11 @@ Display.prototype.drawGame = function(state){
 
   var self = this;
 
+  this.tick++;
+
+  if (this.tick > this.config.fps)
+    this.tick = 0;
+
   // Clear the contexts for redraw
   this.game_context.clearRect(0, 0, 
                           this.config.screenSize.width, 
@@ -54,12 +61,28 @@ Display.prototype.drawGame = function(state){
                           this.config.screenSize.height);
 
   // Draw the player box
-  this.game_context.fillStyle = state.player.colour;
-  this.game_context.fillRect(state.player.x, 
-                          state.player.y, 
-                          state.player.width, 
-                          state.player.height);
+  if (state.player.isBlinking > 0) {
+    if (this.tick < this.config.fps/2) {
+      this.game_context.fillStyle = state.player.colour;
+      this.game_context.fillRect(state.player.x, 
+                              state.player.y, 
+                              state.player.width, 
+                              state.player.height);
+    } else {
+      this.game_context.fillStyle = state.player.invColour;
+      this.game_context.fillRect(state.player.x, 
+                              state.player.y, 
+                              state.player.width, 
+                              state.player.height);
+    }
 
+  } else {
+    this.game_context.fillStyle = state.player.colour;
+    this.game_context.fillRect(state.player.x, 
+                            state.player.y, 
+                            state.player.width, 
+                            state.player.height);
+  }
   // Draw the enemy boxes
   state.enemies.forEach(function(enemy){
     self.game_context.fillStyle = enemy.colour;
