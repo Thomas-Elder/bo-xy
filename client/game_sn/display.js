@@ -39,10 +39,11 @@ Display.prototype.init = function(){
 Display.prototype.drawGame = function(state){
 
   var self = this;
+  var blinkRate = this.config.fps / 2;
 
   this.tick++;
 
-  if (this.tick > this.config.fps)
+  if (this.tick > blinkRate)
     this.tick = 0;
 
   // Clear the contexts for redraw
@@ -62,7 +63,7 @@ Display.prototype.drawGame = function(state){
 
   // Draw the player box
   if (state.player.isBlinking > 0) {
-    if (this.tick < this.config.fps/2) {
+    if (this.tick < blinkRate/2) {
       this.game_context.fillStyle = state.player.colour;
       this.game_context.fillRect(state.player.x, 
                               state.player.y, 
