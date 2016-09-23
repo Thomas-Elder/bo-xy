@@ -10,6 +10,7 @@ EventManager.prototype.lobbyEvents = function(io, lm){
       socket.on('connected',
         function(msg){
           console.log(msg.msg);
+          //socket.emit()
       });
       
       // create new lobby using the name passed from client
