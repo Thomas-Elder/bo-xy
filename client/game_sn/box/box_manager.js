@@ -92,7 +92,7 @@ BoxManager.prototype.enemyHit = function() {
 
           self.enemiesHit++;
 
-          self.playerBox = new PlayerBox(self.config, self.controller);we
+          self.playerBox = new PlayerBox(self.config, self.controller);
         }
       }
     });
