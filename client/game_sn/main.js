@@ -18,6 +18,7 @@ window.onload = function () {
   var game_canvas = document.getElementById('game_canvas');
   var hud_canvas = document.getElementById('hud_canvas');
 
+  // Wrap these in an object to pass to the game  
   contexts = {
     game_canvas: game_canvas,
     hud_canvas: hud_canvas,
@@ -25,14 +26,19 @@ window.onload = function () {
     hud_context: hud_canvas.getContext('2d')
   }
 
+  // Set up io and connect to the 'single' namespace
   var socket = io('/single');
   socket.emit('connected', {msg:"connected to namespace /single"});
 
+  /** We need the game to return the end of game state, so we can 
+  * display that to the user. 
+  */
   var game_details = {};
 
   // Initially show the new player input field
   $("#new-player").show();
   $("#game").hide();
+  $("#endgame").hide();
 
   $("#box").click(function(){
     $("#new-player").hide();
