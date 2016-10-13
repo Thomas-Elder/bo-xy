@@ -1,9 +1,5 @@
 var Server = require('../../server/server');
 
-var http = require('http');
-var express = require('express');
-var app = express();
-var httpServer = http.createServer(app);
 var request = require('request');
 
 describe('Server', 
@@ -17,7 +13,7 @@ describe('Server',
     beforeEach(
       function(done){
         
-        server = new Server(httpServer, express, app);
+        server = new Server();
         console.log('Starting the server...');
         server.start();
         done();

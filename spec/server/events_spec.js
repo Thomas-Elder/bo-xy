@@ -1,15 +1,10 @@
 var Server = require('../../server/server');
 
-var http = require('http');
-var express = require('express');
 var request = require('request');
 var io_client = require('socket.io-client');
 
 describe('Event Manager', 
   function(){
-    
-    var app = express();
-    var httpServer = http.createServer(app);
 
     var server;
     
