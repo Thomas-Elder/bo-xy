@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= title
+  p Check out the highscores!
+  
+  div#highscores
+    ul.highscores
+      each val in scores
+        li
+          div= 'N A M E: ' + val.name + ' - - - S C O R E: ' + val.score

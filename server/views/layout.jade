@@ -1,0 +1,20 @@
+doctype html
+
+include mixins/header
+include mixins/footer
+include mixins/nav
+
+html
+  head
+    title= title
+    link(rel='stylesheet' href='static/stylesheets/style.css')
+
+  body
+    .container
+      block header
+        mixin header()
+        mixin nav()
+      block content
+      block footer
+        mixin footer()
+    block scripts
