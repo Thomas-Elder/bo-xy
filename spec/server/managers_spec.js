@@ -1,6 +1,7 @@
 var managers = require('../../server/managers');
 
 describe('Managers', function(){
+  
   describe('Highscore Manager', 
     function(){
       

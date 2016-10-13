@@ -1,6 +1,6 @@
 
 // Local requires
-var controllers = require('./controllers/controllers');
+var Controllers = require('./controllers/controllers');
 var config = require('./config');
 var EventManager = require('./events');
 var managers = require('./managers');
@@ -36,11 +36,16 @@ var Server = function(){
   
   // set lobby manager
   var lobbyManager = new managers.Lobbies(); 
-  controllers.setLobbyManager(lobbyManager);
+  //controllers.setLobbyManager(lobbyManager);
   
   // set highscore manager
   var highscoreManager = new managers.Highscores();
-  controllers.setHighscoreManager(highscoreManager);
+  //controllers.setHighscoreManager(highscoreManager);
+
+  console.log('there exists a highscore manager now; ' + highscoreManager);
+  console.log('values are: ' + highscoreManager.getAll());
+
+  var controllers = new Controllers(lobbyManager, highscoreManager);
 
   // Create new events instance
   var eventManager = new EventManager();
@@ -52,7 +57,7 @@ var Server = function(){
   app.get('/single', controllers.single);
   app.get('/highscores', controllers.highscores);
   app.get('/mingle', controllers.mingle);
-  app.get('/lobbies', controllers.lobbies);
+  //app.get('/lobbies', controllers.lobbies);
   app.get('*', controllers.none);
  
 };
