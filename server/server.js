@@ -1,28 +1,26 @@
 
-/**
- * Module dependencies.
- */
+// Local requires
 var controllers = require('./controllers/controllers');
 var config = require('./config');
 var EventManager = require('./events');
 var LobbyManager = require('./managers/lobbyManager');
 var HighscoreManager = require('./managers/highscoreManager');
 
+// Express and Server requires
+var http = require('http');
+var express = require('express');
+var app = express();
+var server = http.createServer(app);
+
+// Other requires
 var path = require('path');
 
 /**
  * Server
- * @param httpServer
- * @param express
- * @param app
- * 
  */
-var Server = function(httpServer, express, app){
+var Server = function(){
   
-  // get instance references for these to use in start()
-  this.app = app;
-  this.server = httpServer;  
-  this.io = require('socket.io')(httpServer);
+  this.io = require('socket.io')(server);
 
   // set port, view dir and engine
   app.set('port', process.env.PORT || config.port);
@@ -67,10 +65,10 @@ var Server = function(httpServer, express, app){
  */
 Server.prototype.start = function(){
   
-  var port = this.app.get('port');
+  var port = app.get('port');
 
   // start listening!
-  this.server.listen(port,
+  server.listen(port,
     function(){
       console.log('Express server listening on port: ' + port);
   });
@@ -82,7 +80,7 @@ Server.prototype.start = function(){
  * Stops the server recieving any further requests.
  */
 Server.prototype.stop = function(){
-  this.server.close();
+  server.close();
 };
 
 module.exports = Server;
