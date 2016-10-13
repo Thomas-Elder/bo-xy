@@ -3,8 +3,6 @@
 var controllers = require('./controllers/controllers');
 var config = require('./config');
 var EventManager = require('./events');
-var LobbyManager = require('./managers/lobbyManager');
-var HighscoreManager = require('./managers/highscoreManager');
 var managers = require('./managers');
 
 // Express and Server requires
