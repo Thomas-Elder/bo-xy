@@ -4,8 +4,6 @@ var lobbyManager;
 var Controller = function(lm, hm){
   lobbyManager = lm;
   highscoreManager = hm;
-
-  console.log('Constructor highscoreManager is ' + highscoreManager);
 };
 
 Controller.prototype.index = function(req, res){

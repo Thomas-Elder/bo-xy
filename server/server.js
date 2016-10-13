@@ -11,6 +11,9 @@ var express = require('express');
 var app = express();
 var server = http.createServer(app);
 
+// Socket requires
+var io = require('socket.io')(server);
+
 // Other requires
 var path = require('path');
 
@@ -18,8 +21,6 @@ var path = require('path');
  * Server
  */
 var Server = function(){
-  
-  this.io = require('socket.io')(server);
 
   // set port, view dir and engine
   app.set('port', process.env.PORT || config.port);
@@ -34,32 +35,24 @@ var Server = function(){
   // set path for static files
   app.use('/static', express.static(path.join(__dirname, '../client')));
   
-  // set lobby manager
+  // setup managers
   var lobbyManager = new managers.Lobbies(); 
-  //controllers.setLobbyManager(lobbyManager);
-  
-  // set highscore manager
   var highscoreManager = new managers.Highscores();
-  //controllers.setHighscoreManager(highscoreManager);
 
-  console.log('there exists a highscore manager now; ' + highscoreManager);
-  console.log('values are: ' + highscoreManager.getAll());
-
+  // setup controller, and pass managers
   var controllers = new Controllers(lobbyManager, highscoreManager);
 
   // Create new events instance
   var eventManager = new EventManager();
-  eventManager.lobbyEvents(this.io, lobbyManager);
-  eventManager.singleEvents(this.io, highscoreManager); 
+  eventManager.lobbyEvents(io, lobbyManager);
+  eventManager.singleEvents(io, highscoreManager); 
 
   // setting up routes 
   app.get('/', controllers.index);
   app.get('/single', controllers.single);
-  app.get('/highscores', controllers.highscores);
   app.get('/mingle', controllers.mingle);
-  //app.get('/lobbies', controllers.lobbies);
+  app.get('/highscores', controllers.highscores);
   app.get('*', controllers.none);
- 
 };
 
 /**
