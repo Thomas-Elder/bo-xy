@@ -5,6 +5,7 @@ var config = require('./config');
 var EventManager = require('./events');
 var LobbyManager = require('./managers/lobbyManager');
 var HighscoreManager = require('./managers/highscoreManager');
+var managers = require('./managers');
 
 // Express and Server requires
 var http = require('http');
@@ -36,17 +37,17 @@ var Server = function(){
   app.use('/static', express.static(path.join(__dirname, '../client')));
   
   // set lobby manager
-  var lobbyManager = new LobbyManager();
+  var lobbyManager = new managers.Lobbies(); 
   controllers.setLobbyManager(lobbyManager);
   
   // set highscore manager
-  var highscoreManager = new HighscoreManager();
+  var highscoreManager = new managers.Highscores();
   controllers.setHighscoreManager(highscoreManager);
 
   // Create new events instance
   var eventManager = new EventManager();
   eventManager.lobbyEvents(this.io, lobbyManager);
-  eventManager.singleEvents(this.io, highscoreManager);
+  eventManager.singleEvents(this.io, highscoreManager); 
 
   // setting up routes 
   app.get('/', controllers.index);
