@@ -19,7 +19,7 @@ describe('Event Manager',
     beforeEach(
       function(done){
         
-        server = new Server(httpServer, express, app);
+        server = new Server();
         console.log('Starting the server...');
         server.start();
         done();

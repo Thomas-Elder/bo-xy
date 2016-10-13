@@ -1,4 +1,4 @@
-var LobbyManager = require('../../../server/managers/lobbyManager');
+var managers = require('../../../server/managers');
 
 describe('Lobby Manager', 
   function(){
@@ -7,7 +7,7 @@ describe('Lobby Manager',
 
     beforeEach(
       function(done){
-        lobbyManager = new LobbyManager();
+        lobbyManager = new managers.Lobbies();
         done();
     });
     

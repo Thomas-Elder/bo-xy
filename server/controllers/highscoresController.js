@@ -1,5 +1,3 @@
-var Scores = require('../managers/highscoreManager');
-
 var highscoresManager;
 
 exports.setHighscoreManager = function(hm){

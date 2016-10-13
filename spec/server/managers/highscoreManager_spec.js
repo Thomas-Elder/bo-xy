@@ -1,4 +1,4 @@
-var HighscoreManager = require('../../../server/managers/highscoreManager');
+var managers = require('../../../server/managers');
 
 describe('Highscore Manager', 
   function(){
@@ -7,7 +7,7 @@ describe('Highscore Manager',
 
     beforeEach(
       function(done){
-        highscoreManager = new HighscoreManager();
+        highscoreManager = new managers.Highscores();
         done();
     });
     
