@@ -17,7 +17,6 @@ describe('Event Manager',
         server = new Server();
         console.log('Starting the server...');
         server.start();
-        done();
 
         // Connect a client socket to the server
         socket_emit = io_client.connect(url,
@@ -46,6 +45,8 @@ describe('Event Manager',
           function(){
             console.log('socket_emit connected.');
         });
+
+        done();
     });
     
     afterEach(
