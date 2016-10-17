@@ -1,7 +1,5 @@
 extends layout
 
-include mixins/singleScripts
-
 block content
   h2= title
 
@@ -29,5 +27,5 @@ block content
       
   div#endgame
   
-  block scripts
-    mixin singleScripts()
+block scripts
+  include mixins/singleScripts

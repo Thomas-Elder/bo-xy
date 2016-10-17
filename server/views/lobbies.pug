@@ -1,7 +1,5 @@
 extends layout
 
-include mixins/lobbyScripts
-
 block content
   h1= title
   
@@ -37,4 +35,4 @@ block content
         button(id="start" class="btn") S T A R T
         
 block scripts
-  mixin lobbyScripts()
+  include mixins/lobbyScripts

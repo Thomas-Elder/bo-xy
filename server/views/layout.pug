@@ -12,9 +12,9 @@ html
   body
     .container
       block header
-        mixin header()
-        mixin nav()
+        +header()
+        +nav()
       block content
       block footer
-        mixin footer()
+        +footer()
     block scripts
