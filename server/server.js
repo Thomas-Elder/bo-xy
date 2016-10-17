@@ -25,7 +25,7 @@ var Server = function(){
   // set port, view dir and engine
   app.set('port', process.env.PORT || config.port);
   app.set('views', path.join(__dirname, './views'));
-  app.set('view engine', 'jade');
+  app.set('view engine', 'pug');
 
   if ('development' == app.get('env')) {
     app.use(express.errorHandler());
