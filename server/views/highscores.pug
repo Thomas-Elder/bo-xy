@@ -2,10 +2,13 @@ extends layout
 
 block content
   h2= title
-  p Check out the highscores!
-  
-  div#highscores
-    ul.highscores
-      each val in scores
-        li
-          div= 'N A M E: ' + val.name + ' - - - S C O R E: ' + val.score
+
+  if scores.length === 0
+    p No highscores at the moment.
+  else
+    p Check out the highscores!
+    div#highscores
+      ul.highscores
+        each val in scores
+          li
+            div= 'N A M E: ' + val.name + ' - - - S C O R E: ' + val.score
