@@ -1,0 +1,8 @@
+.wrapper {
+  margin: auto;
+  padding: 0;
+
+  height: auto;
+  min-height: 100%;
+  width: 100%;
+}

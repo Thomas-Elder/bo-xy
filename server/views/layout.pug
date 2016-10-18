@@ -10,11 +10,12 @@ html
     include mixins/style
 
   body
-    .container
+    .wrapper
       block header
         +header()
         +nav()
-      block content
-      block footer
-        +footer()
+      .content
+        block content
+    block footer
+      +footer()
     block scripts
