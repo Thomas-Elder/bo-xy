@@ -7,10 +7,12 @@ include mixins/nav
 html
   head
     title= title
+ 
+    block style
     include mixins/style
 
   body
-    .wrapper
+    .container
       block header
         +header()
         +nav()

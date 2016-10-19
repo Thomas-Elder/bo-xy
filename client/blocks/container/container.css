@@ -1,0 +1,12 @@
+.container {
+  margin: auto;
+  padding: 0;
+  
+  height: 100%;
+  width: 100%;
+
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  
+  color: #3399FF;
+  background-color: #1A1A1A;
+}
