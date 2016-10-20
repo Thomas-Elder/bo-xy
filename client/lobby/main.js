@@ -7,6 +7,7 @@ window.onload = function(){
   socket.emit('connected', {msg:"connected to namespace /lobby"});
   
   // Initially show just the lobby list
+  $('#lobby-list').show();
   $('#lobby-create').hide();
   $('#lobby').hide();
   $('#lobbies').hide();
