@@ -13,25 +13,25 @@ block content
           span= 'L O B B Y : ' + lobby.name
           button(id= lobby.id class="lobby-list__button") J O I N
   
-  div#lobby-create
+  div#lobby-create.lobby-create
     p C R E A T E
     
-    div.new-lobby
+    div.lobby-create__lobby
       label N A M E:
-        input(id="name" type="text")
+      input#name.lobby-create__input(type="text")
         
-      div.button-case
-        button(id="open" class="btn") O P E N
+      div.lobby-create__button-case
+        button#open.lobby-create__button O P E N
   
-  div#lobby
+  div#lobby.lobby
     p W E L C O M E
     
-    div.lobby
+    div.lobby__lobby
       label L O B B Y N A M E
       label#lobby-name
       div.lobby__button-case
-        button(id="bail" class="lobby__button") B A I L
-        button(id="start" class="lobby__button") S T A R T
+        button#bail.lobby__button B A I L
+        button#start.lobby__button S T A R T
         
 block scripts
   include mixins/lobbyScripts

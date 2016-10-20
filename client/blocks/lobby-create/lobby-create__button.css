@@ -1,0 +1,10 @@
+.lobby-create__button {
+  color: #1A1A1A;
+  background-color: #3399FF;
+  padding: 10px;
+  border-style: none;
+}
+
+.lobby-create__button:hover {
+  background-color: #1177BB;
+}
