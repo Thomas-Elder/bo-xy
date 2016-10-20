@@ -3,27 +3,28 @@ extends layout
 block content
   h2= title
 
-  div#new-player.new-player
+  div#new-player.name-sn
     label N A M E:
       input(id="name" type="text")
-    div.button-case
+    .name-sn__button
       button(id="box" class="btn") B O X
 
-  div#game
-    .game
-      canvas(
-        id="game_canvas"
-        style="border: 1px solid #000000;"
-        width="400"
-        height="400"
-        )
+  div#game.game-sn
+    canvas(
+      class="game-sn__game"
+      id="game_canvas"
+      style="border: 1px solid #000000;"
+      width="400"
+      height="400"
+      )
 
-      canvas(
-        id="hud_canvas"
-        style="border: 1px solid #000000;"
-        width="400"
-        height="50"
-        )
+    canvas(
+      class="game-sn__hud"
+      id="hud_canvas"
+      style="border: 1px solid #000000;"
+      width="400"
+      height="50"
+      )
       
   div#endgame
   
