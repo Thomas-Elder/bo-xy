@@ -28,10 +28,10 @@ block content
     
     div.lobby
       label L O B B Y N A M E
-    
-      div.button-case
-        button(id="bail" class="btn") B A I L
-        button(id="start" class="btn") S T A R T
+      label#lobby-name
+      div.lobby__button-case
+        button(id="bail" class="lobby__button") B A I L
+        button(id="start" class="lobby__button") S T A R T
         
 block scripts
   include mixins/lobbyScripts
