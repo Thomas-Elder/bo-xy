@@ -7,8 +7,8 @@ block content
     p No highscores at the moment.
   else
     p Check out the highscores!
-    div#highscores
-      ul.highscores
+    div#highscores.scores
+      ul.scores__ul
         each val in scores
-          li
+          li.scores__li
             div= 'N A M E: ' + val.name + ' - - - S C O R E: ' + val.score
