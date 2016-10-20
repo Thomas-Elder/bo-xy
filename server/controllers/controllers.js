@@ -18,7 +18,7 @@ Controller.prototype.single = function(req, res){
 
 Controller.prototype.mingle = function(req, res){
 
-  res.render('mingle', { title: 'B O X E S' });
+  res.render('mingle', { title: 'B O X E S', lobbies: lobbyManager.getAll()});
 };
 
 Controller.prototype.highscores = function(req, res){

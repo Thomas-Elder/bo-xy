@@ -2,4 +2,36 @@ extends layout
 
 block content
   h2= title
-  p Sorry, we're not yet ready to mingle.
+  
+  button(id="new" class="btn") N E W
+  button(id="lobbies" class="btn") L O B B I E S
+  
+  div#lobby-list.lobby-list
+    ul.lobby-list__ul
+      each lobby in lobbies
+        li.lobby-list__li
+          span= 'L O B B Y : ' + lobby.name
+          button(id= lobby.id class="lobby-list__button") J O I N
+  
+  div#lobby-create
+    p C R E A T E
+    
+    div.new-lobby
+      label N A M E:
+        input(id="name" type="text")
+        
+      div.button-case
+        button(id="open" class="btn") O P E N
+  
+  div#lobby
+    p W E L C O M E
+    
+    div.lobby
+      label L O B B Y N A M E
+    
+      div.button-case
+        button(id="bail" class="btn") B A I L
+        button(id="start" class="btn") S T A R T
+        
+block scripts
+  include mixins/lobbyScripts
