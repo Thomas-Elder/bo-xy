@@ -1,15 +1,11 @@
 doctype html
 
-include mixins/header
-include mixins/footer
-include mixins/nav
-
 html
   head
     title= title
  
     block style
-    
+
     link(rel='stylesheet' href='static/blocks/page.css')
     link(rel='stylesheet' href='static/blocks/container/container.css')
     link(rel='stylesheet' href='static/blocks/content/content.css')
@@ -23,9 +19,14 @@ html
 
   body
     .container
-      block header
-        +header()
-        +nav()
+      .header
+        .header-bar 
+          a.header-bar__link(href='/')='B O X L A N D'
+      .nav
+        a.nav__link(href='/')= 'H O M E' 
+        a.nav__link(href='/single')= 'S I N G L E'
+        a.nav__link(href='/mingle')= 'M I N G L E'
+        a.nav__link(href='/highscores')= 'H I G H S C O R E S'
       .content
         block content
     block scripts
