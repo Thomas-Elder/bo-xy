@@ -1,10 +1,31 @@
 extends layout
 
+block style
+  link(rel='stylesheet' href='static/blocks/new-lobby/new-lobby.css')
+  link(rel='stylesheet' href='static/blocks/new-lobby/new-lobby__button.css')
+
+  link(rel='stylesheet' href='static/blocks/lobby-list/lobby-list.css')
+  link(rel='stylesheet' href='static/blocks/lobby-list/lobby-list__button.css')
+  link(rel='stylesheet' href='static/blocks/lobby-list/lobby-list__li.css')
+  link(rel='stylesheet' href='static/blocks/lobby-list/lobby-list__ul.css')
+
+  link(rel='stylesheet' href='static/blocks/lobby/lobby.css')
+  link(rel='stylesheet' href='static/blocks/lobby/lobby__lobby.css')
+  link(rel='stylesheet' href='static/blocks/lobby/lobby__button.css')
+  link(rel='stylesheet' href='static/blocks/lobby/lobby__button-case.css')
+
+  link(rel='stylesheet' href='static/blocks/lobby-create/lobby-create.css')
+  link(rel='stylesheet' href='static/blocks/lobby-create/lobby-create__lobby.css')
+  link(rel='stylesheet' href='static/blocks/lobby-create/lobby-create__input.css')
+  link(rel='stylesheet' href='static/blocks/lobby-create/lobby-create__button.css')
+  link(rel='stylesheet' href='static/blocks/lobby-create/lobby-create__button-case.css') 
+
 block content
   h2= title
   
-  button(id="new" class="btn") N E W
-  button(id="lobbies" class="btn") L O B B I E S
+  div.new-lobby
+    button#new.new-lobby__button N E W
+    button#lobbies.new-lobby__button L O B B I E S
   
   div#lobby-list.lobby-list
     ul.lobby-list__ul
