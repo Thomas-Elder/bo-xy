@@ -3,14 +3,14 @@ var EventManager = function(){};
 
 EventManager.prototype.lobbyEvents = function(io, lm){
   var lobbyManager = lm;
-  var lobbyNamespace = io.of('/lobby');
+  var mingleNamespace = io.of('/mingle');
 
-  lobbyNamespace.on('connection',
+  mingleNamespace.on('connection',
     function(socket){
       socket.on('connected',
         function(msg){
           console.log(msg.msg);
-          //socket.emit()
+          socket.emit('connect');
       });
       
       // create new lobby using the name passed from client
@@ -26,8 +26,8 @@ EventManager.prototype.lobbyEvents = function(io, lm){
           socket.join(lobby.id);
           
           console.log(lobby);
-          // let the lobbyNamespace know about the new lobby
-          lobbyNamespace.emit('newLobby', lobby);
+          // let the mingleNamespace know about the new lobby
+          mingleNamespace.emit('newLobby', lobby);
       });
       
       // Add this socket to a room
@@ -42,7 +42,7 @@ EventManager.prototype.lobbyEvents = function(io, lm){
           console.log(lobbyManager.get(lobby.id));
                 
           // let the room know you've joined
-          lobbyNamespace.to(lobby.id).emit('newPlayer', 'A player has joined!');
+          mingleNamespace.to(lobby.id).emit('newPlayer', 'A player has joined!');
       });
       
       // Remove this socket from the room
@@ -54,13 +54,13 @@ EventManager.prototype.lobbyEvents = function(io, lm){
           lobbyManager.get(lobby.id).users.pop(socket.id);
           console.log(lobbyManager.get(lobby.id));
           
-          /// let the lobbyNamespace know about the lobby bailage
-          lobbyNamespace.emit('bailLobby', lobby);
+          /// let the mingleNamespace know about the lobby bailage
+          mingleNamespace.emit('bailLobby', lobby);
       });
       
       socket.on('start',
         function(lobby){
-          lobbyNamespace.to(lobby.id).emit('start', 'Starting the game... ');
+          mingleNamespace.to(lobby.id).emit('start', 'Starting the game... ');
       });
   });
 };

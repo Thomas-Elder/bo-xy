@@ -92,6 +92,22 @@ describe('Server',
               expect(res.statusCode).toBe(200);
               done();
           });
-      });  
+      });
+
+      it('should return OK statusCode to a request for "/gibberish"',
+        function(done){
+          request.get(
+            {
+              'url':url + "/gibberish"
+            },
+            function(err, res){
+
+              if(res === undefined)
+                throw new Error('Server not responding.');
+              
+              expect(res.statusCode).toBe(200);
+              done();
+          });
+      });   
     });  
 });

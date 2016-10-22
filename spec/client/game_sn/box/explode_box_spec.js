@@ -32,6 +32,20 @@ describe('ExplodeBox',
             expect(result).toEqual(expected);
             done();
         });
+
+        it('function endOfExplode should return true after 50 update calls', 
+          function(done){
+
+            var expected = true;
+
+            for (var i = 0; i < 50; i++)
+              explode.update();
+
+            var result = explode.endOfExplode();
+
+            expect(result).toEqual(expected);
+            done();
+        });
     });
 
     describe('Size', 
