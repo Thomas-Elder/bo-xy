@@ -7,12 +7,10 @@ EventManager.prototype.lobbyEvents = function(io, lm){
 
   mingleNamespace.on('connection',
     function(socket){
-      socket.on('connected',
-        function(msg){
-          console.log(msg.msg);
-          socket.emit('connect');
-      });
-      
+
+      socket.emit('connect', {msg:'you are connected'});
+      mingleNamespace.emit('newPlayer', {msg:'new player x has joined'});
+
       // create new lobby using the name passed from client
       socket.on('open',
         function(lobby){
@@ -24,8 +22,7 @@ EventManager.prototype.lobbyEvents = function(io, lm){
           
           // create new room and assign this socket to it.
           socket.join(lobby.id);
-          
-          console.log(lobby);
+
           // let the mingleNamespace know about the new lobby
           mingleNamespace.emit('newLobby', lobby);
       });
@@ -42,7 +39,7 @@ EventManager.prototype.lobbyEvents = function(io, lm){
           console.log(lobbyManager.get(lobby.id));
                 
           // let the room know you've joined
-          mingleNamespace.to(lobby.id).emit('newPlayer', 'A player has joined!');
+          mingleNamespace.to(lobby.id).emit('PlayerJoined', 'A player has joined!');
       });
       
       // Remove this socket from the room
@@ -62,6 +59,10 @@ EventManager.prototype.lobbyEvents = function(io, lm){
         function(lobby){
           mingleNamespace.to(lobby.id).emit('start', 'Starting the game... ');
       });
+
+      socket.on('disconnect', function(){
+
+      });
   });
 };
 
@@ -75,6 +76,7 @@ EventManager.prototype.singleEvents = function(io, hm){
       socket.on('connected',
         function(msg){
           console.log(msg.msg);
+          socket.emit('connect');
       });
       
       // create new lobby using the name passed from client
