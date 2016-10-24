@@ -16,12 +16,12 @@ describe('Single events',
         };
     var client;
 
+    server = new Server();
+    console.log('Starting the server...');
+    server.start();
+
     beforeEach(
       function(done){
-        
-        server = new Server();
-        console.log('Starting the server...');
-        server.start();
 
         // Connect a client socket to the server
         client = io_client(url, socketOptions);
@@ -43,9 +43,8 @@ describe('Single events',
     
     afterEach(
       function(done){
-
+        
         client.disconnect(true);
-        server.stop();
         done();
     });
 

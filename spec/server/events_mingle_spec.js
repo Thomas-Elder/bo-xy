@@ -17,12 +17,12 @@ describe('Lobby events',
     var client_emit;
     var client_rcv;
 
+    server = new Server();
+    console.log('Starting the server...');
+    server.start();
+
     beforeEach(
       function(done){
-        
-        server = new Server();
-        console.log('Starting the server...');
-        server.start();
 
         // Connect a client socket to the server
         client_emit = io_client(url, socketOptions);
@@ -57,7 +57,6 @@ describe('Lobby events',
             console.log('client_rcv not connected, there was an error.');
             done();
         });
-
     });
     
     afterEach(
@@ -68,11 +67,10 @@ describe('Lobby events',
 
         console.log('client_rcv disconnecting... ');
         client_rcv.disconnect(true);
-
-        server.stop();
+ 
         done();
     });
-        
+
     describe('connection',
       function(){
         
