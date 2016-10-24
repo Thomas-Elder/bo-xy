@@ -43,16 +43,14 @@ describe('Single events',
     
     afterEach(
       function(done){
-        
+
         client.disconnect(true);
         done();
     });
 
-    describe('connect', 
-      function(){
+    describe('connect', function(){
 
-        it('Should emit "connect" event to this client on connection', 
-          function(done){           
+        it('should emit "connect" event to this client on connection', function(done){           
             client.on('connect', function(msg){
               console.log('connect rcvd:', msg);
               expect(true).toEqual(true);
@@ -64,8 +62,11 @@ describe('Single events',
         });
     });
 
-    describe('score',
-      function(){
+    describe('score', function(){
+
+        it('should', function(done){
+          done();
+        });
 
     });
 });

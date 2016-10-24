@@ -99,41 +99,78 @@ describe('Lobby events',
         });
     });
     
-    describe('open',
-      function(){
+    describe('open', function(){
 
-        it('should emit "newLobby" event to other clients, on "open" event', 
-          function(done){
+      it('should emit "newLobby" event to other clients, on "open" event', 
+        function(done){
 
-            client_emit.emit('open', {msg:"open message"});
+          client_emit.emit('open', {msg:"open message"});
 
-            client_rcv.on('newLobby', 
-              function(lobby) {
-                expect(true).toEqual(true);
-                done(); 
-            }); 
-        });
+          client_rcv.on('newLobby', 
+            function(lobby) {
+              expect(true).toEqual(true);
+              done(); 
+          }); 
+      });
 
-        it('should emit "newLobby" event to this client, on "open" event', 
-          function(done){
+      it('should emit "newLobby" event to this client, on "open" event', 
+        function(done){
 
-            client_emit.emit('open', {msg:"open message"});
+          client_emit.emit('open', {msg:"open message"});
 
-            client_emit.on('newLobby', 
-              function(lobby) {
-                expect(true).toEqual(true);
-                done(); 
-            }); 
-        });
+          client_emit.on('newLobby', 
+            function(lobby) {
+              expect(true).toEqual(true);
+              done(); 
+          }); 
+      });
 
-        it('should pass all lobby details on in the "newLobby" event', 
-          function(done){
-            expect(true).toEqual(true);
-            done();
+      it('should pass all lobby details on in the "newLobby" event', function(done){
+
+        var socket_id = "/mingle#" + client_emit.id;
+        var expected = {users:[], id:socket_id};
+
+        client_emit.emit('open', expected);
+
+        client_emit.on('newLobby', 
+          function(lobby) {
+
+            expect(lobby.id).toEqual(expected.id);
+            expect(lobby.users.length).toEqual(1);
+            expect(lobby.users).toEqual([socket_id]);
+            done(); 
         });
       });
+    });
 
     describe('join', function(){
 
+      it('should emit a "PlayerJoined" event when a join event is handled', function(done){
+        
+        // First get the socket.id from client_emit, to host the lobby
+        var lobby_id = "/mingle#" + client_emit.id;
+
+        // Open a lobby
+        client_emit.emit('open', {});
+
+        // Create lobby object 
+        var lobby = {users: [lobby_id], id: lobby_id};
+
+        // Get the client_rcv socket.id to join the lobby with
+        var join_id = "/mingle#" + client_rcv.id
+        
+        var expected = {users:[lobby_id, join_id], id:lobby_id};
+
+        client_rcv.emit('join', lobby);
+
+        client_emit.on('PlayerJoined', 
+          function(lobby) {
+
+            expect(lobby.id).toEqual(expected.id);
+            expect(lobby.users.length).toEqual(2);
+            expect(lobby.users).toEqual(expected.users);
+            done(); 
+        });
+      });
     });
 });

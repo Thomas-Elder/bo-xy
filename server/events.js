@@ -32,14 +32,15 @@ EventManager.prototype.lobbyEvents = function(io, lm){
         function(lobby){
           
           console.log('A new player has joined lobby: ', lobby.id);
-          
+          console.log(lobbyManager.get(lobby.id));
+
           // join room
           socket.join(lobby.id);
           lobbyManager.get(lobby.id).users.push(socket.id);
           console.log(lobbyManager.get(lobby.id));
                 
           // let the room know you've joined
-          mingleNamespace.to(lobby.id).emit('PlayerJoined', 'A player has joined!');
+          mingleNamespace.to(lobby.id).emit('PlayerJoined', lobbyManager.get(lobby.id));
       });
       
       // Remove this socket from the room
@@ -73,11 +74,8 @@ EventManager.prototype.singleEvents = function(io, hm){
 
   singleNamespace.on('connection',
     function(socket){
-      socket.on('connected',
-        function(msg){
-          console.log(msg.msg);
-          socket.emit('connect');
-      });
+
+      socket.emit('connect');
       
       // create new lobby using the name passed from client
       socket.on('score',
