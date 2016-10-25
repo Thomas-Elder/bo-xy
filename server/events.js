@@ -13,13 +13,14 @@ EventManager.prototype.lobbyEvents = function(io, lm){
 
       // create new lobby using the name passed from client
       socket.on('open',
-        function(lobby){
-          
+        function(){
+
+          var lobby = {};
           lobby.users = [];
           lobby.id = socket.id;
           lobby.users.push(socket.id);
           lobbyManager.add(lobby);
-          
+
           // create new room and assign this socket to it.
           socket.join(lobby.id);
 
@@ -30,14 +31,12 @@ EventManager.prototype.lobbyEvents = function(io, lm){
       // Add this socket to a room
       socket.on('join',
         function(lobby){
-          
-          console.log('A new player has joined lobby: ', lobby.id);
-          console.log(lobbyManager.get(lobby.id));
 
           // join room
           socket.join(lobby.id);
+
+          // push the socket.id into the lobby.users object
           lobbyManager.get(lobby.id).users.push(socket.id);
-          console.log(lobbyManager.get(lobby.id));
                 
           // let the room know you've joined
           mingleNamespace.to(lobby.id).emit('PlayerJoined', lobbyManager.get(lobby.id));

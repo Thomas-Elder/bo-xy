@@ -77,7 +77,7 @@ Server.prototype.start = function(){
  * Stops the server recieving any further requests.
  */
 Server.prototype.stop = function(){
-
+  io.close();
   server.close();
 };
 
