@@ -7,10 +7,10 @@ EventManager.prototype.lobbyEvents = function(io, lm){
 
   mingleNamespace.on('connection',
     function(socket){
-
+      
       socket.emit('connect', {msg:'you are connected'});
       mingleNamespace.emit('newPlayer', {msg:'new player x has joined'});
-
+      
       // create new lobby using the name passed from client
       socket.on('open',
         function(){
@@ -49,8 +49,7 @@ EventManager.prototype.lobbyEvents = function(io, lm){
           // leave room
           socket.leave(lobby.id); 
           lobbyManager.get(lobby.id).users.pop(socket.id);
-          console.log(lobbyManager.get(lobby.id));
-          
+                    
           /// let the mingleNamespace know about the lobby bailage
           mingleNamespace.emit('bailLobby', lobby);
       });

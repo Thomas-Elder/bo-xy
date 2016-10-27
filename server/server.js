@@ -27,6 +27,8 @@ var Server = function(){
   app.set('views', path.join(__dirname, './views'));
   app.set('view engine', 'pug');
 
+  app.set('env', 'development');
+
   if ('development' == app.get('env')) {
     app.use(express.errorHandler());
     app.use(express.logger('dev'));

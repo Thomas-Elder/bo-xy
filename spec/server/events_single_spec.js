@@ -50,23 +50,22 @@ describe('Single events',
 
     describe('connect', function(){
 
-        it('should emit "connect" event to this client on connection', function(done){           
-            client.on('connect', function(msg){
-              console.log('connect rcvd:', msg);
-              expect(true).toEqual(true);
-              done();
-            });
-
-            client.disconnect();
-            client.connect(url, socketOptions); 
+      it('should emit "connect" event to this client on connection', function(done){           
+        client.on('connect', function(msg){
+          expect(true).toEqual(true);
+          done();
         });
+
+        client.disconnect();
+        client.connect(url, socketOptions); 
+      });
     });
 
     describe('score', function(){
-
-        it('should', function(done){
-          done();
-        });
+      
+      it('should', function(done){
+        done();
+      });
 
     });
 });
