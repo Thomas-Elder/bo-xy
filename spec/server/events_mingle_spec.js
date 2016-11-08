@@ -205,7 +205,6 @@ describe('Lobby events',
           expect(true).toEqual(true);
           done(); 
         });
-
       });
 
       it('should emit a "bailLobby" event to other clients when the bail event is handled', function(){
