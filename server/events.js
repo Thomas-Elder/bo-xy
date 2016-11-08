@@ -9,7 +9,7 @@ EventManager.prototype.lobbyEvents = function(io, lm){
     function(socket){
       
       socket.emit('connect', {msg:'you are connected'});
-      mingleNamespace.emit('newPlayer', {msg:'new player x has joined'});
+      socket.broadcast.emit('newPlayer', {msg:'new player x has joined'});
       
       // create new lobby using the name passed from client
       socket.on('open',
@@ -39,24 +39,30 @@ EventManager.prototype.lobbyEvents = function(io, lm){
           lobbyManager.get(lobby.id).users.push(socket.id);
                 
           // let the room know you've joined
-          mingleNamespace.to(lobby.id).emit('PlayerJoined', lobbyManager.get(lobby.id));
+          socket.broadcast.to(lobby.id).emit('PlayerJoined', lobbyManager.get(lobby.id));
       });
       
       // Remove this socket from the room
       socket.on('bail',
         function(lobby){
           
-          // leave room
-          socket.leave(lobby.id); 
           lobbyManager.get(lobby.id).users.pop(socket.id);
                     
-          /// let the mingleNamespace know about the lobby bailage
-          mingleNamespace.emit('bailLobby', lobby);
+          /// let the lobby know about the bailage
+          socket.broadcast.to(lobby.id).emit('bailLobby', lobby);
+
+          // leave room
+          socket.leave(lobby.id); 
       });
       
       socket.on('start',
         function(lobby){
-          mingleNamespace.to(lobby.id).emit('start', 'Starting the game... ');
+          socket.broadcast.to(lobby.id).emit('start', 'Starting the game... ');
+      });
+
+      socket.on('msg',
+        function(lobby, msg){
+          socket.broadcast.to(lobby.id).broadcast('msg', 'msg');
       });
 
       socket.on('disconnect', function(){
