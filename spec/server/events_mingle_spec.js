@@ -84,7 +84,9 @@ describe('Lobby events',
 
       it('should emit "newLobby" event to other clients, on "open" event', function(done){
 
-        client_emit.emit('open', {msg:"open message"});
+        var lobby = {};
+
+        client_emit.emit('open', lobby);
 
         client_rcv.on('newLobby', function(lobby) {
           expect(true).toEqual(true);
@@ -96,8 +98,9 @@ describe('Lobby events',
 
         var socket_id = "/mingle#" + client_emit.id;
         var expected = {users:[socket_id], id:socket_id};
+        var lobby = {};
 
-        client_emit.emit('open');
+        client_emit.emit('open', lobby);
 
         client_emit.on('newLobby', function(lobby) {
           expect(lobby).toEqual(expected);
