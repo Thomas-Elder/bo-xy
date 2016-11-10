@@ -177,6 +177,26 @@ describe('Lobby events',
           done(); 
         });
       });
+
+      it('should emit a "bailLobby" event to other clients when the bail event is handled', function(done){
+        
+        // First get the socket.id from client_emit, to host the lobby
+        var lobby_id = "/mingle#" + client_emit.id;
+
+        // Open a lobby
+        client_emit.emit('open', {});
+
+        // Create lobby object 
+        var lobby = {users: [lobby_id], id: lobby_id};
+
+        client_rcv.emit('join', lobby);
+        client_rcv.emit('bail', lobby);
+
+        client_emit.on('bailLobby', function(lobby){
+          expect(true).toEqual(true);
+          done(); 
+        });
+      });
     });
 
     describe('start', function(){
@@ -199,10 +219,9 @@ describe('Lobby events',
 
         // join the lobby
         client_rcv.emit('join', lobby);
+        client_rcv.emit('start', lobby);
 
-        client_emit.emit('start', lobby);
-
-        client_rcv.on('start', function(){
+        client_emit.on('start', function(text){
           expect(true).toEqual(true);
           done(); 
         });
@@ -230,7 +249,31 @@ describe('Lobby events',
 
         // join the lobby
         client_rcv.emit('join', lobby);
+        client_rcv.emit('msg', lobby, {user:'',text:'Sup!'});
 
+        client_emit.on('msg', function(msg){
+          expect(true).toEqual(true);
+          expect(msg.text).toEqual('Sup!');     
+          done(); 
+        });
+      });
+
+      it('should emit a "msg" event to other clients when a msg event is handled', function(done){
+        
+        // First get the socket.id from client_emit, to host the lobby
+        var lobby_id = "/mingle#" + client_emit.id;
+
+        // Open a lobby
+        client_emit.emit('open', {});
+
+        // Create lobby object 
+        var lobby = {users: [lobby_id], id: lobby_id};
+
+        // Get the client_rcv socket.id to join the lobby with
+        var join_id = "/mingle#" + client_rcv.id
+
+        // join the lobby
+        client_rcv.emit('join', lobby);
         client_emit.emit('msg', lobby, {user:'',text:'Sup!'});
 
         client_rcv.on('msg', function(msg){

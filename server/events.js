@@ -49,7 +49,7 @@ EventManager.prototype.lobbyEvents = function(io, lm){
           lobbyManager.get(lobby.id).users.pop(socket.id);
                     
           /// let the lobby know about the bailage
-          socket.broadcast.to(lobby.id).emit('bailLobby', lobby);
+          mingleNamespace.emit('bailLobby', lobby);
 
           // leave room
           socket.leave(lobby.id); 
@@ -62,7 +62,7 @@ EventManager.prototype.lobbyEvents = function(io, lm){
 
       socket.on('msg',
         function(lobby, msg){
-          socket.broadcast.to(lobby.id).broadcast('msg', 'msg');
+          socket.broadcast.to(lobby.id).emit('msg', msg);
       });
 
       socket.on('disconnect', function(){
