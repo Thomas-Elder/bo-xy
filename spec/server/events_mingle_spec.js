@@ -272,15 +272,24 @@ describe('Lobby events',
         // Get the client_rcv socket.id to join the lobby with
         var join_id = "/mingle#" + client_rcv.id
 
-        // join the lobby
-        client_rcv.emit('join', lobby);
-        client_emit.emit('msg', lobby, {user:'',text:'Sup!'});
+        // Wait til we recieve the newLobby event
+        client_rcv.on('newLobby', function(){
 
-        client_rcv.on('msg', function(msg){
-          expect(true).toEqual(true);
-          expect(msg.text).toEqual('Sup!');     
-          done(); 
-        });
+          // Join the lobby
+          client_rcv.emit('join', lobby);
+
+          // Wait till we recieve the PlayerJoined event
+          client_emit.on('PlayerJoined', function(){
+            
+            // Send the message
+            client_emit.emit('msg', lobby, {user:'',text:'Sup!'});
+            client_rcv.on('msg', function(msg){
+              expect(true).toEqual(true);
+              expect(msg.text).toEqual('Sup!');     
+              done(); 
+            });
+          });
+        });    
       });
     });
 });

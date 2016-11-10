@@ -13,6 +13,7 @@ block style
   link(rel='stylesheet' href='static/blocks/lobby/lobby__lobby.css')
   link(rel='stylesheet' href='static/blocks/lobby/lobby__button.css')
   link(rel='stylesheet' href='static/blocks/lobby/lobby__button-case.css')
+  link(rel='stylesheet' href='static/blocks/lobby/lobby__chat.css')
 
   link(rel='stylesheet' href='static/blocks/lobby-create/lobby-create.css')
   link(rel='stylesheet' href='static/blocks/lobby-create/lobby-create__lobby.css')
@@ -53,6 +54,15 @@ block content
       div.lobby__button-case
         button#bail.lobby__button B A I L
         button#start.lobby__button S T A R T
-        
+    
+    div.lobby__chat
+      div.lobby__chat-msg
+        label M S G: 
+        input#msg.lobby__chat-input(type="text")
+
+        div.lobby__chat-button-case
+          button#send.lobby__chat-button-send S E N D
+      ul.lobby__chat-ul
+
 block scripts
   include mixins/lobbyScripts

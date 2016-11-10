@@ -54,6 +54,8 @@ window.onload = function(){
     $('#lobby').show();
     
     // pass the name back to server for rooming
+    var lobby = {};
+    lobby.id = socket.id;
     lobby.name = $('#name').val();
     
     console.log(lobby.id);
@@ -61,6 +63,14 @@ window.onload = function(){
     
     // emit open to the server with details
     socket.emit('open', lobby);
+  });
+
+  $('#send').click(function(){
+
+    var msg = {};
+    msg.text = $('#msg').val();
+
+    socket.emit('msg', msg);
   });
   
   $('#lobbies').click(function(){
@@ -88,7 +98,6 @@ window.onload = function(){
   $('#start').click(function(){
     
     socket.emit('start', lobby);
-    window.location.replace("http://localhost:8888/dodge");
   });
   
   
@@ -104,6 +113,12 @@ window.onload = function(){
     function(lobby){
       console.log('A new player has joined your lobby!');
   });
+
+  socket.on('msg', 
+    function(msg){
+      console.log('msg rcvd... ');
+      $(".lobby__chat-ul").append('<li class="lobby__chat-li">U S E R:' + msg.user + ' S A Y S:' + msg.text + '</li>');
+  });
   
   socket.on('bailLobby', 
     function(lobby){
@@ -112,7 +127,7 @@ window.onload = function(){
   
   socket.on('start',
     function(lobby){
-      window.location.replace("http://localhost:8888/dodge");
+
   });
 };
 

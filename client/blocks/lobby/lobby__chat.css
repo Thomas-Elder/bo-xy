@@ -1,0 +1,42 @@
+.lobby__chat-msg {
+  background-color: #1F1F1F; 
+  padding: 8px 16px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.lobby__chat-input {
+
+}
+
+.lobby__chat-button-case {
+  float: right;
+  clear: both;
+}
+
+.lobby__chat-button-send {
+  color: #1A1A1A;
+  background-color: #3399FF;
+  padding: 10px;
+  border-style: none;
+}
+
+.lobby__chat-button-send:hover {
+  background-color: #1177BB;
+}
+
+.lobby__chat{
+
+}
+
+.lobby__chat-ul {
+
+}
+
+.lobby__chat-li {
+  background-color: #1F1F1F; 
+  padding: 8px 16px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+

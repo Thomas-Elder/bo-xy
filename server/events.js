@@ -12,10 +12,9 @@ EventManager.prototype.lobbyEvents = function(io, lm){
       socket.broadcast.emit('newPlayer', {msg:'new player x has joined'});
       
       // create new lobby using the name passed from client
-      socket.on('open',
-        function(){
+      socket.on('open', function(lobby){
 
-          var lobby = {};
+          console.log('user created the room... ');
           lobby.users = [];
           lobby.id = socket.id;
           lobby.users.push(socket.id);
@@ -32,13 +31,9 @@ EventManager.prototype.lobbyEvents = function(io, lm){
       socket.on('join',
         function(lobby){
 
-          // join room
+          console.log('user joined the room... ');
           socket.join(lobby.id);
-
-          // push the socket.id into the lobby.users object
           lobbyManager.get(lobby.id).users.push(socket.id);
-                
-          // let the room know you've joined
           socket.broadcast.to(lobby.id).emit('PlayerJoined', lobbyManager.get(lobby.id));
       });
       
@@ -46,22 +41,23 @@ EventManager.prototype.lobbyEvents = function(io, lm){
       socket.on('bail',
         function(lobby){
           
+          console.log('user left the room... ');
           lobbyManager.get(lobby.id).users.pop(socket.id);
-                    
-          /// let the lobby know about the bailage
           mingleNamespace.emit('bailLobby', lobby);
-
-          // leave room
           socket.leave(lobby.id); 
       });
       
       socket.on('start',
         function(lobby){
+
+          console.log('user started the game... ');
           socket.broadcast.to(lobby.id).emit('start', 'Starting the game... ');
       });
 
       socket.on('msg',
         function(lobby, msg){
+
+          console.log('user sent a message... ');
           socket.broadcast.to(lobby.id).emit('msg', msg);
       });
 
