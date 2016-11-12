@@ -13,8 +13,8 @@ EventManager.prototype.lobbyEvents = function(io, lm){
       
       socket.on('open', function(lobby){
 
-        lobby.users = [];
-        lobby.users.push(socket.id);
+        //lobby.users = [];
+        //lobby.users.push(socket.id);
         lobbyManager.add(lobby);
 
         // create new room and assign this socket to it.
@@ -24,11 +24,11 @@ EventManager.prototype.lobbyEvents = function(io, lm){
         mingleNamespace.emit('new-lobby', lobby);
       });
       
-      socket.on('join', function(lobby){
+      socket.on('join', function(lobby, user){
 
         if(lobbyManager.get(lobby.id).users.indexOf(socket.id) === -1)
           lobbyManager.get(lobby.id).users.push(socket.id);
-          
+
         socket.broadcast.to(lobby.id).emit('player-joined', lobbyManager.get(lobby.id)); 
         socket.join(lobby.id);
       });

@@ -12,25 +12,23 @@ window.onload = function(){
   $('#lobbies').hide();
     
   // JOIN
-  $('#lobby-list').on('click',
-    'button',
-    function() {
+  $('#lobby-list').on('click', 'button', function() {
       
-      // display the lobby details
-      $('#lobby-list').hide();
-      $('#lobby-create').hide();
-      $('#new').hide();
-      
-      $('#lobbies').show();
-      $('#lobby').show();
-          
-      // get the lobbyID from the button attr
-      lobby.id = $(this).attr('id');
-      console.log('lobbyID = ', lobby.id);
-      
-      // emit join to the server with the id
-      socket.emit('join', lobby);
-    });
+    // display the lobby details
+    $('#lobby-list').hide();
+    $('#lobby-create').hide();
+    $('#new').hide();
+    
+    $('#lobbies').show();
+    $('#lobby').show();
+        
+    // get the lobbyID from the button attr
+    lobby.id = $(this).attr('id');
+    console.log('lobbyID = ', lobby.id);
+    
+    // emit join to the server with the id
+    socket.emit('join', lobby);
+  });
 
   // NEW  
   $('#new').click(function(){
@@ -56,11 +54,15 @@ window.onload = function(){
     // pass the name back to server for rooming
     var lobby = {};
     lobby.id = socket.id;
-    lobby.name = $('#name').val();
+    lobby.name = $('#lobby-name').val();
     
-    console.log(lobby.id);
-    console.log(lobby.name);
-    
+    var user = {};
+    user.name = $('#player-name').val();
+    user.id = socket.id;
+
+    lobby.users = [];
+    lobby.users.push(user);
+ 
     // emit open to the server with details
     socket.emit('open', lobby);
   });

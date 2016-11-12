@@ -82,8 +82,15 @@ describe('Lobby events',
 
         var socket_id = "/mingle#" + client_emit.id;
         var lobby = {};
+        var user = {};
+
+        user.id = socket_id;
+        user.name = '';
 
         lobby.id = socket_id;
+        lobby.name = 'test';
+        lobby.users = [];
+        lobby.users.push(user);
 
         client_emit.emit('open', lobby);
 
@@ -96,10 +103,25 @@ describe('Lobby events',
       it('should pass all lobby details on in the "new-lobby" event', function(done){
 
         var socket_id = "/mingle#" + client_emit.id;
-        var expected = {users:[socket_id], id:socket_id};
+        var expected = {
+          id:socket_id, 
+          name:'test',
+          users:[{
+            name:'Tom', 
+            id:socket_id
+          }]
+        };
+        
         var lobby = {};
+        var user = {};
+
+        user.id = socket_id;
+        user.name = 'Tom';
 
         lobby.id = socket_id;
+        lobby.name = 'test';
+        lobby.users = [];
+        lobby.users.push(user);
 
         client_emit.emit('open', lobby);
 
@@ -117,8 +139,15 @@ describe('Lobby events',
         // First get the socket.id from client_emit, to host the lobby
         var socket_id = "/mingle#" + client_emit.id;
         var lobby = {};
+        var user = {};
+
+        user.id = socket_id;
+        user.name = '';
 
         lobby.id = socket_id;
+        lobby.name = 'test';
+        lobby.users = [];
+        lobby.users.push(user);
 
         // Open a lobby
         client_emit.emit('open', lobby);
@@ -138,20 +167,38 @@ describe('Lobby events',
         var socket_id = "/mingle#" + client_emit.id;
         var join_id = "/mingle#" + client_rcv.id
         
-        var expected = {users:[socket_id, join_id], id:socket_id};
+        var expected = {
+          id:socket_id, 
+          name:'test',
+          users:[{
+            name:'Tom', 
+            id:socket_id
+          },
+          {
+            name:'Tim',
+            id:join_id
+          }]
+        };
+        
         var lobby = {};
+        var user = {};
+
+        user.id = socket_id;
+        user.name = '';
+
+        lobby.id = socket_id;
+        lobby.name = 'test';
+        lobby.users = [];
+        lobby.users.push(user);
 
         lobby.id = socket_id;
 
         client_emit.emit('open', lobby);
-        
         client_rcv.on('new-lobby', function(lobby){
-
           client_rcv.emit('join', lobby);
         });
 
         client_emit.on('player-joined', function(lobby) {
-
           expect(lobby).toEqual(expected);
           done(); 
         });
@@ -164,8 +211,15 @@ describe('Lobby events',
         
         var socket_id = "/mingle#" + client_emit.id;
         var lobby = {};
+        var user = {};
+
+        user.id = socket_id;
+        user.name = '';
 
         lobby.id = socket_id;
+        lobby.name = 'test';
+        lobby.users = [];
+        lobby.users.push(user);
 
         client_emit.emit('open', lobby);
 
@@ -187,8 +241,15 @@ describe('Lobby events',
         
         var socket_id = "/mingle#" + client_emit.id;
         var lobby = {};
+        var user = {};
+
+        user.id = socket_id;
+        user.name = '';
 
         lobby.id = socket_id;
+        lobby.name = 'test';
+        lobby.users = [];
+        lobby.users.push(user);
 
         client_emit.emit('open', lobby);
 
@@ -213,8 +274,15 @@ describe('Lobby events',
         
         var socket_id = "/mingle#" + client_emit.id;
         var lobby = {};
+        var user = {};
+
+        user.id = socket_id;
+        user.name = '';
 
         lobby.id = socket_id;
+        lobby.name = 'test';
+        lobby.users = [];
+        lobby.users.push(user);
 
         client_emit.emit('open', lobby);
 
@@ -236,8 +304,15 @@ describe('Lobby events',
         
         var socket_id = "/mingle#" + client_emit.id;
         var lobby = {};
+        var user = {};
+
+        user.id = socket_id;
+        user.name = '';
 
         lobby.id = socket_id;
+        lobby.name = 'test';
+        lobby.users = [];
+        lobby.users.push(user);
 
         client_emit.emit('open', lobby);
 
@@ -262,8 +337,15 @@ describe('Lobby events',
 
         var socket_id = "/mingle#" + client_emit.id;
         var lobby = {};
+        var user = {};
+
+        user.id = socket_id;
+        user.name = '';
 
         lobby.id = socket_id;
+        lobby.name = 'test';
+        lobby.users = [];
+        lobby.users.push(user);
 
         client_emit.emit('open', lobby);
 
@@ -284,8 +366,15 @@ describe('Lobby events',
         // First get the socket.id from client_emit, to host the lobby
         var socket_id = "/mingle#" + client_emit.id;
         var lobby = {};
+        var user = {};
+
+        user.id = socket_id;
+        user.name = '';
 
         lobby.id = socket_id;
+        lobby.name = 'test';
+        lobby.users = [];
+        lobby.users.push(user);
 
         client_emit.emit('open', lobby);
 
