@@ -9,60 +9,52 @@ EventManager.prototype.lobbyEvents = function(io, lm){
     function(socket){
       
       socket.emit('connect', {msg:'you are connected'});
-      socket.broadcast.emit('newPlayer', {msg:'new player x has joined'});
+      socket.broadcast.emit('new-player', {msg:'new player x has joined'});
       
-      // create new lobby using the name passed from client
       socket.on('open', function(lobby){
 
-          console.log('user created the room... ');
-          lobby.users = [];
-          lobby.id = socket.id;
-          lobby.users.push(socket.id);
-          lobbyManager.add(lobby);
+        lobby.users = [];
+        lobby.users.push(socket.id);
+        lobbyManager.add(lobby);
 
-          // create new room and assign this socket to it.
-          socket.join(lobby.id);
+        // create new room and assign this socket to it.
+        socket.join(lobby.id);
 
-          // let the mingleNamespace know about the new lobby
-          mingleNamespace.emit('newLobby', lobby);
+        // let the mingleNamespace know about the new lobby
+        mingleNamespace.emit('new-lobby', lobby);
       });
       
-      // Add this socket to a room
-      socket.on('join',
-        function(lobby){
+      socket.on('join', function(lobby){
 
-          console.log('user joined the room... ');
-          socket.join(lobby.id);
-          lobbyManager.get(lobby.id).users.push(socket.id);
-          socket.broadcast.to(lobby.id).emit('PlayerJoined', lobbyManager.get(lobby.id));
+        lobbyManager.get(lobby.id).users.push(socket.id);
+        socket.broadcast.to(lobby.id).emit('player-joined', lobbyManager.get(lobby.id)); 
+        socket.join(lobby.id);
       });
       
-      // Remove this socket from the room
-      socket.on('bail',
-        function(lobby){
+      socket.on('bail', function(lobby){
           
-          console.log('user left the room... ');
-          lobbyManager.get(lobby.id).users.pop(socket.id);
-          mingleNamespace.emit('bailLobby', lobby);
-          socket.leave(lobby.id); 
+        lobbyManager.get(lobby.id).users.pop(socket.id);
+        mingleNamespace.emit('bail-lobby', lobby);
+        socket.leave(lobby.id); 
       });
       
-      socket.on('start',
-        function(lobby){
+      socket.on('start', function(lobby){
 
-          console.log('user started the game... ');
-          socket.broadcast.to(lobby.id).emit('start', 'Starting the game... ');
+        socket.broadcast.to(lobby.id).emit('start', 'Starting the game... ');
       });
 
-      socket.on('msg',
-        function(lobby, msg){
+      socket.on('msg', function(lobby, msg){
 
-          console.log('user sent a message... ');
-          socket.broadcast.to(lobby.id).emit('msg', msg);
+        socket.broadcast.to(lobby.id).emit('msg', msg);
       });
 
       socket.on('disconnect', function(){
 
+      });
+
+      socket.on('error', function(error){
+
+        console.log(error);
       });
   });
 };
@@ -72,18 +64,22 @@ EventManager.prototype.singleEvents = function(io, hm){
   var highscoreManager = hm;
   var singleNamespace = io.of('/single');
 
-  singleNamespace.on('connection',
-    function(socket){
+  singleNamespace.on('connection', function(socket){
 
-      socket.emit('connect');
-      
-      // create new lobby using the name passed from client
-      socket.on('score',
-        function(gameDetails){
-          console.log('Adding game score to highscores... ');
-          highscoreManager.add({name:gameDetails.playerName, score:gameDetails.score});
-      });
+    socket.emit('connect');
+    
+    // create new lobby using the name passed from client
+    socket.on('score', function(gameDetails){
+
+      console.log('Adding game score to highscores... ');
+      highscoreManager.add({name:gameDetails.playerName, score:gameDetails.score});
     });
+
+    socket.on('error', function(error){
+
+      console.log(error);
+    });
+  });
 };
 
 module.exports = EventManager;
