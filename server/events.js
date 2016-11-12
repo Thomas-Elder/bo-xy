@@ -26,7 +26,9 @@ EventManager.prototype.lobbyEvents = function(io, lm){
       
       socket.on('join', function(lobby){
 
-        lobbyManager.get(lobby.id).users.push(socket.id);
+        if(lobbyManager.get(lobby.id).users.indexOf(socket.id) === -1)
+          lobbyManager.get(lobby.id).users.push(socket.id);
+          
         socket.broadcast.to(lobby.id).emit('player-joined', lobbyManager.get(lobby.id)); 
         socket.join(lobby.id);
       });
