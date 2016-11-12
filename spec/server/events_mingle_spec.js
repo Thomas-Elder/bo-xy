@@ -126,7 +126,9 @@ describe('Lobby events',
         client_emit.emit('open', lobby);
 
         client_emit.on('new-lobby', function(lobby) {
-          expect(lobby).toEqual(expected);
+          expect(lobby.name).toEqual(expected.name);
+          expect(lobby.id).toEqual(expected.id);
+          expect(lobby.users).toEqual(expected.users);
           done(); 
         });
       });
@@ -138,6 +140,7 @@ describe('Lobby events',
         
         // First get the socket.id from client_emit, to host the lobby
         var socket_id = "/mingle#" + client_emit.id;
+        var join_id = "/mingle#" + client_rcv.id;
         var lobby = {};
         var user = {};
 
@@ -153,7 +156,7 @@ describe('Lobby events',
         client_emit.emit('open', lobby);
 
         client_rcv.on('new-lobby', function(lobby){
-          client_rcv.emit('join', lobby);
+          client_rcv.emit('join', lobby, { id:join_id, name:'Tim' });
         });
         
         client_emit.on('player-joined', function(lobby) {
@@ -165,7 +168,7 @@ describe('Lobby events',
       it('should pass the lobby details to the original client', function(done){
 
         var socket_id = "/mingle#" + client_emit.id;
-        var join_id = "/mingle#" + client_rcv.id
+        var join_id = "/mingle#" + client_rcv.id;
         
         var expected = {
           id:socket_id, 
@@ -184,7 +187,7 @@ describe('Lobby events',
         var user = {};
 
         user.id = socket_id;
-        user.name = '';
+        user.name = 'Tom';
 
         lobby.id = socket_id;
         lobby.name = 'test';
@@ -195,11 +198,13 @@ describe('Lobby events',
 
         client_emit.emit('open', lobby);
         client_rcv.on('new-lobby', function(lobby){
-          client_rcv.emit('join', lobby);
+          client_rcv.emit('join', lobby, {id:join_id, name:'Tim'});
         });
 
         client_emit.on('player-joined', function(lobby) {
-          expect(lobby).toEqual(expected);
+          expect(lobby.name).toEqual(expected.name);
+          expect(lobby.id).toEqual(expected.id);
+          expect(lobby.users).toEqual(expected.users);
           done(); 
         });
       });
@@ -210,6 +215,7 @@ describe('Lobby events',
       it('should emit a "bail-lobby" event to other clients when the bail event is handled', function(done){
         
         var socket_id = "/mingle#" + client_emit.id;
+        var join_id = "/mingle#" + client_rcv.id;
         var lobby = {};
         var user = {};
 
@@ -224,7 +230,7 @@ describe('Lobby events',
         client_emit.emit('open', lobby);
 
         client_rcv.on('new-lobby', function(lobby){
-          client_rcv.emit('join', lobby);
+          client_rcv.emit('join', lobby, { id:join_id, name:'Tim' });
         });
 
         client_emit.on('player-joined', function(){
@@ -240,6 +246,7 @@ describe('Lobby events',
       it('should emit a "bail-lobby" event to other clients when the bail event is handled', function(done){
         
         var socket_id = "/mingle#" + client_emit.id;
+        var join_id = "/mingle#" + client_rcv.id;
         var lobby = {};
         var user = {};
 
@@ -254,7 +261,7 @@ describe('Lobby events',
         client_emit.emit('open', lobby);
 
         client_rcv.on('new-lobby', function(lobby){
-          client_rcv.emit('join', lobby);         
+          client_rcv.emit('join', lobby, { id:join_id, name:'Tim' });         
         });
         
         client_emit.on('player-joined', function(lobby){
@@ -273,6 +280,7 @@ describe('Lobby events',
       it('should emit a "start" event to other clients when client_rcv starts', function(done){
         
         var socket_id = "/mingle#" + client_emit.id;
+        var join_id = "/mingle#" + client_rcv.id;
         var lobby = {};
         var user = {};
 
@@ -287,7 +295,7 @@ describe('Lobby events',
         client_emit.emit('open', lobby);
 
         client_rcv.on('new-lobby', function(lobby){
-          client_rcv.emit('join', lobby);
+          client_rcv.emit('join', lobby, { id:join_id, name:'Tim' });
         });
         
         client_emit.on('player-joined', function(lobby){
@@ -303,6 +311,7 @@ describe('Lobby events',
       it('should emit a "start" event to other clients when client_emit starts', function(done){
         
         var socket_id = "/mingle#" + client_emit.id;
+        var join_id = "/mingle#" + client_rcv.id;
         var lobby = {};
         var user = {};
 
@@ -317,7 +326,7 @@ describe('Lobby events',
         client_emit.emit('open', lobby);
 
         client_rcv.on('new-lobby', function(lobby){
-          client_rcv.emit('join', lobby);
+          client_rcv.emit('join', lobby, { id:join_id, name:'Tim' });
         });
         
         client_emit.on('player-joined', function(lobby){
@@ -336,6 +345,7 @@ describe('Lobby events',
       it('should emit a "msg" event to other clients when a msg event is handled', function(done){
 
         var socket_id = "/mingle#" + client_emit.id;
+        var join_id = "/mingle#" + client_rcv.id;
         var lobby = {};
         var user = {};
 
@@ -350,7 +360,7 @@ describe('Lobby events',
         client_emit.emit('open', lobby);
 
         client_rcv.on('new-lobby', function(lobbg){
-          client_rcv.emit('join', lobby);
+          client_rcv.emit('join', lobby, { id:join_id, name:'Tim' });
           client_rcv.emit('msg', lobby, {user:'',text:'Sup!'});
         });
         
@@ -365,6 +375,7 @@ describe('Lobby events',
         
         // First get the socket.id from client_emit, to host the lobby
         var socket_id = "/mingle#" + client_emit.id;
+        var join_id = "/mingle#" + client_rcv.id;
         var lobby = {};
         var user = {};
 
@@ -379,7 +390,7 @@ describe('Lobby events',
         client_emit.emit('open', lobby);
 
         client_rcv.on('new-lobby', function(lobby){
-          client_rcv.emit('join', lobby);
+          client_rcv.emit('join', lobby, { id:join_id, name:'Tim' });
         });
 
         client_emit.on('player-joined', function(){     
