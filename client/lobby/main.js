@@ -2,15 +2,25 @@ window.onload = function(){
 
   var socket = io('/mingle');
   var lobby = {};
-  
+  var player_name = '';
+
   socket.emit('connected', {msg:"connected to namespace /mingle"});
   
-  // Initially show just the lobby list
-  $('#lobby-list').show();
+  $('#lobby-list').hide();
   $('#lobby-create').hide();
   $('#lobby').hide();
   $('#lobbies').hide();
+  $('#new').hide();
     
+  $('#play').click(function(){
+
+    $('#lobbies').show();
+    $('#new').show();
+    $('#name').hide();
+
+    player_name = $('#player_name').val();
+  });
+
   // JOIN
   $('#lobby-list').on('click', 'button', function() {
       
@@ -20,7 +30,7 @@ window.onload = function(){
     $('#new').hide();
     
     $('#lobbies').show();
-    $('#lobby').show();
+    //$('#lobby').show();
         
     // get the lobbyID from the button attr
     lobby.id = $(this).attr('id');

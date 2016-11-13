@@ -28,13 +28,25 @@ block content
     button#new.new-lobby__button N E W
     button#lobbies.new-lobby__button L O B B I E S
   
+  div#name.name
+    div.lobby-create__lobby
+      div
+        label N A M E:
+        input#player_name.lobby-create__input(type="text")
+      div.lobby-create__button-case
+        button#play.lobby-create__button P L A Y
+
   div#lobby-list.lobby-list
     ul.lobby-list__ul
-      each lobby in lobbies
+      if lobbies.length > 1
+        each lobby in lobbies
+          li.lobby-list__li
+            span= 'L O B B Y : ' + lobby.name
+            button(id= lobby.id class="lobby-list__button") J O I N
+      else
         li.lobby-list__li
-          span= 'L O B B Y : ' + lobby.name
-          button(id= lobby.id class="lobby-list__button") J O I N
-  
+          N O _ L O B B I E S
+
   div#lobby-create.lobby-create
     p C R E A T E
     
@@ -42,10 +54,6 @@ block content
       div
         label L O B B Y _ N A M E:
         input#lobby-name.lobby-create__input(type="text")
-      
-      div
-        label P L A Y E R _ N A M E:
-        input#player-name.lobby-create__input(type="text")
 
       div.lobby-create__button-case
         button#open.lobby-create__button O P E N

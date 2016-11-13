@@ -1,10 +1,8 @@
 .name-sn__button {
-  float: right;
-  clear: both;
-
   color: #1A1A1A;
   background-color: #3399FF;
   border-style: none;
+  padding: 10px;
 }
 
 .name-sn__button:hover {
