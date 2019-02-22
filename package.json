@@ -17,6 +17,7 @@
   "dependencies": {
     "browserify": "*",
     "express": ">=3.11.0",
+    "growl": "^1.10.5",
     "jade": "*",
     "socket.io": "^2.2.0"
   },
