@@ -60,7 +60,8 @@ describe('Event Manager',
         server.stop();
         done();
     });
-      
+    
+    /*
     describe('Lobby Events', 
       function(){
         
@@ -69,5 +70,6 @@ describe('Event Manager',
               expect(true).toEqual(true);
               done();
           });
-      });  
+      });
+      */
 });
