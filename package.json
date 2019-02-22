@@ -5,12 +5,11 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "test" : "jasmine-node --verbose --captureExceptions --forceexit ./spec",
-    "watch" : "watchify client/game_sn/box/box_manager.js client/game_sn/box/enemy_box.js client/game_sn/box/explode_box.js client/game_sn/box/player_box.js client/game_sn/background.js client/game_sn/config.js client/game_sn/controller.js client/game_sn/display.js client/game_sn/engine.js           client/game_sn/hud.js client/game_sn/interaction.js client/game_sn/main.js -o client/game_sn.js",
-    "build" : "browserify client/game_sn/box/box_manager.js client/game_sn/box/enemy_box.js client/game_sn/box/explode_box.js client/game_sn/box/player_box.js client/game_sn/background.js client/game_sn/config.js client/game_sn/controller.js client/game_sn/display.js client/game_sn/engine.js client/game_sn/hud.js client/game_sn/interaction.js client/game_sn/main.js | uglifyjs -mc warnings=false > client/game_sn.js",
+    "test": "jasmine-node --verbose --captureExceptions --forceexit ./spec",
+    "watch": "watchify client/game_sn/box/box_manager.js client/game_sn/box/enemy_box.js client/game_sn/box/explode_box.js client/game_sn/box/player_box.js client/game_sn/background.js client/game_sn/config.js client/game_sn/controller.js client/game_sn/display.js client/game_sn/engine.js           client/game_sn/hud.js client/game_sn/interaction.js client/game_sn/main.js -o client/game_sn.js",
+    "build": "browserify client/game_sn/box/box_manager.js client/game_sn/box/enemy_box.js client/game_sn/box/explode_box.js client/game_sn/box/player_box.js client/game_sn/background.js client/game_sn/config.js client/game_sn/controller.js client/game_sn/display.js client/game_sn/engine.js client/game_sn/hud.js client/game_sn/interaction.js client/game_sn/main.js | uglifyjs -mc warnings=false > client/game_sn.js",
     "postinstall": "npm run build"
   },
-
   "author": "thomas elder",
   "engines": {
     "node": "4.2.4"
@@ -26,7 +25,6 @@
     "jasmine-node": "^1.14.5",
     "request": "^2.69.0",
     "socket.io-client": "^1.4.5",
-    "typings": "^0.6.6",
     "watchify": "*"
   }
 }
