@@ -15,10 +15,10 @@
     "node": ">=10.0.0"
   },
   "dependencies": {
+    "browserify": "*",
     "express": ">=3.11.0",
     "jade": "*",
-    "socket.io": "^1.4.5",
-    "browserify": "*",
+    "socket.io": "^2.2.0",
     "uglify-js": "*"
   },
   "devDependencies": {
