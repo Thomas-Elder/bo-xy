@@ -11,6 +11,10 @@ var express = require('express');
 var app = express();
 var server = http.createServer(app);
 
+// Express middleware
+var errorhandler = require('errorhandler')
+var morgan = require('morgan')
+
 // Socket requires
 var io = require('socket.io')(server);
 
@@ -30,8 +34,8 @@ var Server = function(){
   app.set('env', 'development');
 
   if ('development' == app.get('env')) {
-    app.use(express.errorHandler());
-    app.use(express.logger('dev'));
+    app.use(errorhandler());
+    app.use(morgan('dev'));
   }
 
   // set path for static files

@@ -8,8 +8,8 @@ var io_client = require('socket.io-client');
 describe('Lobby events', 
   function(){
 
+    // Declared here to be accessible in all functions. 
     var server;
-
     var url = 'http://localhost:8888/mingle';
     var socketOptions = {
           'reconnection delay' : 0, 
@@ -20,9 +20,18 @@ describe('Lobby events',
     var client_emit;
     var client_rcv;
 
-    server = new Server();
-    console.log('Starting the server...');
-    server.start();
+    // Spin up server before all tests
+    beforeAll(function(){
+
+      server = new Server();
+      console.log('Starting the server...');
+      server.start();
+    });
+    
+    // Close server after all tests
+    afterAll(function(){
+      server.stop();
+    });
 
     beforeEach(function(done){
 
