@@ -157,8 +157,6 @@ describe('Lobby events',
         client_rcv.emit('join', lobby);
 
         client_emit.on('PlayerJoined', function(lobby) {
-          console.log();
-          console.log(lobby);
           expect(lobby.users[0]).toEqual(expected.users[0]);
           expect(lobby.id).toEqual(expected.id);
           done(); 
@@ -184,8 +182,6 @@ describe('Lobby events',
         client_rcv.emit('join', lobby);
 
         client_rcv.on('PlayerJoined', function(lobby) {
-          console.log();
-          console.log(lobby);
           expect(lobby.users[0]).toEqual(expected.users[0]);
           expect(lobby.id).toEqual(expected.id);
           done(); 
