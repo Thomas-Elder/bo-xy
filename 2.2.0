@@ -1,0 +1,4 @@
++ socket.io-client@1.7.4
+added 1 package, removed 2 packages, updated 2 packages and audited 5816 packages in 7.946s
+found 8 vulnerabilities (4 low, 1 moderate, 3 high)
+  run `npm audit fix` to fix them, or `npm audit` for details

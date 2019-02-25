@@ -21,7 +21,7 @@
     "express": ">=3.11.0",
     "morgan": "^1.9.1",
     "pug": "^2.0.0-beta6",
-    "socket.io": "^1.4.5",
+    "socket.io": ">=2.2.0",
     "uglify-js": "*"
   },
   "devDependencies": {
@@ -29,7 +29,7 @@
     "istanbul": "^0.4.5",
     "jasmine": "^3.3.1",
     "request": "^2.69.0",
-    "socket.io-client": "^1.4.5",
+    "socket.io-client": ">=2.2.0",
     "typings": "^0.6.6",
     "watchify": "*"
   }
