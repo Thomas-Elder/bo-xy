@@ -103,7 +103,7 @@ describe('Lobby events',
 
       it('should pass all lobby details on in the "newLobby" event', function(done){
 
-        var socket_id = "/mingle#" + client_emit.id;
+        var socket_id = client_emit.id;
         var expected = {users:[socket_id], id:socket_id};
 
         client_emit.emit('open');
@@ -122,7 +122,7 @@ describe('Lobby events',
       it('should emit a "PlayerJoined" event when a join event is handled', function(done){
         
         // First get the socket.id from client_emit, to host the lobby
-        var lobby_id = "/mingle#" + client_emit.id;
+        var lobby_id = client_emit.id;
 
         // Open a lobby
         client_emit.emit('open', {});
@@ -141,7 +141,7 @@ describe('Lobby events',
       it('should pass the lobby details to the original client', function(done){
         
         // First get the socket.id from client_emit, to host the lobby
-        var lobby_id = "/mingle#" + client_emit.id;
+        var lobby_id = client_emit.id;
 
         // Open a lobby
         client_emit.emit('open', {});
@@ -150,7 +150,7 @@ describe('Lobby events',
         var lobby = {users: [lobby_id], id: lobby_id};
 
         // Get the client_rcv socket.id to join the lobby with
-        var join_id = "/mingle#" + client_rcv.id
+        var join_id = client_rcv.id
         
         var expected = {users:[lobby_id, join_id], id:lobby_id};
 
@@ -166,7 +166,7 @@ describe('Lobby events',
       it('should pass the lobby details to the new client', function(done){
 
         // First get the socket.id from client_emit, to host the lobby
-        var lobby_id = "/mingle#" + client_emit.id;
+        var lobby_id = client_emit.id;
 
         // Open a lobby
         client_emit.emit('open', {});
@@ -175,7 +175,7 @@ describe('Lobby events',
         var lobby = {users: [lobby_id], id: lobby_id};
 
         // Get the client_rcv socket.id to join the lobby with
-        var join_id = "/mingle#" + client_rcv.id
+        var join_id = client_rcv.id
         
         var expected = {users:[lobby_id, join_id], id:lobby_id};
 
@@ -196,7 +196,7 @@ describe('Lobby events',
       it('should emit a "bailLobby" event to this client when the bail event is handled', function(){
         
         // First get the socket.id from client_emit, to host the lobby
-        var lobby_id = "/mingle#" + client_emit.id;
+        var lobby_id = client_emit.id;
 
         // Open a lobby
         client_emit.emit('open', {});
@@ -205,7 +205,7 @@ describe('Lobby events',
         var lobby = {users: [lobby_id], id: lobby_id};
 
         // Get the client_rcv socket.id to join the lobby with
-        var join_id = "/mingle#" + client_rcv.id
+        var join_id = client_rcv.id
 
         // join the lobby
         client_rcv.emit('join', lobby);
@@ -221,7 +221,7 @@ describe('Lobby events',
       it('should emit a "bailLobby" event to other clients when the bail event is handled', function(){
         
         // First get the socket.id from client_emit, to host the lobby
-        var lobby_id = "/mingle#" + client_emit.id;
+        var lobby_id = client_emit.id;
 
         // Open a lobby
         client_emit.emit('open', {});
@@ -230,7 +230,7 @@ describe('Lobby events',
         var lobby = {users: [lobby_id], id: lobby_id};
 
         // Get the client_rcv socket.id to join the lobby with
-        var join_id = "/mingle#" + client_rcv.id
+        var join_id = client_rcv.id
 
         // join the lobby
         client_rcv.emit('join', lobby);
@@ -251,7 +251,7 @@ describe('Lobby events',
       it('should emit a "start" event to this client when the start event is handled', function(){
         
         // First get the socket.id from client_emit, to host the lobby
-        var lobby_id = "/mingle#" + client_emit.id;
+        var lobby_id = client_emit.id;
 
         // Open a lobby
         client_emit.emit('open', {});
@@ -260,7 +260,7 @@ describe('Lobby events',
         var lobby = {users: [lobby_id], id: lobby_id};
 
         // Get the client_rcv socket.id to join the lobby with
-        var join_id = "/mingle#" + client_rcv.id
+        var join_id = client_rcv.id
 
         // join the lobby
         client_rcv.emit('join', lobby);
@@ -276,7 +276,7 @@ describe('Lobby events',
       it('should emit a "start" event to other clients when the start event is handled', function(){
         
         // First get the socket.id from client_emit, to host the lobby
-        var lobby_id = "/mingle#" + client_emit.id;
+        var lobby_id = client_emit.id;
 
         // Open a lobby
         client_emit.emit('open', {});
@@ -285,7 +285,7 @@ describe('Lobby events',
         var lobby = {users: [lobby_id], id: lobby_id};
 
         // Get the client_rcv socket.id to join the lobby with
-        var join_id = "/mingle#" + client_rcv.id
+        var join_id = client_rcv.id
 
         // join the lobby
         client_rcv.emit('join', lobby);
