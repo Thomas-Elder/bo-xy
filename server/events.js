@@ -35,6 +35,10 @@ EventManager.prototype.lobbyEvents = function(io, lm){
           // join room
           socket.join(lobby.id);
 
+          console.log();
+          console.log('Logging ', lobby, ' to see if for some reason it resolves travis test run... ');
+          console.log();
+
           // push the socket.id into the lobby.users object
           lobbyManager.get(lobby.id).users.push(socket.id);
                 
