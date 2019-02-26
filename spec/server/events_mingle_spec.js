@@ -179,6 +179,7 @@ describe('Lobby events',
         
         var expected = {users:[lobby_id, join_id], id:lobby_id};
 
+        console.log('Logging lobby object in spec, ', lobby)
         client_rcv.emit('join', lobby);
 
         client_rcv.on('PlayerJoined', function(lobby) {
@@ -261,6 +262,8 @@ describe('Lobby events',
 
         // Get the client_rcv socket.id to join the lobby with
         var join_id = client_rcv.id
+
+        console.log('Logging lobby object in spec, ', lobby)
 
         // join the lobby
         client_rcv.emit('join', lobby);
