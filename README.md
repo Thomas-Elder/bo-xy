@@ -4,9 +4,7 @@
 
 Learning some node.js
 
-This app is basically to serve a Javascript game currently called Dodge. I'm pretty new to node.js so creating a website around this simple game seemed like a good place to start.
-
-Originally there was just a single player game where you dodged falling boxes for points and had three lives. More recently there has been work on implementing a multiplayer version of this. Milestone 1.0 however will be focused on completing the single player game and associated pages.
+This app is basically to serve a Javascript game currently called Dodge.
 
 The app is hosted on Heroku, there is a bo-xy pipeline with 3 apps, dev, staging and production.
 
@@ -23,3 +21,9 @@ staging:
 production:
 * Heroku app: bo-xy
 * Github branch: master
+
+##Testing
+jasmine is the testing library used, and it's run with `npm test`.
+
+nyc is used to check coverage of tests, it reports at the end of npm test, but the report can also be shown by running `npm run cover`.
+

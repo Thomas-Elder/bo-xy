@@ -18,7 +18,7 @@ window.onload = function () {
   var game_canvas = document.getElementById('game_canvas');
   var hud_canvas = document.getElementById('hud_canvas');
 
-  // Wrap these in an object to pass to the game  
+  // Wrap these in an object to pass to the game
   contexts = {
     game_canvas: game_canvas,
     hud_canvas: hud_canvas,
