@@ -13,12 +13,12 @@ Controller.prototype.index = function(req, res){
 
 Controller.prototype.single = function(req, res){
 
-  res.render('single', { title: 'D O D G E B O X' });
+  res.render('single', { title: 'B O X' });
 };
 
 Controller.prototype.mingle = function(req, res){
 
-  res.render('mingle', { title: 'D O D G E B O X' });
+  res.render('mingle', { title: 'B O X E S', lobbies: lobbyManager.getAll()});
 };
 
 Controller.prototype.highscores = function(req, res){

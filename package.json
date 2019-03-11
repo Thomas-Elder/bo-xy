@@ -5,27 +5,31 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "test": "jasmine-node --verbose --captureExceptions ./spec",
-    "watch": "watchify client/game_sn/box/box_manager.js client/game_sn/box/enemy_box.js client/game_sn/box/explode_box.js client/game_sn/box/player_box.js client/game_sn/background.js client/game_sn/config.js client/game_sn/controller.js client/game_sn/display.js client/game_sn/engine.js           client/game_sn/hud.js client/game_sn/interaction.js client/game_sn/main.js -o client/game_sn.js",
-    "build": "browserify client/game_sn/box/box_manager.js client/game_sn/box/enemy_box.js client/game_sn/box/explode_box.js client/game_sn/box/player_box.js client/game_sn/background.js client/game_sn/config.js client/game_sn/controller.js client/game_sn/display.js client/game_sn/engine.js client/game_sn/hud.js client/game_sn/interaction.js client/game_sn/main.js | uglifyjs -mc warnings=false > client/game_sn.js",
-    "postinstall": "npm run build"
+    "cover": "nyc report",
+    "test": "nyc jasmine",
+    "watch": "watchify client/browserify.js -o client/game_sn.js -v",
+    "build": "browserify client/browserify.js | uglifyjs -mc warnings=false > client/game_sn.js"
   },
   "author": "thomas elder",
   "engines": {
-    "node": ">=10.0.0"
+    "node": "10.0.0"
   },
   "dependencies": {
-    "browserify": "*",
-    "express": ">=3.11.0",
-    "growl": "^1.10.5",
-    "jade": "*",
-    "socket.io": "^2.2.0"
+    "browserify": "^16.2.3",
+    "errorhandler": "^1.5.0",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "pug": "^2.0.3",
+    "socket.io": "^2.2.0",
+    "uglify-js": "^3.4.9"
   },
   "devDependencies": {
-    "jasmine-node": "^2.0.1",
-    "request": "^2.88.0",
+    "async": "^2.6.2",
+    "jasmine": "^3.3.1",
+    "nyc": "^13.3.0",
+    "request": "^2.69.0",
     "socket.io-client": "^2.2.0",
-    "uglify-js": "^3.4.9",
     "watchify": "^3.11.1"
-  }
+  },
+  "heroku-run-build-script": true
 }

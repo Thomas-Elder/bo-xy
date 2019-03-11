@@ -1,0 +1,41 @@
+extends layout
+
+block style
+  link(rel='stylesheet' href='static/blocks/name-sn/name-sn.css')
+  link(rel='stylesheet' href='static/blocks/name-sn/name-sn__button.css')
+
+  link(rel='stylesheet' href='static/blocks/game-sn/game-sn.css')
+  link(rel='stylesheet' href='static/blocks/game-sn/game-sn__game.css')
+  link(rel='stylesheet' href='static/blocks/game-sn/game-sn__hud.css')
+
+
+block content
+  h2= title
+
+  div#new-player.name-sn
+    label N A M E:
+      input(id="name" type="text")
+    .name-sn__button
+      button(id="box" class="btn") B O X
+
+  div#game.game-sn
+    canvas(
+      class="game-sn__game"
+      id="game_canvas"
+      style="border: 1px solid #000000;"
+      width="400"
+      height="400"
+      )
+
+    canvas(
+      class="game-sn__hud"
+      id="hud_canvas"
+      style="border: 1px solid #000000;"
+      width="400"
+      height="50"
+      )
+      
+  div#endgame
+  
+block scripts
+  include mixins/singleScripts

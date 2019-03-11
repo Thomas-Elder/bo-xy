@@ -1,0 +1,58 @@
+extends layout
+
+block style
+  link(rel='stylesheet' href='static/blocks/new-lobby/new-lobby.css')
+  link(rel='stylesheet' href='static/blocks/new-lobby/new-lobby__button.css')
+
+  link(rel='stylesheet' href='static/blocks/lobby-list/lobby-list.css')
+  link(rel='stylesheet' href='static/blocks/lobby-list/lobby-list__button.css')
+  link(rel='stylesheet' href='static/blocks/lobby-list/lobby-list__li.css')
+  link(rel='stylesheet' href='static/blocks/lobby-list/lobby-list__ul.css')
+
+  link(rel='stylesheet' href='static/blocks/lobby/lobby.css')
+  link(rel='stylesheet' href='static/blocks/lobby/lobby__lobby.css')
+  link(rel='stylesheet' href='static/blocks/lobby/lobby__button.css')
+  link(rel='stylesheet' href='static/blocks/lobby/lobby__button-case.css')
+
+  link(rel='stylesheet' href='static/blocks/lobby-create/lobby-create.css')
+  link(rel='stylesheet' href='static/blocks/lobby-create/lobby-create__lobby.css')
+  link(rel='stylesheet' href='static/blocks/lobby-create/lobby-create__input.css')
+  link(rel='stylesheet' href='static/blocks/lobby-create/lobby-create__button.css')
+  link(rel='stylesheet' href='static/blocks/lobby-create/lobby-create__button-case.css') 
+
+block content
+  h2= title
+  
+  div.new-lobby
+    button#new.new-lobby__button N E W
+    button#lobbies.new-lobby__button L O B B I E S
+  
+  div#lobby-list.lobby-list
+    ul.lobby-list__ul
+      each lobby in lobbies
+        li.lobby-list__li
+          span= 'L O B B Y : ' + lobby.name
+          button(id= lobby.id class="lobby-list__button") J O I N
+  
+  div#lobby-create.lobby-create
+    p C R E A T E
+    
+    div.lobby-create__lobby
+      label N A M E:
+      input#name.lobby-create__input(type="text")
+        
+      div.lobby-create__button-case
+        button#open.lobby-create__button O P E N
+  
+  div#lobby.lobby
+    p W E L C O M E
+    
+    div.lobby__lobby
+      label L O B B Y N A M E
+      label#lobby-name
+      div.lobby__button-case
+        button#bail.lobby__button B A I L
+        button#start.lobby__button S T A R T
+        
+block scripts
+  include mixins/lobbyScripts

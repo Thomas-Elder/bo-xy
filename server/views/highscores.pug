@@ -1,0 +1,19 @@
+extends layout
+
+block style
+  link(rel='stylesheet' href='static/blocks/scores/scores.css')
+  link(rel='stylesheet' href='static/blocks/scores/scores__ul.css')
+  link(rel='stylesheet' href='static/blocks/scores/scores__li.css')
+
+block content
+  h2= title
+
+  if scores.length === 0
+    p No highscores at the moment.
+  else
+    p Check out the highscores!
+    div#highscores.scores
+      ul.scores__ul
+        each val in scores
+          li.scores__li
+            div= 'N A M E: ' + val.name + ' - - - S C O R E: ' + val.score

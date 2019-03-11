@@ -1,0 +1,13 @@
+.lobby-list__button {
+  float: right;
+  clear: both;
+  
+  color: #1A1A1A;
+  background-color: #3399FF;
+  padding: 10px;
+  border-style: none;
+}
+
+.lobby-list__button:hover {
+  background-color: #1177BB;
+}

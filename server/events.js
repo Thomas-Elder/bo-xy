@@ -3,46 +3,47 @@ var EventManager = function(){};
 
 EventManager.prototype.lobbyEvents = function(io, lm){
   var lobbyManager = lm;
-  var lobbyNamespace = io.of('/lobby');
+  var mingleNamespace = io.of('/mingle');
 
-  lobbyNamespace.on('connection',
+  mingleNamespace.on('connection',
     function(socket){
-      socket.on('connected',
-        function(msg){
-          console.log(msg.msg);
-          //socket.emit()
-      });
+      
+      socket.emit('connect', {msg:'you are connected'});
+      mingleNamespace.emit('newPlayer', {msg:'new player x has joined'});
       
       // create new lobby using the name passed from client
       socket.on('open',
-        function(lobby){
-          
+        function(){
+
+          var lobby = {};
           lobby.users = [];
           lobby.id = socket.id;
           lobby.users.push(socket.id);
           lobbyManager.add(lobby);
-          
+
           // create new room and assign this socket to it.
           socket.join(lobby.id);
-          
-          console.log(lobby);
-          // let the lobbyNamespace know about the new lobby
-          lobbyNamespace.emit('newLobby', lobby);
+
+          // let the mingleNamespace know about the new lobby
+          mingleNamespace.emit('newLobby', lobby);
       });
       
       // Add this socket to a room
       socket.on('join',
         function(lobby){
-          
-          console.log('A new player has joined lobby: ', lobby.id);
-          
+
           // join room
           socket.join(lobby.id);
+
+          console.log();
+          console.log('Logging ', lobby, ' to see if for some reason it resolves travis test run... ');
+          console.log();
+
+          // push the socket.id into the lobby.users object
           lobbyManager.get(lobby.id).users.push(socket.id);
-          console.log(lobbyManager.get(lobby.id));
                 
           // let the room know you've joined
-          lobbyNamespace.to(lobby.id).emit('newPlayer', 'A player has joined!');
+          mingleNamespace.to(lobby.id).emit('PlayerJoined', lobbyManager.get(lobby.id));
       });
       
       // Remove this socket from the room
@@ -52,15 +53,18 @@ EventManager.prototype.lobbyEvents = function(io, lm){
           // leave room
           socket.leave(lobby.id); 
           lobbyManager.get(lobby.id).users.pop(socket.id);
-          console.log(lobbyManager.get(lobby.id));
-          
-          /// let the lobbyNamespace know about the lobby bailage
-          lobbyNamespace.emit('bailLobby', lobby);
+                    
+          /// let the mingleNamespace know about the lobby bailage
+          mingleNamespace.emit('bailLobby', lobby);
       });
       
       socket.on('start',
         function(lobby){
-          lobbyNamespace.to(lobby.id).emit('start', 'Starting the game... ');
+          mingleNamespace.to(lobby.id).emit('start', 'Starting the game... ');
+      });
+
+      socket.on('disconnect', function(){
+
       });
   });
 };
@@ -72,10 +76,8 @@ EventManager.prototype.singleEvents = function(io, hm){
 
   singleNamespace.on('connection',
     function(socket){
-      socket.on('connected',
-        function(msg){
-          console.log(msg.msg);
-      });
+
+      socket.emit('connect');
       
       // create new lobby using the name passed from client
       socket.on('score',

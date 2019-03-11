@@ -1,12 +1,12 @@
 window.onload = function(){
-  console.log('loading lobby script... ');
-  
-  var socket = io('/lobby');
+
+  var socket = io('/mingle');
   var lobby = {};
   
-  socket.emit('connected', {msg:"connected to namespace /lobby"});
+  socket.emit('connected', {msg:"connected to namespace /mingle"});
   
   // Initially show just the lobby list
+  $('#lobby-list').show();
   $('#lobby-create').hide();
   $('#lobby').hide();
   $('#lobbies').hide();
@@ -100,7 +100,7 @@ window.onload = function(){
       $(".lobby-ulist").append('<li><div>L O B B Y : ' + lobby.name +'<div class="button-case"><button id="' + lobby.id + '" class="btn">J O I N</button></div></div></li>')
   });
   
-  socket.on('newPlayer', 
+  socket.on('PlayerJoined', 
     function(lobby){
       console.log('A new player has joined your lobby!');
   });
