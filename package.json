@@ -20,7 +20,7 @@
     "express": "^4.16.4",
     "morgan": "^1.9.1",
     "pug": "^2.0.3",
-    "socket.io": "^2.2.0",
+    "socket.io": "^2.4.1",
     "uglify-js": "^3.4.9"
   },
   "devDependencies": {
@@ -29,7 +29,7 @@
     "nyc": "^13.3.0",
     "request": "^2.69.0",
     "socket.io-client": "^2.2.0",
-    "watchify": "^3.11.1"
+    "watchify": "^4.0.0"
   },
   "heroku-run-build-script": true
 }
