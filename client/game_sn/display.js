@@ -102,6 +102,15 @@ Display.prototype.drawGame = function(state){
                           explosion.height);
   });
 
+  // Draw the starboxes, if any
+  state.stars.forEach(function(starbox){
+    self.game_context.fillStyle = starbox.colour;
+    self.game_context.fillRect(starbox.x, 
+                          starbox.y, 
+                          starbox.width, 
+                          starbox.height);
+  });
+
   // Draw the powerboxes, if any
   state.powerboxes.forEach(function(powerboxes){
     self.game_context.fillStyle = powerboxes.colour;
