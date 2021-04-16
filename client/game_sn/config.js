@@ -7,7 +7,7 @@ var config = {
   * Global Configuration Settings
   */
   fps : 120,
-  gravity : 2,
+  gravity : 1,
   backgroundColour : '#000000',
   numberOfLevels : 5,
   levelLength: 1000,
