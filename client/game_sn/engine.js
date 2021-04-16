@@ -106,7 +106,8 @@ Engine.prototype.draw = function(){
     player: this.boxManager.playerBox, 
     enemies: this.boxManager.enemyBoxes,
     explosions: this.boxManager.explodeBoxes,
-    stars: this.boxManager.starBoxes,
+    farStars: this.boxManager.farStarBoxes,
+    nearStars: this.boxManager.nearStarBoxes,
     powerboxes: []
   });
 
