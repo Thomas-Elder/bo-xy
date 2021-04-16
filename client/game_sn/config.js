@@ -12,6 +12,7 @@ var config = {
   numberOfLevels : 5,
   levelLength: 1000,
   numberOfEnemies : 20,
+  numberOfStars : 50,
 
   hudSize : {
     width : 600,
@@ -90,8 +91,8 @@ var config = {
      * STAR CONFIG
      */
      star : {
-      speed : 1,
-      
+      speed : 0.5,
+
       size : {
         height : 2,
         width : 2
