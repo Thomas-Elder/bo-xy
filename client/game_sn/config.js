@@ -8,7 +8,7 @@ var config = {
   */
   fps : 120,
   gravity : 2,
-  backgroundColour : '#1A1A1A',
+  backgroundColour : '#000000',
   numberOfLevels : 5,
   levelLength: 1000,
   numberOfEnemies : 20,
@@ -16,14 +16,14 @@ var config = {
   numberOfNearStars : 10,
 
   hudSize : {
-    width : 600,
+    width : 800,
     height : 50
   },
 
   hudTextColour : '#3399FF',
 
   screenSize : {
-    width : 600,
+    width : 800,
     height : 600
   },
 
@@ -92,11 +92,11 @@ var config = {
      * FAR STAR CONFIG
      */
     farstar : {
-      speed : 0.2,
+      speed : 0.3,
 
       size : {
-        height : 2,
-        width : 2
+        height : 1,
+        width : 1
       },
 
       colour : '#FFFFFF'
@@ -106,11 +106,11 @@ var config = {
      * NEAR STAR CONFIG
      */
     nearstar : {
-      speed : 0.5,
+      speed : 0.6,
 
       size : {
-        height : 4,
-        width : 4
+        height : 3,
+        width : 3
       },
 
       colour : '#FFFFFF'
