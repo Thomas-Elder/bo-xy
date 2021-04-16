@@ -102,8 +102,19 @@ Display.prototype.drawGame = function(state){
                           explosion.height);
   });
 
-  // Draw the starboxes, if any
-  state.stars.forEach(function(starbox){
+  // Draw the far stars, if any
+  state.farStars.forEach(function(starbox){
+    console.log('Drawing far star boxes');
+    self.game_context.fillStyle = starbox.colour;
+    self.game_context.fillRect(starbox.x, 
+                          starbox.y, 
+                          starbox.width, 
+                          starbox.height);
+  });
+
+  // Draw the near stars, if any
+  state.nearStars.forEach(function(starbox){
+    console.log('Drawing near star boxes');
     self.game_context.fillStyle = starbox.colour;
     self.game_context.fillRect(starbox.x, 
                           starbox.y, 
