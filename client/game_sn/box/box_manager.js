@@ -6,6 +6,9 @@ var StarBox = require('./star_box.js');
 
 var Interaction = require('../interaction');
 
+const {Howl, Howler} = require('howler');
+var explosion = new Howl({src:['static/game_sn/media/explosion.mp3'], volume: 0.5});
+
 /**
  * BoxManager
  */
@@ -34,6 +37,8 @@ BoxManager.prototype.init = function() {
 
   this.interaction = new Interaction();
 
+  //this.sounds = new Sounds('../media/explosion.m4a');
+
   // Instantiate a new instance of type PlayerBox.
   this.playerBox = new PlayerBox(this.config, this.controller);
   
@@ -51,7 +56,6 @@ BoxManager.prototype.init = function() {
 
   // Instantiate an array of new instances of type StarBox.
   for (var i = 0; i < this.farStarBoxes.length; i++) {
-    console.log('Instantiating far star boxes');
     var location = this.newStarLocation(this.config);
     this.farStarBoxes[i] = new StarBox(location, this.config, 
                                                 this.config.box.farstar.size.width, 
@@ -62,7 +66,6 @@ BoxManager.prototype.init = function() {
 
   // Instantiate an array of new instances of type StarBox.
   for (var i = 0; i < this.nearStarBoxes.length; i++) {
-    console.log('Instantiating near star boxes');
     var location = this.newStarLocation(this.config);
     this.nearStarBoxes[i] = new StarBox(location, this.config, 
                                                   this.config.box.nearstar.size.width, 
@@ -138,7 +141,7 @@ BoxManager.prototype.enemyHit = function() {
     this.enemyBoxes.forEach(function(enemy) {
       if (enemy.onScreen){
         if (self.interaction.collision(self.playerBox, enemy)) {
-
+          explosion.play();
           enemy.hit = true;
           enemy.onScreen = false;
           self.explodeBoxes.push(new ExplodeBox(enemy.getPosition().x,
