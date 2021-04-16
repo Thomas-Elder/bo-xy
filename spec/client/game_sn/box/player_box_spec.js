@@ -34,7 +34,7 @@ describe('PlayerBox',
         it('should maintain positions passed to the constructor', 
           function(done){
 
-            var expected = {x:290, y:290};
+            var expected = {x:390, y:290};
 
             var result = player.getPosition();
 
@@ -63,7 +63,7 @@ describe('PlayerBox',
         it('should apply gravity',
           function(done){
 
-            var expected = {x:290, y:287};
+            var expected = {x:390, y:286};
 
             /* So we set the controller.up to true, to move the box up. Gravity
              * is applied regardless of controller status, so we should only move
@@ -82,7 +82,7 @@ describe('PlayerBox',
         it('should move the box when the controller.right is true', 
           function(done){
 
-            var expected = {x:295, y:292};
+            var expected = {x:395, y:291};
 
             controller.right = true;
             player.update();
@@ -96,7 +96,7 @@ describe('PlayerBox',
         it('should move the box when the controller.left is true', 
           function(done){
 
-            var expected = {x:285, y:292};
+            var expected = {x:385, y:291};
 
             controller.left = true;
             player.update();
@@ -109,7 +109,7 @@ describe('PlayerBox',
         it('should move the box when the controller.up is true', 
           function(done){
 
-            var expected = {x:290, y:287};
+            var expected = {x:390, y:286};
 
             controller.up = true;
             player.update();
@@ -122,7 +122,7 @@ describe('PlayerBox',
         it('should move the box when the controller.down is true', 
           function(done){
 
-            var expected = {x:290, y:297};
+            var expected = {x:390, y:296};
 
             controller.down = true;
             player.update();
