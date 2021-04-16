@@ -1,17 +1,17 @@
 
 // Defines the StarBox type.
-var StarBox = function (location, config) {
+var StarBox = function (location, config, width, height, colour, speed) {
   this.x            = location.x;
   this.y            = location.y;
   
-  this.width        = config.box.star.size.width;
-  this.height       = config.box.star.size.height;
+  this.width        = width;
+  this.height       = height;
 
   this.screenWidth  = config.screenSize.width;
   this.screenHeight = config.screenSize.height;
 
-  this.colour       = config.box.star.colour;
-  this.speed        = config.box.star.speed;
+  this.colour       = colour;
+  this.speed        = speed;
 
   this.onScreen     = true;
 }
