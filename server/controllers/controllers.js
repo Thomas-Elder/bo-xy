@@ -11,6 +11,11 @@ Controller.prototype.index = function(req, res){
   res.render('index', { title: 'B O X L A N D' });
 };
 
+Controller.prototype.blog = function(req, res){
+  
+  res.render('blog', { title: 'B L O G L A N D' });
+};
+
 Controller.prototype.single = function(req, res){
 
   res.render('single', { title: 'B O X' });
