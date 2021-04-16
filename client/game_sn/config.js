@@ -12,7 +12,8 @@ var config = {
   numberOfLevels : 5,
   levelLength: 1000,
   numberOfEnemies : 20,
-  numberOfStars : 50,
+  numberOfFarStars : 50,
+  numberOfNearStars : 10,
 
   hudSize : {
     width : 600,
@@ -88,14 +89,28 @@ var config = {
     },
 
     /**
-     * STAR CONFIG
+     * FAR STAR CONFIG
      */
-     star : {
-      speed : 0.5,
+    farstar : {
+      speed : 0.2,
 
       size : {
         height : 2,
         width : 2
+      },
+
+      colour : '#FFFFFF'
+    },
+
+    /**
+     * NEAR STAR CONFIG
+     */
+    nearstar : {
+      speed : 0.5,
+
+      size : {
+        height : 4,
+        width : 4
       },
 
       colour : '#FFFFFF'
