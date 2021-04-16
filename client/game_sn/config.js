@@ -85,7 +85,21 @@ var config = {
                 '#777777',
                 '#555555']
     },
-    
+
+    /**
+     * STAR CONFIG
+     */
+     star : {
+      speed : 1,
+      
+      size : {
+        height : 2,
+        width : 2
+      },
+
+      colour : '#FFFFFF'
+    },
+
     /**
      * POWER CONFIG
      */
