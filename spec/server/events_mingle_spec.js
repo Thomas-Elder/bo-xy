@@ -244,7 +244,7 @@ describe('Lobby events',
         });
       });
     });
-
+/**
     describe('start', function(){
       console.log('');
       console.log('testing start... ');
@@ -300,5 +300,5 @@ describe('Lobby events',
           done(); 
         });
       });
-    });
+    }); */
 });
