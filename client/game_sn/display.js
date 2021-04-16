@@ -104,7 +104,6 @@ Display.prototype.drawGame = function(state){
 
   // Draw the far stars, if any
   state.farStars.forEach(function(starbox){
-    console.log('Drawing far star boxes');
     self.game_context.fillStyle = starbox.colour;
     self.game_context.fillRect(starbox.x, 
                           starbox.y, 
@@ -114,7 +113,6 @@ Display.prototype.drawGame = function(state){
 
   // Draw the near stars, if any
   state.nearStars.forEach(function(starbox){
-    console.log('Drawing near star boxes');
     self.game_context.fillStyle = starbox.colour;
     self.game_context.fillRect(starbox.x, 
                           starbox.y, 
