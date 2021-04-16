@@ -55,6 +55,7 @@ var Server = function(){
 
   // setting up routes 
   app.get('/', controllers.index);
+  app.get('/blog', controllers.blog);
   app.get('/single', controllers.single);
   app.get('/mingle', controllers.mingle);
   app.get('/highscores', controllers.highscores);
