@@ -2,6 +2,7 @@
 var PlayerBox = require('./player_box.js');
 var EnemyBox = require('./enemy_box.js');
 var ExplodeBox = require('./explode_box.js');
+var StarBox = require('./star_box.js');
 
 var Interaction = require('../interaction');
 
@@ -18,7 +19,10 @@ var BoxManager = function (config, controller) {
   this.enemySpacing = 0;
   
   this.explodeBoxes = [];
-  
+
+  this.starBoxes   = new Array(this.config.numberOfStars);
+  this.starSpeed   = config.box.star.speed;
+
   this.enemiesDodged= 0;
   this.enemiesHit   = 0;
 }
@@ -41,6 +45,13 @@ BoxManager.prototype.init = function() {
     var location = this.newEnemyLocation(this.config);
     this.enemyBoxes[i] = new EnemyBox(location, 0, this.config);
   }
+
+  // Instantiate an array of new instances of type StarBox.
+  for (var i = 0; i < this.starBoxes.length; i++) {
+    var location = this.newStarLocation(this.config);
+    this.starBoxes[i] = new StarBox(location, this.config);
+  }
+
 };
 
 BoxManager.prototype.update = function(level) {
@@ -71,6 +82,15 @@ BoxManager.prototype.update = function(level) {
       
       var location = this.newEnemyLocation(this.config);
       this.enemyBoxes[i] = new EnemyBox(location, level, this.config);
+    }
+  }
+
+  for (var i = 0; i < this.starBoxes.length; i++){
+    if (this.starBoxes[i].onScreen){
+      this.starBoxes[i].update();
+    } else {
+      var location = this.newStarLocation(this.config);
+      this.starBoxes[i] = new StarBox(location, this.config)
     }
   }
 };
@@ -107,6 +127,17 @@ BoxManager.prototype.enemyHit = function() {
  * newEnemyLocation
  */
 BoxManager.prototype.newEnemyLocation = function(config) {
+
+  return {
+    x: Math.floor(Math.random() * config.screenSize.width), 
+    y: -((this.config.screenSize.height - Math.floor(Math.random() * this.config.screenSize.height)))
+  };
+};
+
+/**
+ * newStarLocation
+ */
+ BoxManager.prototype.newStarLocation = function(config) {
 
   return {
     x: Math.floor(Math.random() * config.screenSize.width), 
