@@ -42,11 +42,11 @@ describe('Lobby events',
       client_rcv = io_client(url, socketOptions);
 
       // Log connection
-      client_emit.on('connect', function(){
+      client_emit.on('ack', function(){
         //console.log('socket_emit connected.');
       });
 
-      client_rcv.on('connect', function(){
+      client_rcv.on('ack', function(){
         //console.log('client_rcv connected.');
         done();
       });
@@ -67,7 +67,7 @@ describe('Lobby events',
         
       it('should emit "connect" event to this client on connection', function(done){
 
-        client_emit.on('connect', function(msg){
+        client_emit.on('ack', function(msg){
           expect(true).toEqual(true);
           done();
         });

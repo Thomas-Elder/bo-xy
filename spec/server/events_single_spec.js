@@ -38,7 +38,7 @@ describe('Single events',
         client = io_client(url, socketOptions);
 
         // Log connection
-        client.on('connect',
+        client.on('ack',
           function(){
             console.log('socket_emit connected.');
             done();
@@ -59,10 +59,10 @@ describe('Single events',
         done();
     });
 
-    describe('connect', function(){
+    describe('ack', function(){
 
-      it('should emit "connect" event to this client on connection', function(done){           
-        client.on('connect', function(msg){
+      it('should emit "ack" event to this client on connection', function(done){           
+        client.on('ack', function(msg){
           expect(true).toEqual(true);
           done();
         });

@@ -8,7 +8,7 @@ EventManager.prototype.lobbyEvents = function(io, lm){
   mingleNamespace.on('connection',
     function(socket){
       
-      socket.emit('connect', {msg:'you are connected'});
+      socket.emit('ack', {msg:'you are connected'});
       mingleNamespace.emit('newPlayer', {msg:'new player x has joined'});
       
       // create new lobby using the name passed from client
@@ -77,7 +77,7 @@ EventManager.prototype.singleEvents = function(io, hm){
   singleNamespace.on('connection',
     function(socket){
 
-      socket.emit('connect');
+      socket.emit('ack');
       
       // create new lobby using the name passed from client
       socket.on('score',

@@ -28,7 +28,7 @@ describe('Event Manager',
         }); 
 
         // Log connection
-        socket_emit.on('connect',
+        socket_emit.on('ack',
           function(){
             console.log('socket_emit connected.');
         });
@@ -42,7 +42,7 @@ describe('Event Manager',
         });
 
         // Log connection
-        socket_rcv.on('connect',
+        socket_rcv.on('ack',
           function(){
             console.log('socket_emit connected.');
         });
