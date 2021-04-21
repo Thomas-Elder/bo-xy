@@ -23,12 +23,6 @@ var BoxManager = function (config, controller) {
   
   this.explodeBoxes = [];
 
-  this.farStarBoxes   = new Array(this.config.numberOfFarStars);
-  this.farStarSpeed   = config.box.farstar.speed;
-
-  this.nearStarBoxes   = new Array(this.config.numberOfNearStars);
-  this.nearStarSpeed   = config.box.nearstar.speed;
-
   this.enemiesDodged= 0;
   this.enemiesHit   = 0;
 }
@@ -52,26 +46,6 @@ BoxManager.prototype.init = function() {
   for (var i = 0; i < this.enemyBoxes.length; i++) {
     var location = this.newEnemyLocation(this.config);
     this.enemyBoxes[i] = new EnemyBox(location, 0, this.config);
-  }
-
-  // Instantiate an array of new instances of type StarBox.
-  for (var i = 0; i < this.farStarBoxes.length; i++) {
-    var location = this.newStarLocation(this.config);
-    this.farStarBoxes[i] = new StarBox(location, this.config, 
-                                                this.config.box.farstar.size.width, 
-                                                this.config.box.farstar.size.height, 
-                                                this.config.box.farstar.colour, 
-                                                this.config.box.farstar.speed);
-  }
-
-  // Instantiate an array of new instances of type StarBox.
-  for (var i = 0; i < this.nearStarBoxes.length; i++) {
-    var location = this.newStarLocation(this.config);
-    this.nearStarBoxes[i] = new StarBox(location, this.config, 
-                                                  this.config.box.nearstar.size.width, 
-                                                  this.config.box.nearstar.size.height, 
-                                                  this.config.box.nearstar.colour, 
-                                                  this.config.box.nearstar.speed);
   }
 };
 
@@ -103,32 +77,6 @@ BoxManager.prototype.update = function(level) {
       
       var location = this.newEnemyLocation(this.config);
       this.enemyBoxes[i] = new EnemyBox(location, level, this.config);
-    }
-  }
-
-  for (var i = 0; i < this.farStarBoxes.length; i++){
-    if (this.farStarBoxes[i].onScreen){
-      this.farStarBoxes[i].update();
-    } else {
-      var location = this.newStarLocation(this.config);
-      this.farStarBoxes[i] = new StarBox(location, this.config, 
-                                                    this.config.box.farstar.size.width, 
-                                                    this.config.box.farstar.size.height, 
-                                                    this.config.box.farstar.colour, 
-                                                    this.config.box.farstar.speed);
-    }
-  }
-
-  for (var i = 0; i < this.nearStarBoxes.length; i++){
-    if (this.nearStarBoxes[i].onScreen){
-      this.nearStarBoxes[i].update();
-    } else {
-      var location = this.newStarLocation(this.config);
-      this.nearStarBoxes[i] = new StarBox(location, this.config, 
-                                                    this.config.box.nearstar.size.width, 
-                                                    this.config.box.nearstar.size.height, 
-                                                    this.config.box.nearstar.colour, 
-                                                    this.config.box.nearstar.speed);
     }
   }
 };
@@ -171,18 +119,5 @@ BoxManager.prototype.newEnemyLocation = function(config) {
     y: -((this.config.screenSize.height - Math.floor(Math.random() * this.config.screenSize.height)))
   };
 };
-
-/**
- * newStarLocation
- */
-BoxManager.prototype.newStarLocation = function(config) {
-
-  return {
-    x: Math.floor(Math.random() * config.screenSize.width), 
-    y: -((this.config.screenSize.height - Math.floor(Math.random() * this.config.screenSize.height)))
-  };
-};
-
-
 
 module.exports = BoxManager;
