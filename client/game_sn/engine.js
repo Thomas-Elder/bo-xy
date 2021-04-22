@@ -70,6 +70,7 @@ Engine.prototype.run = function(){
   var introCount = 0;
   var outroCount = self.config.outroDuration;
   var levelChangeCount = self.config.levelChangeDuration;
+  var gameOver = false;
 
   // loop
   function loop(){
@@ -98,9 +99,9 @@ Engine.prototype.run = function(){
       self.display.drawBackground(state);
       self.display.drawPlayer(state);
       self.display.drawHud({
-        score: self.score,
-        level: self.level,
-        lives: self.lives
+        score: 0,
+        level: 0,
+        lives: 3
       });
 
       introCount++;
@@ -128,8 +129,11 @@ Engine.prototype.run = function(){
     } else if (outroCount != outroDuration) {
       self.background.update();
       self.hud.update();
+      self.boxManager.updateExplosions();
+
       self.display.drawClear();
       self.display.drawBackground(state);
+      self.display.drawExplosions(state);
       self.display.drawHud({
         score: self.score,
         level: self.level,
@@ -139,7 +143,7 @@ Engine.prototype.run = function(){
       outroCount++;
 
       // Else run the game
-    } else {
+    } else if (!gameOver) {
 
       // Update the game  
       self.background.update();
@@ -175,9 +179,13 @@ Engine.prototype.run = function(){
 
       // Check if game is over and clearInterval if so
       if (self.lives === 0 || self.level === config.numberOfLevels) {
-        self.endGame();          
-        clearInterval(gameLoop);
+        outroCount = 0;
+        gameOver = true;
       }
+
+    } else {
+      self.endGame();          
+      clearInterval(gameLoop);
     }
   }
 
