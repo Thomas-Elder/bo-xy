@@ -88,24 +88,34 @@ Engine.prototype.run = function(){
 
     // First we need to do intro stuff, till introCount == introDuration
     if (introCount != self.config.introDuration) {
+      // Update everything we want on the screen during this
       self.background.update();
       self.hud.update();
+      self.boxManager.updatePlayer();
+
+      // Then draaw it all
       self.display.drawClear();
       self.display.drawBackground(state);
+      self.display.drawPlayer(state);
       self.display.drawHud({
-        score: 0,
-        level: 0,
-        lives: 3
+        score: self.score,
+        level: self.level,
+        lives: self.lives
       });
 
       introCount++;
 
       // Then we need to do the same between levels... 
     } else if (levelChangeCount != levelChangeDuration) {
+      // Update everything we want on the screen during this
       self.background.update();
       self.hud.update();
+      self.boxManager.updatePlayer();
+
+      // Then draaw it all
       self.display.drawClear();
       self.display.drawBackground(state);
+      self.display.drawPlayer(state);
       self.display.drawHud({
         score: self.score,
         level: self.level,
@@ -134,7 +144,9 @@ Engine.prototype.run = function(){
       // Update the game  
       self.background.update();
       self.hud.update();
-      self.boxManager.update(self.level);
+      self.boxManager.updatePlayer();
+      self.boxManager.updateExplosions();
+      self.boxManager.updateEnemies(self.level);
       self.boxManager.enemyHit();
       self.lives = config.box.player.lives - self.boxManager.enemiesHit;
       self.score = self.boxManager.enemiesDodged;
