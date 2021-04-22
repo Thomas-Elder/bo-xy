@@ -29,6 +29,8 @@ var Engine = function(socket){
   this.lives        = config.box.player.lives;
 
   this.max_level    = config.numberOfLevels;
+  this.config = config;
+
 };
 
 /**
@@ -64,18 +66,14 @@ Engine.prototype.run = function(){
   
   var self = this;
 
+  var introCount = 0;
+  var outroCount = 0;
+  var levelChangeCount = 0;
+
   // loop
   function loop(){
-    // Ok let's pop all the updates in here
-    self.background.update();
-    self.hud.update();
-    self.boxManager.update(self.level);
-    self.boxManager.enemyHit();
-    self.lives = config.box.player.lives - self.boxManager.enemiesHit;
-    self.level = Math.floor(self.boxManager.enemiesDodged / 100);
-    self.score = self.boxManager.enemiesDodged;
 
-    // And the draws...
+    // Set the state var to pass to draw methods.
     var state = {
       background: self.background,
       hud: self.hud,
@@ -87,21 +85,48 @@ Engine.prototype.run = function(){
       powerboxes: []
     };
 
-    self.display.drawClear();
-    self.display.drawBackground(state);
-    self.display.drawPlayer(state);
-    self.display.drawEnemies(state);
-    self.display.drawExplosions(state);
-    self.display.drawHud({
-      score: self.score,
-      level: self.level,
-      lives: self.lives
-    });
+    // First we need to do intro stuff, till introCount == introDuration
+    // else run the game
+    if (introCount != self.config.introDuration) {
+      self.background.update();
+      self.hud.update();
+      self.display.drawClear();
+      self.display.drawBackground(state);
+      self.display.drawHud({
+        score: 0,
+        level: 0,
+        lives: 3
+      });
 
-    // Check if game is over and clearInterval if so
-    if (self.lives === 0 || self.level === config.numberOfLevels) {
-      self.endGame();          
-      clearInterval(gameLoop);
+      introCount++;
+    } else {
+
+      // Update and draw the game  
+      self.background.update();
+      self.hud.update();
+      self.boxManager.update(self.level);
+      self.boxManager.enemyHit();
+      self.lives = config.box.player.lives - self.boxManager.enemiesHit;
+      self.level = Math.floor(self.boxManager.enemiesDodged / 100);
+      self.score = self.boxManager.enemiesDodged;
+
+      // And the draws...
+      self.display.drawClear();
+      self.display.drawBackground(state);
+      self.display.drawPlayer(state);
+      self.display.drawEnemies(state);
+      self.display.drawExplosions(state);
+      self.display.drawHud({
+        score: self.score,
+        level: self.level,
+        lives: self.lives
+      });
+
+      // Check if game is over and clearInterval if so
+      if (self.lives === 0 || self.level === config.numberOfLevels) {
+        self.endGame();          
+        clearInterval(gameLoop);
+      }
     }
   }
 
