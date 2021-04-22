@@ -81,6 +81,17 @@ BoxManager.prototype.update = function(level) {
   }
 };
 
+/**
+ * Reinstantiate the enemy box array
+ */
+BoxManager.prototype.clearEnemies = function(level) {
+
+  for (var i = 0; i < this.enemyBoxes.length; i++) {
+    var location = this.newEnemyLocation(this.config);
+    this.enemyBoxes[i] = new EnemyBox(location, level, this.config);
+  }
+};
+
 BoxManager.prototype.enemyHit = function() {
 
   var self = this;
