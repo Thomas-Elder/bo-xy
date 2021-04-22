@@ -66,8 +66,37 @@ Engine.prototype.run = function(){
 
   // loop
   function loop(){
-    self.update();
-    self.draw();
+    // Ok let's pop all the updates in here
+    self.background.update();
+    self.hud.update();
+    self.boxManager.update(self.level);
+    self.boxManager.enemyHit();
+    self.lives = config.box.player.lives - self.boxManager.enemiesHit;
+    self.level = Math.floor(self.boxManager.enemiesDodged / 100);
+    self.score = self.boxManager.enemiesDodged;
+
+    // And the draws...
+    var state = {
+      background: self.background,
+      hud: self.hud,
+      player: self.boxManager.playerBox, 
+      enemies: self.boxManager.enemyBoxes,
+      explosions: self.boxManager.explodeBoxes,
+      farStars: self.background.farStarBoxes,
+      nearStars: self.background.nearStarBoxes,
+      powerboxes: []
+    };
+
+    self.display.drawClear();
+    self.display.drawBackground(state);
+    self.display.drawPlayer(state);
+    self.display.drawEnemies(state);
+    self.display.drawExplosions(state);
+    self.display.drawHud({
+      score: self.score,
+      level: self.level,
+      lives: self.lives
+    });
 
     // Check if game is over and clearInterval if so
     if (self.lives === 0 || self.level === config.numberOfLevels) {
