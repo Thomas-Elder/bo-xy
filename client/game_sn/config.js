@@ -14,6 +14,9 @@ var config = {
   numberOfEnemies : 20,
   numberOfFarStars : 50,
   numberOfNearStars : 10,
+  introDuration: 3000,
+  outroDuration: 3000,
+  levelChangeDuration: 3000, 
 
   hudSize : {
     width : 800,
