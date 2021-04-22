@@ -1,7 +1,10 @@
 
-
 /**
+ * Display
  * A class for handling calling any draw functions.
+ * 
+ * @param {Object} config config file
+ * @param {Object} contexts an object wrapping the game and hud contexts for drawing 
  */
 var Display = function(config, contexts){
   this.config = config;
@@ -10,6 +13,11 @@ var Display = function(config, contexts){
   this.tick = 0;
 };
 
+/**
+ * init
+ * Initialises the game and hud canvases ready for drawing
+ * 
+ */
 Display.prototype.init = function(){
  
   this.contexts.game_canvas.width   = this.config.screenSize.width;
@@ -25,7 +33,6 @@ Display.prototype.init = function(){
 
 /**
  * drawClear
- * 
  * Clears the game_context ready to draw game elements each frame.
  * 
  */
@@ -43,6 +50,7 @@ Display.prototype.drawClear = function() {
 
 /**
  * drawBackground
+ * Draws the background of the game, including stars.
  * 
  * @param state : an object describing the state of the game.
  * The following fields are expected in the state object:
@@ -85,6 +93,7 @@ Display.prototype.drawBackground = function(state) {
 
 /**
  * drawPlayer
+ * Draws the player box
  * 
  * @param state : an object describing the state of the game.
  * The following fields are expected in the state object:
@@ -133,6 +142,7 @@ Display.prototype.drawPlayer = function(state) {
 
 /**
  * drawEnemies
+ * Draws the enemy boxes
  * 
  * @param state : an object describing the state of the game.
  * The following fields are expected in the state object:
@@ -159,6 +169,7 @@ Display.prototype.drawEnemies = function(state) {
 
 /**
  * drawExplosions
+ * Draws the explosion boxes
  * 
  * @param state : an object describing the state of the game.
  * The following fields are expected in the state object:
@@ -185,6 +196,7 @@ Display.prototype.drawExplosions = function(state) {
 
 /**
  * drawPowerBoxes
+ * Draws the power boxes
  * 
  * @param state : an object describing the state of the game.
  * The following fields are expected in the state object:
@@ -209,6 +221,16 @@ Display.prototype.drawPowerBoxes = function(state) {
   });
 };
 
+/**
+ * drawHud
+ * Draws the hud
+ * 
+ * @param {Object} hudState : an object describing the game state for the hud. 
+ * The following fields are expected in the state object:
+ * score: {number} the current player score 
+ * level: {number} the current level of the game
+ * lives: {number} the number of lives the player has left
+ */
 Display.prototype.drawHud = function(hudState){
 
   this.hud_context.font = '20px sans-serif';
@@ -224,6 +246,13 @@ Display.prototype.drawHud = function(hudState){
 
 };
 
+/**
+ * end
+ * Displays the final score at the end of the game
+ * 
+ * @param {number} score the final score  
+ * @param {number} level the final level
+ */
 Display.prototype.end = function(score, level){
 
   this.game_context.font = '20px sans-serif';
