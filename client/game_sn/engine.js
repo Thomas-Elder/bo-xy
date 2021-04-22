@@ -84,38 +84,6 @@ Engine.prototype.run = function(){
  */
 Engine.prototype.update = function(){
 
-  // OOOOOOk I think what we want to do here is update some... 
-  // So conditionally update different parts as needed. 
-  // IE initially we just update background for 5 seconds?
-  // Then if a level changes we do that again. 
-  //
-  // Ok so what conditions do we have...
-  var intro = false;
-  var levelChange = false;
-  var outro = false;
-
-  if (intro) {
-    // update background
-    // update player
-    // after 5 seconds, update intro to false
-
-  } else if (levelChange) {
-    // update background
-    // update player
-    // after 5 seconds, update intro to false
-
-  } else if (outro) {
-    // update background
-    // after 5 seconds, endGame
-
-  } else {
-    // update background
-    // update player
-    // update enemies
-    // check for collisions
-    // if level changes, set levelChange = true
-  }
-
   // update all
   this.background.update();
   this.hud.update();
