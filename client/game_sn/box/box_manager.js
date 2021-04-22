@@ -47,6 +47,8 @@ BoxManager.prototype.init = function() {
     var location = this.newEnemyLocation(this.config);
     this.enemyBoxes[i] = new EnemyBox(location, 0, this.config);
   }
+
+  this.explodeBoxes = [];
 };
 
 BoxManager.prototype.update = function(level) {
@@ -77,6 +79,80 @@ BoxManager.prototype.update = function(level) {
       
       var location = this.newEnemyLocation(this.config);
       this.enemyBoxes[i] = new EnemyBox(location, level, this.config);
+    }
+  }
+};
+
+BoxManager.prototype.update = function(level) {
+ 
+  var self = this;
+
+  this.playerBox.update();
+  
+  if (this.explodeBoxes.length > 0) {
+    for (var k = 0; k < this.explodeBoxes.length; k++){
+
+      this.explodeBoxes[k].update();
+
+      if (this.explodeBoxes[k].endOfExplode()) {
+        this.explodeBoxes.splice(k, 1);
+      }
+    }
+  }
+
+  for (var i = 0; i < this.enemyBoxes.length; i++){
+
+    if(this.enemyBoxes[i].onScreen)
+      this.enemyBoxes[i].update();
+
+    if (!this.enemyBoxes[i].onScreen){
+      if (!this.enemyBoxes[i].hit)
+        this.enemiesDodged++;
+      
+      var location = this.newEnemyLocation(this.config);
+      this.enemyBoxes[i] = new EnemyBox(location, level, this.config);
+    }
+  }
+};
+
+BoxManager.prototype.updatePlayer = function() {
+ 
+  var self = this;
+
+  self.playerBox.update();
+};
+
+BoxManager.prototype.updateExplosions = function() {
+ 
+  var self = this;
+  
+  if (self.explodeBoxes.length > 0) {
+    for (var k = 0; k < self.explodeBoxes.length; k++){
+
+      self.explodeBoxes[k].update();
+
+      if (self.explodeBoxes[k].endOfExplode()) {
+        self.explodeBoxes.splice(k, 1);
+      }
+    }
+  }
+};
+
+BoxManager.prototype.updateEnemies = function(level) {
+ 
+  var self = this;
+
+  for (var i = 0; i < self.enemyBoxes.length; i++){
+
+    if(self.enemyBoxes[i].onScreen)
+      self.enemyBoxes[i].update();
+
+    if (!self.enemyBoxes[i].onScreen){
+      if (!self.enemyBoxes[i].hit)
+        self.enemiesDodged++;
+      
+      var location = self.newEnemyLocation(self.config);
+      self.enemyBoxes[i] = new EnemyBox(location, level, self.config);
     }
   }
 };
