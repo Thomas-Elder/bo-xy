@@ -112,10 +112,12 @@ Engine.prototype.run = function(){
       self.background.update();
       self.hud.update();
       self.boxManager.updatePlayer();
+      self.boxManager.updateExplosions();
 
       // Then draaw it all
       self.display.drawClear();
       self.display.drawBackground(state);
+      self.display.drawExplosions(state);
       self.display.drawPlayer(state);
       self.display.drawHud({
         score: self.score,
