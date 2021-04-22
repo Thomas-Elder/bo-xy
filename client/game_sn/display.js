@@ -24,7 +24,25 @@ Display.prototype.init = function(){
 };
 
 /**
- * draw
+ * drawClear
+ * 
+ * Clears the game_context ready to draw game elements each frame.
+ * 
+ */
+Display.prototype.drawClear = function() {
+  var self = this;
+
+  // Clear the contexts for redraw
+  self.game_context.clearRect(0, 0, 
+                          self.config.screenSize.width, 
+                          self.config.screenSize.height);
+  self.hud_context.clearRect(0, 0, 
+                          self.config.hudSize.width, 
+                          self.config.hudSize.height);
+};
+
+/**
+ * drawBackground
  * 
  * @param state : an object describing the state of the game.
  * The following fields are expected in the state object:
@@ -36,71 +54,15 @@ Display.prototype.init = function(){
  * powerboxes: an array of PowerBox objects
  * 
  */
-Display.prototype.drawGame = function(state){
-
+Display.prototype.drawBackground = function(state) {
   var self = this;
-  var blinkRate = this.config.fps / 2;
-
-  this.tick++;
-
-  if (this.tick > blinkRate)
-    this.tick = 0;
-
-  // Clear the contexts for redraw
-  this.game_context.clearRect(0, 0, 
-                          this.config.screenSize.width, 
-                          this.config.screenSize.height);
-  this.hud_context.clearRect(0, 0, 
-                          this.config.hudSize.width, 
-                          this.config.hudSize.height);
 
   // Draw the background
-  this.game_context.fillStyle = state.background.colour;
-  this.game_context.fillRect(0, 
+  self.game_context.fillStyle = state.background.colour;
+  self.game_context.fillRect(0, 
                           0, 
-                          this.config.screenSize.width, 
-                          this.config.screenSize.height);
-
-  // Draw the player box
-  if (state.player.isBlinking > 0) {
-    if (this.tick < blinkRate/2) {
-      this.game_context.fillStyle = state.player.colour;
-      this.game_context.fillRect(state.player.x, 
-                              state.player.y, 
-                              state.player.width, 
-                              state.player.height);
-    } else {
-      this.game_context.fillStyle = state.player.invColour;
-      this.game_context.fillRect(state.player.x, 
-                              state.player.y, 
-                              state.player.width, 
-                              state.player.height);
-    }
-
-  } else {
-    this.game_context.fillStyle = state.player.colour;
-    this.game_context.fillRect(state.player.x, 
-                            state.player.y, 
-                            state.player.width, 
-                            state.player.height);
-  }
-  // Draw the enemy boxes
-  state.enemies.forEach(function(enemy){
-    self.game_context.fillStyle = enemy.colour;
-    self.game_context.fillRect(enemy.x, 
-                          enemy.y, 
-                          enemy.width, 
-                          enemy.height);
-  });
-
-  // Draw the explosions, if any
-  state.explosions.forEach(function(explosion){
-    self.game_context.fillStyle = explosion.currentColour;
-    self.game_context.fillRect(explosion.x, 
-                          explosion.y, 
-                          explosion.width, 
-                          explosion.height);
-  });
+                          self.config.screenSize.width, 
+                          self.config.screenSize.height);
 
   // Draw the far stars, if any
   state.farStars.forEach(function(starbox){
@@ -119,6 +81,123 @@ Display.prototype.drawGame = function(state){
                           starbox.width, 
                           starbox.height);
   });
+};
+
+/**
+ * drawPlayer
+ * 
+ * @param state : an object describing the state of the game.
+ * The following fields are expected in the state object:
+ * background: a background object
+ * hud: a Hud object
+ * player: a PlayerBox object
+ * enemies: an array of EnemyBox objects
+ * explosions: an array of ExplodeBox objects
+ * powerboxes: an array of PowerBox objects
+ * 
+ */
+Display.prototype.drawPlayer = function(state) {
+  var self = this;
+
+  var blinkRate = self.config.fps / 2;
+
+  self.tick++;
+
+  if (self.tick > blinkRate)
+    self.tick = 0;
+
+  // Draw the player box
+  if (state.player.isBlinking > 0) {
+    if (self.tick < blinkRate/2) {
+      self.game_context.fillStyle = state.player.colour;
+      self.game_context.fillRect(state.player.x, 
+                              state.player.y, 
+                              state.player.width, 
+                              state.player.height);
+    } else {
+      self.game_context.fillStyle = state.player.invColour;
+      self.game_context.fillRect(state.player.x, 
+                              state.player.y, 
+                              state.player.width, 
+                              state.player.height);
+    }
+
+  } else {
+    self.game_context.fillStyle = state.player.colour;
+    self.game_context.fillRect(state.player.x, 
+                            state.player.y, 
+                            state.player.width, 
+                            state.player.height);
+  }
+};
+
+/**
+ * drawEnemies
+ * 
+ * @param state : an object describing the state of the game.
+ * The following fields are expected in the state object:
+ * background: a background object
+ * hud: a Hud object
+ * player: a PlayerBox object
+ * enemies: an array of EnemyBox objects
+ * explosions: an array of ExplodeBox objects
+ * powerboxes: an array of PowerBox objects
+ * 
+ */
+Display.prototype.drawEnemies = function(state) {
+  var self = this;
+
+  // Draw the enemy boxes
+  state.enemies.forEach(function(enemy){
+    self.game_context.fillStyle = enemy.colour;
+    self.game_context.fillRect(enemy.x, 
+                          enemy.y, 
+                          enemy.width, 
+                          enemy.height);
+  });
+};
+
+/**
+ * drawExplosions
+ * 
+ * @param state : an object describing the state of the game.
+ * The following fields are expected in the state object:
+ * background: a background object
+ * hud: a Hud object
+ * player: a PlayerBox object
+ * enemies: an array of EnemyBox objects
+ * explosions: an array of ExplodeBox objects
+ * powerboxes: an array of PowerBox objects
+ * 
+ */
+Display.prototype.drawExplosions = function(state) {
+  var self = this;
+
+  // Draw the explosions, if any
+  state.explosions.forEach(function(explosion){
+    self.game_context.fillStyle = explosion.currentColour;
+    self.game_context.fillRect(explosion.x, 
+                          explosion.y, 
+                          explosion.width, 
+                          explosion.height);
+  });
+};
+
+/**
+ * drawPowerBoxes
+ * 
+ * @param state : an object describing the state of the game.
+ * The following fields are expected in the state object:
+ * background: a background object
+ * hud: a Hud object
+ * player: a PlayerBox object
+ * enemies: an array of EnemyBox objects
+ * explosions: an array of ExplodeBox objects
+ * powerboxes: an array of PowerBox objects
+ * 
+ */
+Display.prototype.drawPowerBoxes = function(state) {
+  var self = this;
 
   // Draw the powerboxes, if any
   state.powerboxes.forEach(function(powerboxes){
