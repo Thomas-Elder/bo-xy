@@ -16,6 +16,7 @@ var Controller = require('./controller');
 var Display = require('./display');
 var Interaction = require('./interaction');
 var config = require('./config');
+const { levelChangeDuration, outroDuration } = require('./config');
 
 /**
  * A class for managing the game.
@@ -67,8 +68,8 @@ Engine.prototype.run = function(){
   var self = this;
 
   var introCount = 0;
-  var outroCount = 0;
-  var levelChangeCount = 0;
+  var outroCount = self.config.outroDuration;
+  var levelChangeCount = self.config.levelChangeDuration;
 
   // loop
   function loop(){
@@ -86,7 +87,6 @@ Engine.prototype.run = function(){
     };
 
     // First we need to do intro stuff, till introCount == introDuration
-    // else run the game
     if (introCount != self.config.introDuration) {
       self.background.update();
       self.hud.update();
@@ -99,16 +99,55 @@ Engine.prototype.run = function(){
       });
 
       introCount++;
+
+      // Then we need to do the same between levels... 
+    } else if (levelChangeCount != levelChangeDuration) {
+      self.background.update();
+      self.hud.update();
+      self.display.drawClear();
+      self.display.drawBackground(state);
+      self.display.drawHud({
+        score: self.score,
+        level: self.level,
+        lives: self.lives
+      });
+
+      levelChangeCount++;
+
+      // Then we need to do the same at the end... 
+    } else if (outroCount != outroDuration) {
+      self.background.update();
+      self.hud.update();
+      self.display.drawClear();
+      self.display.drawBackground(state);
+      self.display.drawHud({
+        score: self.score,
+        level: self.level,
+        lives: self.lives
+      });
+
+      outroCount++;
+
+      // Else run the game
     } else {
 
-      // Update and draw the game  
+      // Update the game  
       self.background.update();
       self.hud.update();
       self.boxManager.update(self.level);
       self.boxManager.enemyHit();
       self.lives = config.box.player.lives - self.boxManager.enemiesHit;
-      self.level = Math.floor(self.boxManager.enemiesDodged / 100);
       self.score = self.boxManager.enemiesDodged;
+
+      // Check if the level changed
+      // And set levelChangeCount =0 so the break plays
+      // Then update self.level, and clearEnemies
+      var currentLevel = Math.floor(self.boxManager.enemiesDodged / 100); 
+      if (self.level != currentLevel) {
+        levelChangeCount = 0;
+        self.level = currentLevel;
+        self.boxManager.clearEnemies(self.level);
+      }
 
       // And the draws...
       self.display.drawClear();
