@@ -7,8 +7,8 @@
     "start": "node app.js",
     "cover": "nyc report",
     "test": "nyc jasmine",
-    "watch": "watchify client/browserify.js -o client/game_sn.js -v",
-    "build": "browserify client/browserify.js | uglifyjs -mc > client/game_sn.js"
+    "watch": "watchify client/browserify.js -p esmify -o client/game_sn.js -v",
+    "build": "browserify client/browserify.js -p esmify | uglifyjs -mc > client/game_sn.js"
   },
   "author": "thomas elder",
   "engines": {
@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "async": "^3.2.0",
+    "esmify": "^2.1.1",
     "jasmine": "^3.7.0",
     "nyc": "^15.1.0",
     "request": "^2.69.0",
