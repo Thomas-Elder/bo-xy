@@ -1,6 +1,8 @@
 
-// Defines the StarBox type.
-export class Starbox {
+/**
+ * StarBox
+ */
+ export class Starbox {
 
   constructor(location, config, width, height, colour, speed) {
     this.x            = location.x;
@@ -28,12 +30,12 @@ export class Starbox {
       this.onScreen = false;
   }
 
-// Returns an object with x an y coords, the box's current position
+  // Returns an object with x an y coords, the box's current position
   getPosition () {
     return {x: this.x, y: this.y};
   }
 
-// Returns an object with width and height of the box
+  // Returns an object with width and height of the box
   getSize () {
     return {width: this.width, height: this.height};
   }
