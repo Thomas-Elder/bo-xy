@@ -1,4 +1,5 @@
-var Starbox = require('./box/star_box');
+
+import {Starbox} from './box/star_box';
 
 // Define the Background type.
 var Background = function(config, speed, context) {
