@@ -1,40 +1,40 @@
 
 // Defines the StarBox type.
-var StarBox = function (location, config, width, height, colour, speed) {
-  this.x            = location.x;
-  this.y            = location.y;
-  
-  this.width        = width;
-  this.height       = height;
+export class Starbox {
 
-  this.screenWidth  = config.screenSize.width;
-  this.screenHeight = config.screenSize.height;
+  constructor(location, config, width, height, colour, speed) {
+    this.x            = location.x;
+    this.y            = location.y;
+    
+    this.width        = width;
+    this.height       = height;
 
-  this.colour       = colour;
-  this.speed        = speed;
+    this.screenWidth  = config.screenSize.width;
+    this.screenHeight = config.screenSize.height;
 
-  this.onScreen     = true;
-}
+    this.colour       = colour;
+    this.speed        = speed;
 
-// Define the StarBox type's update method.
-StarBox.prototype.update = function() {
+    this.onScreen     = true;
+  }
 
-  // Move enemy down the screen
-  if (this.y + this.height < this.screenHeight + this.height)
-    this.y += this.speed;
-  else
-    this.onScreen = false;
-};
+  // Define the StarBox type's update method.
+  update () {
+
+    // Move enemy down the screen
+    if (this.y + this.height < this.screenHeight + this.height)
+      this.y += this.speed;
+    else
+      this.onScreen = false;
+  }
 
 // Returns an object with x an y coords, the box's current position
-StarBox.prototype.getPosition = function() {
-  return {x: this.x, y: this.y};
-};
+  getPosition () {
+    return {x: this.x, y: this.y};
+  }
 
 // Returns an object with width and height of the box
-StarBox.prototype.getSize = function() {
-  return {width: this.width, height: this.height};
-};
-
-
-module.exports = StarBox;
+  getSize () {
+    return {width: this.width, height: this.height};
+  }
+}
