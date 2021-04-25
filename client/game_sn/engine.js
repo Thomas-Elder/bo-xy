@@ -1,10 +1,4 @@
 
-// Box requirements
-var PlayerBox = require('./box/player_box');
-var EnemyBox = require('./box/enemy_box');
-var ExplodeBox = require('./box/explode_box');
-var Starbox = require('./box/star_box');
-var PowerBox = require('./box/power_box');
 var BoxManager = require('./box/box_manager')
 
 // Background and Hud
