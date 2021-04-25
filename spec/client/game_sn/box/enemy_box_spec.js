@@ -15,7 +15,6 @@ describe('EnemyBox',
     
     afterEach(
       function(done){
-        delete enemy;
         done();
     });    
 

@@ -16,7 +16,6 @@ describe('ExplodeBox',
     
     afterEach(
       function(done){
-        delete explode;
         done();
     });    
 

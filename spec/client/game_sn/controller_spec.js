@@ -21,7 +21,6 @@ describe('Controller',
     
     afterEach(
       function(done){
-        delete controller;
         done();
     });    
 

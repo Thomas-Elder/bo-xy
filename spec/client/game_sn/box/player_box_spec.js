@@ -25,7 +25,6 @@ describe('PlayerBox',
     
     afterEach(
       function(done){
-        delete player;
         done();
     });    
 
