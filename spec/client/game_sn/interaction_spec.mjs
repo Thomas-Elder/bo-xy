@@ -1,5 +1,5 @@
 
-var Interaction = require('../../../client/game_sn/interaction');
+import {Interaction} from '../../../client/game_sn/interaction';
 
 var interaction;
 
@@ -15,7 +15,6 @@ describe('Interaction',
     
     afterEach(
       function(done){
-        delete interaction;
         done();
     });    
 
