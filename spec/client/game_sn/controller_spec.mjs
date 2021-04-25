@@ -1,5 +1,5 @@
 
-var Controller = require('../../../client/game_sn/controller');
+import {Controller} from '../../../client/game_sn/controller';
 
 var controller;
 var event;
