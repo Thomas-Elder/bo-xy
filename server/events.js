@@ -35,13 +35,14 @@ EventManager.prototype.lobbyEvents = function(io, lm){
           // join room
           socket.join(lobby.id);
 
-          console.log();
-          console.log('Logging ', lobby, ' to see if for some reason it resolves travis test run... ');
-          console.log();
+
+          //console.log('Logging ', lobby, 'before lobbyManager.get(lobby.id).users.push(socket.id);');
 
           // push the socket.id into the lobby.users object
           lobbyManager.get(lobby.id).users.push(socket.id);
-                
+          
+          //console.log('Logging ', lobby, 'after lobbyManager.get(lobby.id).users.push(socket.id);');
+
           // let the room know you've joined
           mingleNamespace.to(lobby.id).emit('PlayerJoined', lobbyManager.get(lobby.id));
       });
