@@ -3,143 +3,193 @@ var PlayerBox = require('./player_box.js');
 var EnemyBox = require('./enemy_box.js');
 var ExplodeBox = require('./explode_box.js');
 
-import {Interaction} from '../interaction';
+import { Interaction } from '../interaction';
 
-const {Howl} = require('howler');
-var explosion = new Howl({src:['static/game_sn/media/explosion.mp3'], volume: 0.3});
+const { Howl } = require('howler');
+var explosion = new Howl({ src: ['static/game_sn/media/explosion.mp3'], volume: 0.3 });
 
 /**
  * BoxManager
+ * A class for managing the itinialisation and updating for the games boxes.
  */
-var BoxManager = function (config, controller) {
+export class BoxManager {
 
-  this.config     = config;
-  this.controller = controller;
+  constructor(config, controller) {
 
-  this.enemyBoxes   = new Array(this.config.numberOfEnemies);
-  this.enemySpeed   = config.box.enemy.speed;
-  this.enemySpacing = 0;
-  
-  this.explodeBoxes = [];
+    this.config = config;
+    this.controller = controller;
 
-  this.enemiesDodged= 0;
-  this.enemiesHit   = 0;
-}
+    this.enemyBoxes = new Array(this.config.numberOfEnemies);
+    this.enemySpeed = config.box.enemy.speed;
+    this.enemySpacing = 0;
 
-BoxManager.prototype.init = function() {
+    this.explodeBoxes = [];
 
-  this.interaction = new Interaction();
-
-  //this.sounds = new Sounds('../media/explosion.m4a');
-
-  // Instantiate a new instance of type PlayerBox.
-  this.playerBox = new PlayerBox(this.config, this.controller);
-  
-  
-  /* Calculate placement of enemy boxes based on width of screen and number of
-   * boxes.
-   */
-  this.enemySpacing = (this.config.screenSize.width - this.config.box.enemy.size.width) / (this.config.numberOfEnemies - 1);
-
-  // Instantiate an array of new instances of type EnemyBox.
-  for (var i = 0; i < this.enemyBoxes.length; i++) {
-    var location = this.newEnemyLocation(this.config);
-    this.enemyBoxes[i] = new EnemyBox(location, 0, this.config);
+    this.enemiesDodged = 0;
+    this.enemiesHit = 0;
   }
 
-  this.explodeBoxes = [];
-};
+  /**
+   * init
+   * Initialises the necessary objects and variables for the Box Manager.
+   * 
+   * Initialises instances of the following classes:
+   * - interaction
+   * - player
+   * - enemy boxes
+   * - explode box
+   */
+  init() {
+    var self = this;
 
-BoxManager.prototype.updatePlayer = function() {
- 
-  var self = this;
+    self.interaction = new Interaction();
 
-  self.playerBox.update();
-};
+    // Instantiate a new instance of type PlayerBox.
+    self.playerBox = new PlayerBox(self.config, self.controller);
 
-BoxManager.prototype.updateExplosions = function() {
- 
-  var self = this;
-  
-  if (self.explodeBoxes.length > 0) {
-    for (var k = 0; k < self.explodeBoxes.length; k++){
 
-      self.explodeBoxes[k].update();
+    /* Calculate placement of enemy boxes based on width of screen and number of
+    * boxes.
+    */
+    self.enemySpacing = (self.config.screenSize.width - self.config.box.enemy.size.width) / (self.config.numberOfEnemies - 1);
 
-      if (self.explodeBoxes[k].endOfExplode()) {
-        self.explodeBoxes.splice(k, 1);
+    // Instantiate an array of new instances of type EnemyBox.
+    for (var i = 0; i < self.enemyBoxes.length; i++) {
+      var location = self.newEnemyLocation(self.config.screenSize.width, self.config.screenSize.height);
+      self.enemyBoxes[i] = new EnemyBox(location, 0, self.config);
+    }
+
+    self.explodeBoxes = [];
+  }
+
+  /**
+   * updatePlayer
+   * Calls the player box's update function.
+   */
+  updatePlayer() {
+
+    var self = this;
+
+    self.playerBox.update();
+  }
+
+  /**
+   * updateExplosions
+   * Iterates through the explode box array, calling update until
+   * endOfExplode returns true.
+   */
+  updateExplosions() {
+
+    var self = this;
+
+    if (self.explodeBoxes.length > 0) {
+      for (var k = 0; k < self.explodeBoxes.length; k++) {
+
+        self.explodeBoxes[k].update();
+
+        if (self.explodeBoxes[k].endOfExplode()) {
+          self.explodeBoxes.splice(k, 1);
+        }
       }
     }
   }
-};
 
-BoxManager.prototype.updateEnemies = function(level) {
- 
-  var self = this;
+  /**
+   * updateEnemies
+   * Iterates through the enemy box array. If the enemy is on the screen 
+   * it calls update, and increments the number of enemies dodged.
+   * Otherwise create a new box at a new location.
+   * 
+   * @param {int} level the level at which to set the new array of enemies
+   */
+  updateEnemies(level) {
 
-  for (var i = 0; i < self.enemyBoxes.length; i++){
+    var self = this;
 
-    if(self.enemyBoxes[i].onScreen)
-      self.enemyBoxes[i].update();
+    for (var i = 0; i < self.enemyBoxes.length; i++) {
 
-    if (!self.enemyBoxes[i].onScreen){
-      if (!self.enemyBoxes[i].hit)
-        self.enemiesDodged++;
-      
-      var location = self.newEnemyLocation(self.config);
+      if (self.enemyBoxes[i].onScreen) {
+        self.enemyBoxes[i].update();
+      }
+
+      if (!self.enemyBoxes[i].onScreen) {
+        if (!self.enemyBoxes[i].hit)
+          self.enemiesDodged++;
+
+        var location = self.newEnemyLocation(self.config.screenSize.width, self.config.screenSize.height);
+        self.enemyBoxes[i] = new EnemyBox(location, level, self.config);
+      }
+    }
+  }
+
+  /**
+   * clearEnemies
+   * Iterates through the enemy box array and creates new boxes at new
+   * locations.
+   * 
+   * @param {int} level the level at which to set the new array of enemies
+   */
+  clearEnemies(level) {
+
+    var self = this;
+
+    for (var i = 0; i < self.enemyBoxes.length; i++) {
+      var location = self.newEnemyLocation(self.config.screenSize.width, self.config.screenSize.height);
       self.enemyBoxes[i] = new EnemyBox(location, level, self.config);
     }
   }
-};
 
-/**
- * Reinstantiate the enemy box array
- */
-BoxManager.prototype.clearEnemies = function(level) {
+  /** 
+   * enemyHit
+   * Checks if there's a collision between the player box and 
+   * any of the enemy boxes. 
+   * If the player is not invulnerable, and the enemy box is on
+   * the screen, and any coordinates of either box overlap, the 
+   * enemy box is set offscreen, an explode box is created, and 
+   * the enemiesHit count is incremented.
+   * 
+   * The player box is also re-instantiated to trigger the
+   * invulnerability period.
+  */
+  enemyHit() {
 
-  for (var i = 0; i < this.enemyBoxes.length; i++) {
-    var location = this.newEnemyLocation(this.config);
-    this.enemyBoxes[i] = new EnemyBox(location, level, this.config);
-  }
-};
+    var self = this;
 
-BoxManager.prototype.enemyHit = function() {
+    if (!enemy.hit.playerBox.isBlinking) {
+      enemy.hit.enemyBoxes.forEach(function (enemy) {
+        if (enemy.onScreen) {
+          if (self.interaction.collision(self.playerBox, enemy)) {
+            explosion.play();
+            enemy.hit = true;
+            //enemy.onScreen = false;
+            self.explodeBoxes.push(new ExplodeBox(enemy.getPosition().x,
+              enemy.getPosition().y,
+              self.config));
 
-  var self = this;
+            self.enemiesHit++;
 
-  if (!this.playerBox.isBlinking){
-    this.enemyBoxes.forEach(function(enemy) {
-      if (enemy.onScreen){
-        if (self.interaction.collision(self.playerBox, enemy)) {
-          explosion.play();
-          enemy.hit = true;
-          enemy.onScreen = false;
-          self.explodeBoxes.push(new ExplodeBox(enemy.getPosition().x,
-                                                enemy.getPosition().y,
-                                                self.config));
-
-          self.enemiesHit++;
-
-          self.playerBox = new PlayerBox(self.config, self.controller);
+            self.playerBox = new PlayerBox(self.config, self.controller);
+          }
         }
-      }
-    });
+      });
+    }
   }
-};
 
-/**
- * Helper functions for the BoxManager
- */
+  /**
+   * newEnemyLocation
+   * Uses the width and height parameters to generate a new random location.
+   * The y value will put the location returned off the top of the screen, this is 
+   * so when enemies spawn they move into the top of the screen randomly.
+   * 
+   * @param {int} screenWidth the width of the screen to create an enemy location for
+   * @param {int} screenHeight the height of the screen to create an enemy location for
+   * @returns {object} an object with two fields, x and y
+   */
+  newEnemyLocation(screenWidth, screenHeight) {
 
-/**
- * newEnemyLocation
- */
-BoxManager.prototype.newEnemyLocation = function(config) {
-
-  return {
-    x: Math.floor(Math.random() * config.screenSize.width), 
-    y: -((this.config.screenSize.height - Math.floor(Math.random() * this.config.screenSize.height)))
-  };
-};
-
-module.exports = BoxManager;
+    return {
+      x: Math.floor(Math.random() * screenWidth),
+      y: -((screenHeight - Math.floor(Math.random() * screenHeight)))
+    };
+  }
+}
