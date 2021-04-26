@@ -192,7 +192,7 @@ export class EnemyBox{
   }
   
   // Returns an object with x an y coords, the box's current position
-  getPositionn() {
+  getPosition() {
     return {x: this.x, y: this.y};
   }
   
