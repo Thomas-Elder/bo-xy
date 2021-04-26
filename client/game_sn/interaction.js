@@ -6,6 +6,9 @@
  */
 export class Interaction {
 
+  /**
+   * 
+   */
   constructor() {
 
   }
