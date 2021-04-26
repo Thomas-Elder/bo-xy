@@ -33,11 +33,12 @@ export class BoxManager {
    * 
    * Initialises instances of the following classes:
    * - interaction
-   * - player
+   * - player box
    * - enemy boxes
    * - explode box
    */
   init() {
+    
     var self = this;
 
     self.interaction = new Interaction();
