@@ -1,5 +1,5 @@
 
-var BoxManager = require('./box/box_manager')
+import {BoxManager} from './box/box_manager';
 
 // Background and Hud
 var Background = require('./background');
