@@ -3,10 +3,10 @@ var PlayerBox = require('./player_box.js');
 var EnemyBox = require('./enemy_box.js');
 var ExplodeBox = require('./explode_box.js');
 
-var Interaction = require('../interaction');
+import {Interaction} from '../interaction';
 
 const {Howl} = require('howler');
-var explosion = new Howl({src:['static/game_sn/media/explosion.mp3'], volume: 0.5});
+var explosion = new Howl({src:['static/game_sn/media/explosion.mp3'], volume: 0.3});
 
 /**
  * BoxManager
