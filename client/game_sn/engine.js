@@ -3,12 +3,11 @@ var BoxManager = require('./box/box_manager')
 
 // Background and Hud
 var Background = require('./background');
-var Hud = require('./hud');
+import {Hud} from './hud';
 
 // 
 var Controller = require('./controller');
 var Display = require('./display');
-var Interaction = require('./interaction');
 var config = require('./config');
 const { levelChangeDuration, outroDuration } = require('./config');
 
@@ -33,15 +32,13 @@ var Engine = function(socket){
  */
 Engine.prototype.init = function(contexts){
 
-  this.interaction = new Interaction();
-
   this.display = new Display(config, contexts);
   this.display.init();
 
-  this.background = new Background(config);
+  this.background = new Background(this.config);
   this.background.init();
   
-  this.hud = new Hud(config);
+  this.hud = new Hud(this.config);
 
   // Set up the controller to pass to the player
   var controller   = new Controller();
@@ -71,6 +68,7 @@ Engine.prototype.run = function(){
 
     // Set the state var to pass to draw methods.
     var state = {
+      phase: true,
       background: self.background,
       hud: self.hud,
       player: self.boxManager.playerBox, 
