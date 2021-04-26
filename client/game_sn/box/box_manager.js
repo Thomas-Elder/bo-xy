@@ -1,7 +1,5 @@
 
-var PlayerBox = require('./player_box.js');
-var EnemyBox = require('./enemy_box.js');
-var ExplodeBox = require('./explode_box.js');
+import { PlayerBox, EnemyBox, ExplodeBox, Starbox } from './boxes'
 
 import { Interaction } from '../interaction';
 
@@ -155,13 +153,12 @@ export class BoxManager {
 
     var self = this;
 
-    if (!enemy.hit.playerBox.isBlinking) {
-      enemy.hit.enemyBoxes.forEach(function (enemy) {
+    if (!self.playerBox.isBlinking) {
+      self.enemyBoxes.forEach(function (enemy) {
         if (enemy.onScreen) {
           if (self.interaction.collision(self.playerBox, enemy)) {
             explosion.play();
-            enemy.hit = true;
-            //enemy.onScreen = false;
+            enemy.onScreen = false;
             self.explodeBoxes.push(new ExplodeBox(enemy.getPosition().x,
               enemy.getPosition().y,
               self.config));
