@@ -1,26 +1,12 @@
 
-export class hud {
+export class Hud {
 
-  constructor(config, context) {
+  constructor(config) {
   this.config  = config;
-  this.context = context;
 
   this.score   = 0;
   this.level   = 0;
   this.lives   = config.playerLives;
-  }
-
-  draw() {
-    this.context.font = '20px sans-serif';
-
-    var scoreString = 'score: ' + this.score;
-    var levelString = 'level: ' + this.level;
-    var livesString = 'lives: ' + this.lives;
-
-    this.context.fillStyle = '#3399FF';
-    this.context.fillText(scoreString, 10, 20);
-    this.context.fillText(levelString, 130, 20);
-    this.context.fillText(livesString, 250, 20);
   }
 
   update(score, level, lives) {
