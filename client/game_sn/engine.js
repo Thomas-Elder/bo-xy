@@ -1,8 +1,5 @@
 
 import {BoxManager} from './box/box_manager';
-
-// Background and Hud
-var Background = require('./background');
 import {Hud} from './hud';
 
 // 
@@ -34,9 +31,6 @@ Engine.prototype.init = function(contexts){
 
   this.display = new Display(config, contexts);
   this.display.init();
-
-  this.background = new Background(this.config);
-  this.background.init();
   
   this.hud = new Hud(this.config);
 
@@ -74,15 +68,15 @@ Engine.prototype.run = function(){
       player: self.boxManager.playerBox, 
       enemies: self.boxManager.enemyBoxes,
       explosions: self.boxManager.explodeBoxes,
-      farStars: self.background.farStarBoxes,
-      nearStars: self.background.nearStarBoxes,
+      farStars: self.boxManager.farStarBoxes,
+      nearStars: self.boxManager.nearStarBoxes,
       powerboxes: []
     };
 
     // First we need to do intro stuff, till introCount == introDuration
     if (introCount != self.config.introDuration) {
       // Update everything we want on the screen during this
-      self.background.update();
+      self.boxManager.updateBackground();
       self.hud.update();
       self.boxManager.updatePlayer();
 
@@ -101,7 +95,7 @@ Engine.prototype.run = function(){
       // Then we need to do the same between levels... 
     } else if (levelChangeCount != levelChangeDuration) {
       // Update everything we want on the screen during this
-      self.background.update();
+      self.boxManager.updateBackground();
       self.hud.update();
       self.boxManager.updatePlayer();
       self.boxManager.updateExplosions();
@@ -121,7 +115,7 @@ Engine.prototype.run = function(){
 
       // Then we need to do the same at the end... 
     } else if (outroCount != outroDuration) {
-      self.background.update();
+      self.boxManager.updateBackground();
       self.hud.update();
       self.boxManager.updateExplosions();
 
@@ -140,7 +134,7 @@ Engine.prototype.run = function(){
     } else if (!gameOver) {
 
       // Update the game  
-      self.background.update();
+      self.boxManager.updateBackground();
       self.hud.update();
       self.boxManager.updatePlayer();
       self.boxManager.updateExplosions();
