@@ -1,10 +1,10 @@
 
 import {BoxManager} from './box/box_manager';
 import {Hud} from './hud';
+import {Display} from './display';
 
 // 
 var Controller = require('./controller');
-var Display = require('./display');
 var config = require('./config');
 const { levelChangeDuration, outroDuration } = require('./config');
 
