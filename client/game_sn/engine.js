@@ -36,6 +36,7 @@ Engine.prototype.init = function(contexts){
   // Set up the controller to pass to the player
   var controller   = new Controller();
 
+  // Register the controllers event listeners
   window.onkeydown = function (event) { controller.keyDown(event); };
   window.onkeyup   = function (event) { controller.keyUp(event); };
 
