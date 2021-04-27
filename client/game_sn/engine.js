@@ -29,7 +29,6 @@ export class Engine {
     this.config = config;
 
     this.display = new Display(config, contexts);
-    this.display.init();
     
     this.hud = new Hud(this.config);
 
@@ -41,7 +40,6 @@ export class Engine {
     window.onkeyup   = function (event) { controller.keyUp(event); };
 
     this.boxManager = new BoxManager(config, controller);
-    this.boxManager.init();
   }
 
   /**
