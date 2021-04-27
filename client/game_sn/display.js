@@ -66,7 +66,7 @@ Display.prototype.drawBackground = function(state) {
   var self = this;
 
   // Draw the background
-  self.game_context.fillStyle = state.background.colour;
+  self.game_context.fillStyle = self.config.backgroundColour;
   self.game_context.fillRect(0, 
                           0, 
                           self.config.screenSize.width, 
