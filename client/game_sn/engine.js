@@ -2,9 +2,8 @@
 import {BoxManager} from './box/box_manager';
 import {Hud} from './hud';
 import {Display} from './display';
+import {Controller} from './controller';
 
-// 
-var Controller = require('./controller');
 const config = require('./config');
 
 /**
