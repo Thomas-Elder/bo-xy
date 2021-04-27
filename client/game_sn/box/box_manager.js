@@ -13,6 +13,8 @@ export class BoxManager {
 
   constructor(config, controller) {
 
+    var self = this;
+
     this.config = config;
     this.controller = controller;
 
@@ -30,21 +32,6 @@ export class BoxManager {
 
     this.nearStarBoxes   = new Array(this.config.numberOfNearStars);
     this.nearStarSpeed   = config.box.nearstar.speed;
-  }
-
-  /**
-   * init
-   * Initialises the necessary objects and variables for the Box Manager.
-   * 
-   * Initialises instances of the following classes:
-   * - interaction
-   * - player box
-   * - enemy boxes
-   * - explode box
-   */
-  init() {
-
-    var self = this;
 
     // First set up the background
     // Instantiate an array of new instances of type StarBox.
@@ -84,7 +71,6 @@ export class BoxManager {
     // Instantiate the explode boxes array.
     self.explodeBoxes = [];
   }
-
 
   /**
    * updateBackground
