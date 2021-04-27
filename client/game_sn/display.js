@@ -11,16 +11,6 @@ export class Display {
   constructor (config, contexts){
     this.config = config;
     this.contexts = contexts;
-
-    this.tick = 0;
-  }
-
-  /**
-   * init
-   * Initialises the game and hud canvases ready for drawing
-   * 
-   */
-  init(){
  
     this.contexts.game_canvas.width   = this.config.screenSize.width;
     this.contexts.game_canvas.height  = this.config.screenSize.height;
@@ -31,6 +21,7 @@ export class Display {
     this.game_context = this.contexts.game_context;
     this.hud_context = this.contexts.hud_context;
 
+    this.tick = 0;
   }
 
   /**
