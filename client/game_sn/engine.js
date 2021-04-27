@@ -11,7 +11,13 @@ const config = require('./config');
  */
 export class Engine {
 
-  constructor(socket){
+  /**
+   * Engine
+   * 
+   * @param {*} socket 
+   * @param {*} contexts 
+   */
+  constructor(socket, contexts){
 
     this.socket       = socket;
     this.total_score  = 0;
@@ -21,14 +27,6 @@ export class Engine {
 
     this.max_level    = config.numberOfLevels;
     this.config = config;
-
-  }
-
-  /**
-   * init
-   * @param {*} contexts 
-   */
-  init(contexts){
 
     this.display = new Display(config, contexts);
     this.display.init();
@@ -44,7 +42,6 @@ export class Engine {
 
     this.boxManager = new BoxManager(config, controller);
     this.boxManager.init();
-
   }
 
   /**

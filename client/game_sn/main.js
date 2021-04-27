@@ -32,9 +32,7 @@ window.onload = function () {
     $("#new-player").hide();
     $("#game").show();
 
-    var engine = new Engine(socket);
-
-    engine.init(contexts);
+    var engine = new Engine(socket, contexts);
     engine.run();
   }); 
 };
