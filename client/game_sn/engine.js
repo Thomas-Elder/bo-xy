@@ -5,8 +5,7 @@ import {Display} from './display';
 
 // 
 var Controller = require('./controller');
-var config = require('./config');
-const { levelChangeDuration, outroDuration } = require('./config');
+const config = require('./config');
 
 /**
  * A class for managing the game.
@@ -92,7 +91,7 @@ Engine.prototype.run = function(){
       introCount++;
 
       // Then we need to do the same between levels... 
-    } else if (levelChangeCount != levelChangeDuration) {
+    } else if (levelChangeCount != self.config.levelChangeDuration) {
       // Update everything we want on the screen during this
       self.boxManager.updateBackground();
       self.hud.update();
@@ -113,7 +112,7 @@ Engine.prototype.run = function(){
       levelChangeCount++;
 
       // Then we need to do the same at the end... 
-    } else if (outroCount != outroDuration) {
+    } else if (outroCount != self.config.outroDuration) {
       self.boxManager.updateBackground();
       self.hud.update();
       self.boxManager.updateExplosions();
