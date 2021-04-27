@@ -25,6 +25,12 @@ export class BoxManager {
 
     this.enemiesDodged = 0;
     this.enemiesHit = 0;
+
+    this.farStarBoxes   = new Array(this.config.numberOfFarStars);
+    this.farStarSpeed   = config.box.farstar.speed;
+
+    this.nearStarBoxes   = new Array(this.config.numberOfNearStars);
+    this.nearStarSpeed   = config.box.nearstar.speed;
   }
 
   /**
@@ -38,18 +44,36 @@ export class BoxManager {
    * - explode box
    */
   init() {
-    
+
     var self = this;
+
+    // First set up the background
+    // Instantiate an array of new instances of type StarBox.
+    for (var i = 0; i < self.farStarBoxes.length; i++) {
+      var location = self.startStarLocation(self.config.screenSize.width, self.config.screenSize.height);
+      self.farStarBoxes[i] = new Starbox(location, self.config,
+        self.config.box.farstar.size.width,
+        self.config.box.farstar.size.height,
+        self.config.box.farstar.colour,
+        self.config.box.farstar.speed);
+    }
+
+    // Instantiate an array of new instances of type StarBox.
+    for (var i = 0; i < self.nearStarBoxes.length; i++) {
+      var location = self.startStarLocation(self.config.screenSize.width, self.config.screenSize.height);
+      self.nearStarBoxes[i] = new Starbox(location, self.config,
+        self.config.box.nearstar.size.width,
+        self.config.box.nearstar.size.height,
+        self.config.box.nearstar.colour,
+        self.config.box.nearstar.speed);
+    }
 
     self.interaction = new Interaction();
 
     // Instantiate a new instance of type PlayerBox.
     self.playerBox = new PlayerBox(self.config, self.controller);
 
-
-    /* Calculate placement of enemy boxes based on width of screen and number of
-    * boxes.
-    */
+    // Calculate placement of enemy boxes based on width of screen and number of boxes.
     self.enemySpacing = (self.config.screenSize.width - self.config.box.enemy.size.width) / (self.config.numberOfEnemies - 1);
 
     // Instantiate an array of new instances of type EnemyBox.
@@ -58,7 +82,46 @@ export class BoxManager {
       self.enemyBoxes[i] = new EnemyBox(location, 0, self.config);
     }
 
+    // Instantiate the explode boxes array.
     self.explodeBoxes = [];
+  }
+
+
+  /**
+   * updateBackground
+   * Updates the background
+   */
+  updateBackground() {
+
+    var self = this;
+
+    // Update the location of all farStarBoxes
+    for (var i = 0; i < this.farStarBoxes.length; i++) {
+      if (self.farStarBoxes[i].onScreen) {
+        self.farStarBoxes[i].update();
+      } else {
+        var location = self.newStarLocation(self.config.screenSize.width, self.config.screenSize.height);
+        self.farStarBoxes[i] = new Starbox(location, self.config,
+          self.config.box.farstar.size.width,
+          self.config.box.farstar.size.height,
+          self.config.box.farstar.colour,
+          self.config.box.farstar.speed);
+      }
+    }
+
+    // Update the location of all nearStarBoxes
+    for (var i = 0; i < self.nearStarBoxes.length; i++) {
+      if (self.nearStarBoxes[i].onScreen) {
+        self.nearStarBoxes[i].update();
+      } else {
+        var location = self.newStarLocation(self.config.screenSize.width, self.config.screenSize.height);
+        self.nearStarBoxes[i] = new Starbox(location, self.config,
+          self.config.box.nearstar.size.width,
+          self.config.box.nearstar.size.height,
+          self.config.box.nearstar.colour,
+          self.config.box.nearstar.speed);
+      }
+    }
   }
 
   /**
@@ -188,6 +251,42 @@ export class BoxManager {
     return {
       x: Math.floor(Math.random() * screenWidth),
       y: -((screenHeight - Math.floor(Math.random() * screenHeight)))
+    };
+  }
+
+  /**
+   * startStarLocation
+   * Uses the width and height parameters to generate a new random location.
+   * The y value will put the location returned on the screen for this function, 
+   * so that the game starts with stars on the screen.
+   * 
+   * @param {int} screenWidth the width of the screen to create an enemy location for
+   * @param {int} screenHeight the height of the screen to create an enemy location for
+   * @returns {object} an object with two fields, x and y
+   */
+  startStarLocation(screenWidth, screenHeight) {
+
+    return {
+      x: Math.floor(Math.random() * screenWidth),
+      y: screenHeight - Math.floor(Math.random() * screenHeight)
+    };
+  }
+
+  /**
+   * newStarLocation
+   * Uses the width and height parameters to generate a new random location.
+   * The y value will put the location returned off the top of the screen, this is 
+   * so when enemies spawn they move into the top of the screen randomly.
+   * 
+   * @param {int} screenWidth the width of the screen to create an enemy location for
+   * @param {int} screenHeight the height of the screen to create an enemy location for
+   * @returns {object} an object with two fields, x and y
+   */
+  newStarLocation(screenWidth, screenHeight) {
+
+    return {
+      x: Math.floor(Math.random() * screenWidth),
+      y: -(screenHeight - Math.floor(Math.random() * screenHeight))
     };
   }
 }
