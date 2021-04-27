@@ -1,7 +1,6 @@
 
-import { PlayerBox, EnemyBox, ExplodeBox, Starbox } from './boxes'
-
-import { Interaction } from '../interaction';
+import { PlayerBox, EnemyBox, ExplodeBox, Starbox } from './boxes';
+import {Interaction} from './interaction';
 
 const { Howl } = require('howler');
 var explosion = new Howl({ src: ['static/game_sn/media/explosion.mp3'], volume: 0.3 });
