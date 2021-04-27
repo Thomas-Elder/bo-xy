@@ -63,7 +63,6 @@ Engine.prototype.run = function(){
     // Set the state var to pass to draw methods.
     var state = {
       phase: true,
-      background: self.background,
       hud: self.hud,
       player: self.boxManager.playerBox, 
       enemies: self.boxManager.enemyBoxes,
