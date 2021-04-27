@@ -1,5 +1,5 @@
 
-var Engine = require('./engine');
+import {Engine} from './engine';
 
 window.onload = function () {
 
@@ -23,11 +23,6 @@ window.onload = function () {
   var socket = io('/single');
   socket.emit('connected', {msg:"connected to namespace /single"});
 
-  /** We need the game to return the end of game state, so we can 
-  * display that to the user. 
-  */
-  var game_details = {};
-
   // Initially show the new player input field
   $("#new-player").show();
   $("#game").hide();
@@ -37,7 +32,7 @@ window.onload = function () {
     $("#new-player").hide();
     $("#game").show();
 
-    engine = new Engine(socket);
+    var engine = new Engine(socket);
 
     engine.init(contexts);
     engine.run();
