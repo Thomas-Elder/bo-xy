@@ -74,7 +74,7 @@ Server.prototype.start = function(){
   // start listening!
   server.listen(port,
     function(){
-      console.log('Express server listening on port: ' + port);
+      //console.log('Express server listening on port: ' + port);
   });
 };
 
