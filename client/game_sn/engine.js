@@ -3,8 +3,8 @@ import {BoxManager} from './box/box_manager.mjs';
 import {Hud} from './hud';
 import {Display} from './display';
 import {Controller} from './controller.mjs';
-
-const config = require('./config');
+import {config} from './config';
+//const config = require('./config');
 
 /**
  * A class for managing the game.
