@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "cover": "nyc report",
-    "test": "nyc jasmine",
+    "cover": "nyc report --all",
+    "test": "nyc jasmine --config=./spec/support/jasmine.json",
     "watch": "watchify client/browserify.js -p esmify -o client/game_sn.js -v",
     "build": "browserify client/browserify.js -p esmify | uglifyjs -mc > client/game_sn.js"
   },
