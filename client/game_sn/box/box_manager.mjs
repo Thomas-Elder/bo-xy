@@ -37,7 +37,7 @@ export class BoxManager {
     // Instantiate an array of new instances of type StarBox.
     for (var i = 0; i < self.farStarBoxes.length; i++) {
       var location = self.startStarLocation(self.config.screenSize.width, self.config.screenSize.height);
-      self.farStarBoxes[i] = new Starbox(location, self.config,
+      self.farStarBoxes[i] = new StarBox(location, self.config,
         self.config.box.farstar.size.width,
         self.config.box.farstar.size.height,
         self.config.box.farstar.colour,
@@ -47,7 +47,7 @@ export class BoxManager {
     // Instantiate an array of new instances of type StarBox.
     for (var i = 0; i < self.nearStarBoxes.length; i++) {
       var location = self.startStarLocation(self.config.screenSize.width, self.config.screenSize.height);
-      self.nearStarBoxes[i] = new Starbox(location, self.config,
+      self.nearStarBoxes[i] = new StarBox(location, self.config,
         self.config.box.nearstar.size.width,
         self.config.box.nearstar.size.height,
         self.config.box.nearstar.colour,
@@ -86,7 +86,7 @@ export class BoxManager {
         self.farStarBoxes[i].update();
       } else {
         var location = self.newStarLocation(self.config.screenSize.width, self.config.screenSize.height);
-        self.farStarBoxes[i] = new Starbox(location, self.config,
+        self.farStarBoxes[i] = new StarBox(location, self.config,
           self.config.box.farstar.size.width,
           self.config.box.farstar.size.height,
           self.config.box.farstar.colour,
@@ -100,7 +100,7 @@ export class BoxManager {
         self.nearStarBoxes[i].update();
       } else {
         var location = self.newStarLocation(self.config.screenSize.width, self.config.screenSize.height);
-        self.nearStarBoxes[i] = new Starbox(location, self.config,
+        self.nearStarBoxes[i] = new StarBox(location, self.config,
           self.config.box.nearstar.size.width,
           self.config.box.nearstar.size.height,
           self.config.box.nearstar.colour,
