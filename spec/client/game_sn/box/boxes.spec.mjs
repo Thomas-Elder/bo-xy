@@ -1,104 +1,106 @@
 
 //const config = require('../../../../client/game_sn/config');
-import {config} from '../../../../client/game_sn/config.mjs'
-import {PlayerBox, EnemyBox, ExplodeBox, StarBox} from '../../../../client/game_sn/box/boxes.mjs';
+import { config } from '../../../../client/game_sn/config.mjs'
+import { PlayerBox, EnemyBox, ExplodeBox, StarBox } from '../../../../client/game_sn/box/boxes.mjs';
+
+
 
 /**
  * Enemy box tests
  */
 var enemy;
 
-describe('EnemyBox', 
-function(){
+describe('EnemyBox ',
+  function () {
 
-  beforeEach(
-    function(done){
-      enemy = new EnemyBox({x:1,y:1}, 0, config);
-      done();
-  });
-  
-  afterEach(
-    function(done){
-      done();
-  });    
-
-  describe('Position', 
-    function(){  
-      it('should maintain positions passed to the constructor', 
-        function(done){
-
-          var expected = {x:1, y:1};
-
-          var result = enemy.getPosition();
-
-          expect(result).toEqual(expected);
-
-          done();
-      });
-  });
-
-  describe('Size', 
-    function(){  
-      it('should maintain size passed to the constructor', 
-        function(done){
-
-          var expected = {width: 20, height: 20};
-
-          var result = enemy.getSize();
-
-          expect(result).toEqual(expected);
-
-          done();
-      });
-  });
-
-  describe('Movement', 
-    function(){  
-      
-      it('should update the position of the box when the update function is called',
-        function(done){
-
-          var expected = {x:1, y:2};
-
-          enemy.update();
-          var result = enemy.getPosition();
-
-          expect(result).toEqual(expected);
-
-          done();
-      });
-  });
-
-  describe('OnScreen', 
-    function(){
-      it('should return true after creation', 
-        function(done){
-
-          var expected = true;
-
-          var result = enemy.onScreen;
-
-          expect(result).toEqual(expected);
-
-          done();
+    beforeEach(
+      function (done) {
+        enemy = new EnemyBox({ x: 1, y: 1 }, 0, config);
+        done();
       });
 
-      it('should return false when the y position is greater than the screen height', 
-        function(done){
+    afterEach(
+      function (done) {
+        done();
+      });
 
-          var expected = false;
+    describe('Position',
+      function () {
+        it('should maintain positions passed to the constructor',
+          function (done) {
 
-          for (var i = 0; i <= config.screenSize.height; i++)
+            var expected = { x: 1, y: 1 };
+
+            var result = enemy.getPosition();
+
+            expect(result).toEqual(expected);
+
+            done();
+          });
+      });
+
+    describe('Size',
+      function () {
+        it('should maintain size passed to the constructor',
+          function (done) {
+
+            var expected = { width: 20, height: 20 };
+
+            var result = enemy.getSize();
+
+            expect(result).toEqual(expected);
+
+            done();
+          });
+      });
+
+    describe('Movement',
+      function () {
+
+        it('should update the position of the box when the update function is called',
+          function (done) {
+
+            var expected = { x: 1, y: 2 };
+
             enemy.update();
+            var result = enemy.getPosition();
 
-          var result = enemy.onScreen;
+            expect(result).toEqual(expected);
 
-          expect(result).toEqual(expected);
+            done();
+          });
+      });
 
-          done();
+    describe('OnScreen',
+      function () {
+        it('should return true after creation',
+          function (done) {
+
+            var expected = true;
+
+            var result = enemy.onScreen;
+
+            expect(result).toEqual(expected);
+
+            done();
+          });
+
+        it('should return false when the y position is greater than the screen height',
+          function (done) {
+
+            var expected = false;
+
+            for (var i = 0; i <= config.screenSize.height; i++)
+              enemy.update();
+
+            var result = enemy.onScreen;
+
+            expect(result).toEqual(expected);
+
+            done();
+          });
       });
   });
-});
 
 /**
  * Player box tests
@@ -106,11 +108,11 @@ function(){
 var player;
 var controller;
 
-describe('PlayerBox', 
-  function(){
+describe('PlayerBox',
+  function () {
 
     beforeEach(
-      function(done){
+      function (done) {
 
         // Mock controller so we can test actions are handled.
         controller = {
@@ -122,50 +124,50 @@ describe('PlayerBox',
 
         player = new PlayerBox(config, controller, {});
         done();
-    });
-    
+      });
+
     afterEach(
-      function(done){
-          controller = null;
-          player = null;
+      function (done) {
+        controller = null;
+        player = null;
         done();
-    });    
+      });
 
-    describe('Position', 
-      function(){  
-        it('should maintain positions passed to the constructor', 
-          function(done){
+    describe('Position',
+      function () {
+        it('should maintain positions passed to the constructor',
+          function (done) {
 
-            var expected = {x:390, y:290};
+            var expected = { x: 390, y: 290 };
 
             var result = player.getPosition();
 
             expect(result).toEqual(expected);
             done();
-        });
-    });
+          });
+      });
 
-    describe('Size', 
-      function(){  
-        it('should maintain size passed to the constructor', 
-          function(done){
+    describe('Size',
+      function () {
+        it('should maintain size passed to the constructor',
+          function (done) {
 
-            var expected = {width: 20, height: 20};
+            var expected = { width: 20, height: 20 };
 
             var result = player.getSize();
 
             expect(result).toEqual(expected);
             done();
-        });
-    });
+          });
+      });
 
-    describe('Movement', 
-      function(){
+    describe('Movement',
+      function () {
 
         it('should apply gravity',
-          function(done){
+          function (done) {
 
-            var expected = {x:390, y:286};
+            var expected = { x: 390, y: 286 };
 
             /* So we set the controller.up to true, to move the box up. Gravity
              * is applied regardless of controller status, so we should only move
@@ -179,12 +181,12 @@ describe('PlayerBox',
 
             expect(result).toEqual(expected);
             done();
-        });
+          });
 
-        it('should move the box when the controller.right is true', 
-          function(done){
+        it('should move the box when the controller.right is true',
+          function (done) {
 
-            var expected = {x:395, y:291};
+            var expected = { x: 395, y: 291 };
 
             controller.right = true;
             player.update();
@@ -192,13 +194,13 @@ describe('PlayerBox',
 
             expect(result).toEqual(expected);
             done();
-        });
+          });
 
-        
-        it('should move the box when the controller.left is true', 
-          function(done){
 
-            var expected = {x:385, y:291};
+        it('should move the box when the controller.left is true',
+          function (done) {
+
+            var expected = { x: 385, y: 291 };
 
             controller.left = true;
             player.update();
@@ -206,12 +208,12 @@ describe('PlayerBox',
 
             expect(result).toEqual(expected);
             done();
-        });
+          });
 
-        it('should move the box when the controller.up is true', 
-          function(done){
+        it('should move the box when the controller.up is true',
+          function (done) {
 
-            var expected = {x:390, y:286};
+            var expected = { x: 390, y: 286 };
 
             controller.up = true;
             player.update();
@@ -219,12 +221,12 @@ describe('PlayerBox',
 
             expect(result).toEqual(expected);
             done();
-        });
+          });
 
-        it('should move the box when the controller.down is true', 
-          function(done){
+        it('should move the box when the controller.down is true',
+          function (done) {
 
-            var expected = {x:390, y:296};
+            var expected = { x: 390, y: 296 };
 
             controller.down = true;
             player.update();
@@ -232,14 +234,14 @@ describe('PlayerBox',
 
             expect(result).toEqual(expected);
             done();
-        });
-    });
+          });
+      });
 
-    describe('Display', 
-      function(){
+    describe('Display',
+      function () {
 
         it('should have isBlinking > 0 when newly created',
-          function(done){
+          function (done) {
 
             var expected = true;
 
@@ -247,45 +249,45 @@ describe('PlayerBox',
 
             expect(result).toEqual(expected);
             done();
-        });
-    });
-});
+          });
+      });
+  });
 
 /**
  * Explode box tests
  */
 var explode;
 
-describe('ExplodeBox', 
-  function(){
+describe('ExplodeBox',
+  function () {
 
     beforeEach(
-      function(done){
+      function (done) {
 
         explode = new ExplodeBox(1, 1, config, {});
         done();
-    });
-    
+      });
+
     afterEach(
-      function(done){
+      function (done) {
         done();
-    });    
+      });
 
-    describe('Position', 
-      function(){  
-        it('should maintain positions passed to the constructor', 
-          function(done){
+    describe('Position',
+      function () {
+        it('should maintain positions passed to the constructor',
+          function (done) {
 
-            var expected = {x:1, y:1};
+            var expected = { x: 1, y: 1 };
 
             var result = explode.getPosition();
 
             expect(result).toEqual(expected);
             done();
-        });
+          });
 
-        it('function endOfExplode should return true after 50 update calls', 
-          function(done){
+        it('function endOfExplode should return true after 50 update calls',
+          function (done) {
 
             var expected = true;
 
@@ -296,136 +298,136 @@ describe('ExplodeBox',
 
             expect(result).toEqual(expected);
             done();
-        });
-    });
+          });
+      });
 
-    describe('Size', 
-      function(){  
-        it('should maintain intial size passed to the constructor', 
-          function(done){
+    describe('Size',
+      function () {
+        it('should maintain intial size passed to the constructor',
+          function (done) {
 
-            var expected = {width: 20, height: 20};
+            var expected = { width: 20, height: 20 };
 
             var result = explode.getSize();
 
             expect(result).toEqual(expected);
             done();
-        });
+          });
 
-        it('should grow in size on update', 
-          function(done){
+        it('should grow in size on update',
+          function (done) {
 
-            var expected = {width: 22, height: 22};
+            var expected = { width: 22, height: 22 };
 
             explode.update();
             var result = explode.getSize();
 
             expect(result).toEqual(expected);
             done();
-        });
-    });
-});
+          });
+      });
+  });
 
 /**
- * Enemy box tests
+ * Star box tests
  */
- var star;
- 
- describe('EnemyBox', 
- function(){
- 
-   beforeEach(
-     function(done){
-        star = new Starbox(
-            location, 
-            self.config,
-            self.config.box.farstar.size.width,
-            self.config.box.farstar.size.height,
-            self.config.box.farstar.colour,
-            self.config.box.farstar.speed
-            );
-       done();
-   });
-   
-   afterEach(
-     function(done){
-       done();
-   });    
- 
-   describe('Position', 
-     function(){  
-       it('should maintain positions passed to the constructor', 
-         function(done){
- 
-           var expected = {x:1, y:1};
- 
-           var result = star.getPosition();
- 
-           expect(result).toEqual(expected);
- 
-           done();
-       });
-   });
- 
-   describe('Size', 
-     function(){  
-       it('should maintain size passed to the constructor', 
-         function(done){
- 
-           var expected = {width: 1, height: 1};
- 
-           var result = star.getSize();
- 
-           expect(result).toEqual(expected);
- 
-           done();
-       });
-   });
- 
-   describe('Movement', 
-     function(){  
-       
-       it('should update the position of the box when the update function is called',
-         function(done){
- 
-           var expected = {x:1, y:2};
- 
-           star.update();
-           var result = star.getPosition();
- 
-           expect(result).toEqual(expected);
- 
-           done();
-       });
-   });
- 
-   describe('OnScreen', 
-     function(){
-       it('should return true after creation', 
-         function(done){
- 
-           var expected = true;
- 
-           var result = star.onScreen;
- 
-           expect(result).toEqual(expected);
- 
-           done();
-       });
- 
-       it('should return false when the y position is greater than the screen height', 
-         function(done){
- 
-           var expected = false;
- 
-           for (var i = 0; i <= config.screenSize.height; i++)
-             star.update();
- 
-           var result = star.onScreen;
- 
-           expect(result).toEqual(expected);
- 
-           done();
-       });
-   });
- });
+var star;
+
+describe('StarBox',
+  function () {
+
+    beforeEach(
+      function (done) {
+        star = new StarBox(
+          { x: 1, y: 1 },
+          config,
+          config.box.farstar.size.width,
+          config.box.farstar.size.height,
+          config.box.farstar.colour,
+          config.box.farstar.speed
+        );
+        done();
+      });
+
+    afterEach(
+      function (done) {
+        done();
+      });
+
+    describe('Position',
+      function () {
+        it('should maintain positions passed to the constructor',
+          function (done) {
+
+            var expected = { x: 1, y: 1 };
+
+            var result = star.getPosition();
+
+            expect(result).toEqual(expected);
+
+            done();
+          });
+      });
+
+    describe('Size',
+      function () {
+        it('should maintain size passed to the constructor',
+          function (done) {
+
+            var expected = { width: 1, height: 1 };
+
+            var result = star.getSize();
+
+            expect(result).toEqual(expected);
+
+            done();
+          });
+      });
+
+    describe('Movement',
+      function () {
+
+        it('should update the position of the box when the update function is called',
+          function (done) {
+
+            var expected = { x: 1, y: 1 + config.box.farstar.speed };
+
+            star.update();
+            var result = star.getPosition();
+
+            expect(result).toEqual(expected);
+
+            done();
+          });
+      });
+
+    describe('OnScreen',
+      function () {
+        it('should return true after creation',
+          function (done) {
+
+            var expected = true;
+
+            var result = star.onScreen;
+
+            expect(result).toEqual(expected);
+
+            done();
+          });
+
+        it('should return false when the y position is greater than the screen height',
+          function (done) {
+
+            var expected = false;
+
+            for (var i = 0; i <= config.screenSize.height / star.speed; i++)
+              star.update();
+
+            var result = star.onScreen;
+
+            expect(result).toEqual(expected);
+
+            done();
+          });
+      });
+  });
