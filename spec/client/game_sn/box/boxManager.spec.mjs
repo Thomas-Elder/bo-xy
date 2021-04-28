@@ -1,8 +1,15 @@
 
-var config = require('../../../../client/game_sn/config');
-var PlayerBox = require('../../../../client/game_sn/box/player_box');
-var EnemyBox = require('../../../../client/game_sn/box/enemy_box');
-var ExplodeBox = require('../../../../client/game_sn/box/explode_box');
+// const config = require('../../../client/game_sn/config.js');
+//const PlayerBox = require('../../../../client/game_sn/box/boxes.js');
+//const EnemyBox = require('../../../../client/game_sn/box/boxes.js');
+//const ExplodeBox = require('../../../../client/game_sn/box/boxes.js');
+//const Starbox = require('../../../../client/game_sn/box/boxes.js');
+
+import {StarBox, PlayerBox, EnemyBox, ExplodeBox} from '../../../../client/game_sn/box/boxes.mjs';
+import {BoxManager} from '../../../../client/game_sn/box/box_manager.mjs'
+
+//import pkg from '../../../../client/game_sn/box/boxes.mjs';
+//const {StarBox, PlayerBox, EnemyBox, ExplodeBox} = pkg;
 
 describe('Box Manager',
   function(){

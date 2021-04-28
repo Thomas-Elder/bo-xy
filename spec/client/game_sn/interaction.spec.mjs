@@ -1,5 +1,5 @@
 
-import {Interaction} from '../../../client/game_sn/interaction';
+import {Interaction} from '../../../client/game_sn/box/interaction.mjs';
 
 var interaction;
 

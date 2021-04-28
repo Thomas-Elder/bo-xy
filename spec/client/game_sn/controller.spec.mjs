@@ -1,5 +1,5 @@
 
-import {Controller} from '../../../client/game_sn/controller';
+import {Controller} from '../../../client/game_sn/controller.mjs';
 
 var controller;
 var event;
