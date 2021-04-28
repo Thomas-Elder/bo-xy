@@ -45,7 +45,22 @@ describe('Server',
           });
       });
       
-    
+      it('should return OK statusCode to a request for "/blog"',
+        function(done){
+          request.get(
+            {
+              'url':url + "/blog"
+            },
+            function(err, res){
+
+              if(res === undefined)
+                throw new Error('Server not responding.');
+              
+              expect(res.statusCode).toBe(200);
+              done();
+          });
+      });
+
       it('should return OK statusCode to a request for "/single"',
         function(done){
           request.get(
