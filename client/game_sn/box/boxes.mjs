@@ -3,7 +3,7 @@
 /**
  * StarBox
  */
-export class Starbox {
+export class StarBox {
 
     constructor(location, config, width, height, colour, speed) {
     this.x            = location.x;
@@ -249,3 +249,11 @@ export class ExplodeBox {
     return {width: this.width, height: this.height};
   }
 }
+
+export default {
+  StarBox: StarBox,
+  EnemyBox: EnemyBox,
+  PlayerBox: PlayerBox,
+  ExplodeBox: ExplodeBox,
+  PowerBox: PowerBox
+}; 
