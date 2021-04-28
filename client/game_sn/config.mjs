@@ -1,7 +1,7 @@
 /**
 * Configuration Settings for flappy_box
 */
-var config = {
+export var config = {
 
   /**
   * Global Configuration Settings
@@ -207,4 +207,6 @@ var config = {
 
 
 
-module.exports = config;
+export default {
+  config: config
+};
