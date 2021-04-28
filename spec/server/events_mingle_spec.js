@@ -87,7 +87,7 @@ describe('Lobby events',
     describe('open', function () {
 
       it('should emit "newLobby" event to other clients, on "open" event', function (done) {
-        
+
         client_rcv.on('newLobby', function (lobby) {
           expect(true).toEqual(true);
           done();
@@ -106,7 +106,7 @@ describe('Lobby events',
         var socket_id = client_emit.id;
         var expected = { users: [socket_id], id: socket_id };
 
-        client_emit.emit('open');   
+        client_emit.emit('open');
       });
     });
 
@@ -128,8 +128,8 @@ describe('Lobby events',
         // Create lobby object 
         var lobby = { users: [lobby_id], id: lobby_id };
 
-        client_rcv.emit('join', lobby);        
-      });
+        client_rcv.emit('join', lobby);
+      }, 100);
 
       it('should pass the lobby details to the original client', function (done) {
 
@@ -154,7 +154,7 @@ describe('Lobby events',
         var expected = { users: [lobby_id, join_id], id: lobby_id };
 
         client_rcv.emit('join', lobby);
-      });
+      }, 100);
 
       it('should pass the lobby details to the new client', function (done) {
 
@@ -179,8 +179,8 @@ describe('Lobby events',
         var expected = { users: [lobby_id, join_id], id: lobby_id };
 
         client_rcv.emit('join', lobby);
-      });
-    });
+      }, 100);
+    }, 100);
 
     describe('bail', function () {
       it('should emit a "bailLobby" event to this client when the bail event is handled', function () {
@@ -205,11 +205,11 @@ describe('Lobby events',
         // join the lobby
         client_rcv.emit('join', lobby);
 
-        client_emit.emit('bail', lobby);        
-      });
+        client_emit.emit('bail', lobby);
+      }, 100);
 
       it('should emit a "bailLobby" event to other clients when the bail event is handled', function () {
-        
+
         client_rcv.on('bailLobby', function () {
           expect(true).toEqual(true);
           done();
@@ -230,14 +230,14 @@ describe('Lobby events',
         // join the lobby
         client_rcv.emit('join', lobby);
 
-        client_emit.emit('bail', lobby);        
-      });
-    });
+        client_emit.emit('bail', lobby);
+      }, 100);
+    }, 100);
 
     describe('start', function () {
 
       it('should emit a "start" event to this client when the start event is handled', function () {
-        
+
         client_emit.on('start', function () {
           expect(true).toEqual(true);
           done();
@@ -259,7 +259,7 @@ describe('Lobby events',
         client_rcv.emit('join', lobby);
 
         client_emit.emit('start', lobby);
-      });
+      }, 100);
 
       it('should emit a "start" event to other clients when the start event is handled', function () {
 
@@ -283,6 +283,6 @@ describe('Lobby events',
 
         // emit the start event
         client_emit.emit('start', lobby);
-      });
-    });
+      }, 100);
+    }, 100);
   });
