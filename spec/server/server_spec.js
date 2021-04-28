@@ -14,7 +14,6 @@ describe('Server',
       function(done){
         
         server = new Server();
-        console.log('Starting the server...');
         server.start();
         done();
     });
