@@ -1,8 +1,8 @@
 
-import {BoxManager} from './box/box_manager';
+import {BoxManager} from './box/box_manager.mjs';
 import {Hud} from './hud';
 import {Display} from './display';
-import {Controller} from './controller';
+import {Controller} from './controller.mjs';
 
 const config = require('./config');
 
