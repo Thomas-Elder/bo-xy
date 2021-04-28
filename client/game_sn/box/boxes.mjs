@@ -24,11 +24,11 @@ export class StarBox {
     // Define the StarBox type's update method.
     update () {
 
-        // Move enemy down the screen
+      // Move star down the screen
         if (this.y + this.height < this.screenHeight + this.height)
-        this.y += this.speed;
+          this.y += this.speed;
         else
-        this.onScreen = false;
+          this.onScreen = false;
     }
 
     // Returns an object with x an y coords, the box's current position
