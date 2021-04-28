@@ -19,6 +19,10 @@
       "client/*",
       "server/*"
     ],
+    "exclude": [
+      "client/browserify.js",
+      "client/game_sn.js"
+    ],
     "reporter": [
       "lcov",
       "text-summary"
