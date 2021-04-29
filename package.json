@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "test": "jasmine --config=./spec/support/jasmine.json",
-    "cover": "c8 jasmine --config=./spec/support/jasmine.json",
+    "cover": "c8 --exclude=spec/* jasmine --config=./spec/support/jasmine.json",
     "watch": "watchify client/browserify.js -p esmify -o client/game_sn.js -v",
     "build": "browserify client/browserify.js -p esmify | uglifyjs -mc > client/game_sn.js"
   },
