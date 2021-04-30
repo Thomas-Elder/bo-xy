@@ -42,12 +42,9 @@ describe('Lobby events',
 
       // Log connection
       client_emit.on('ack', function () {
-        //console.log('socket_emit connected.');
-      });
-
-      client_rcv.on('ack', function () {
-        //console.log('client_rcv connected.');
-        done();
+        client_rcv.on('ack', function () {
+          done();
+        });
       });
     });
 
@@ -62,15 +59,18 @@ describe('Lobby events',
 
     describe('connection', function () {
 
-      it('should emit "connect" event to this client on connection', function (done) {
+      it('should emit "ack" event to this client on connection', function (done) {
 
         client_emit.on('ack', function (msg) {
           expect(true).toEqual(true);
           done();
         });
+  
+        client_emit.on('disconnect', function () {
+          client_emit.connect(url, socketOptions);
+        });
 
         client_emit.disconnect();
-        client_emit.connect(url, socketOptions);
       });
 
       it('should emit "newPlayer" event to other clients in the namespace', function (done) {
@@ -79,8 +79,11 @@ describe('Lobby events',
           done();
         });
 
+        client_emit.on('disconnect', function () {
+          client_emit.connect(url, socketOptions);
+        });
+
         client_emit.disconnect();
-        client_emit.connect(url, socketOptions);
       });
     });
 
@@ -128,8 +131,12 @@ describe('Lobby events',
         // Create lobby object 
         var lobby = { users: [lobby_id], id: lobby_id };
 
-        client_rcv.emit('join', lobby);
-      }, 100);
+        // Wait till rcv gets a newLobby event, confirming the lobby has been
+        // created before attempting to join.
+        client_rcv.on('newLobby', function () {
+          client_rcv.emit('join', lobby);
+        });
+      });
 
       it('should pass the lobby details to the original client', function (done) {
 
@@ -148,13 +155,14 @@ describe('Lobby events',
         // Create lobby object 
         var lobby = { users: [lobby_id], id: lobby_id };
 
-        // Get the client_rcv socket.id to join the lobby with
-        var join_id = client_rcv.id
+        var expected = { users: [lobby_id, client_rcv.id], id: lobby_id };
 
-        var expected = { users: [lobby_id, join_id], id: lobby_id };
-
-        client_rcv.emit('join', lobby);
-      }, 100);
+        // Wait till rcv gets a newLobby event, confirming the lobby has been
+        // created before attempting to join.
+        client_rcv.on('newLobby', function () {
+          client_rcv.emit('join', lobby);
+        });
+      });
 
       it('should pass the lobby details to the new client', function (done) {
 
@@ -173,14 +181,15 @@ describe('Lobby events',
         // Create lobby object 
         var lobby = { users: [lobby_id], id: lobby_id };
 
-        // Get the client_rcv socket.id to join the lobby with
-        var join_id = client_rcv.id
+        var expected = { users: [lobby_id, client_rcv.id], id: lobby_id };
 
-        var expected = { users: [lobby_id, join_id], id: lobby_id };
-
-        client_rcv.emit('join', lobby);
-      }, 100);
-    }, 100);
+        // Wait till rcv gets a newLobby event, confirming the lobby has been
+        // created before attempting to join.
+        client_rcv.on('newLobby', function () {
+          client_rcv.emit('join', lobby);
+        });
+      });
+    });
 
     describe('bail', function () {
       it('should emit a "bailLobby" event to this client when the bail event is handled', function () {
@@ -199,14 +208,10 @@ describe('Lobby events',
         // Create lobby object 
         var lobby = { users: [lobby_id], id: lobby_id };
 
-        // Get the client_rcv socket.id to join the lobby with
-        var join_id = client_rcv.id
-
-        // join the lobby
-        client_rcv.emit('join', lobby);
-
-        client_emit.emit('bail', lobby);
-      }, 100);
+        client_emit.on('newLobby', function () {
+          client_emit.emit('bail', lobby);
+        });
+      });
 
       it('should emit a "bailLobby" event to other clients when the bail event is handled', function () {
 
@@ -224,15 +229,15 @@ describe('Lobby events',
         // Create lobby object 
         var lobby = { users: [lobby_id], id: lobby_id };
 
-        // Get the client_rcv socket.id to join the lobby with
-        var join_id = client_rcv.id
+        client_rcv.on('newLobby', function () {
+          client_rcv.emit('join', lobby);
 
-        // join the lobby
-        client_rcv.emit('join', lobby);
-
-        client_emit.emit('bail', lobby);
-      }, 100);
-    }, 100);
+          client_emit.on('playerJoined', function () {
+            client_emit.emit('bail', lobby);
+          });
+        });
+      });
+    });
 
     describe('start', function () {
 
@@ -252,14 +257,10 @@ describe('Lobby events',
         // Create lobby object 
         var lobby = { users: [lobby_id], id: lobby_id };
 
-        // Get the client_rcv socket.id to join the lobby with
-        var join_id = client_rcv.id
-
-        // join the lobby
-        client_rcv.emit('join', lobby);
-
-        client_emit.emit('start', lobby);
-      }, 100);
+        client_emit.on('newLobby', function () {
+          client_emit.emit('start', lobby);
+        });
+      });
 
       it('should emit a "start" event to other clients when the start event is handled', function () {
 
@@ -278,11 +279,13 @@ describe('Lobby events',
         // Create lobby object 
         var lobby = { users: [lobby_id], id: lobby_id };
 
-        // join the lobby
-        client_rcv.emit('join', lobby);
+        client_rcv.on('newLobby', function () {
+          client_rcv.emit('join', lobby);
 
-        // emit the start event
-        client_emit.emit('start', lobby);
-      }, 100);
-    }, 100);
+          client_emit.on('playerJoined', function () {
+            client_emit.emit('start', lobby);
+          });
+        });
+      });
+    });
   });
