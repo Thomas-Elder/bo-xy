@@ -1,9 +1,7 @@
-var async = require('async');
 
 var Server = require('../../server/server');
-
-var request = require('request');
 var io_client = require('socket.io-client');
+
 
 describe('Lobby events',
   function () {
@@ -16,7 +14,7 @@ describe('Lobby events',
       'reopen delay': 0,
       'force new connection': true
     };
-
+    
     var client_emit;
     var client_rcv;
 
@@ -40,20 +38,19 @@ describe('Lobby events',
       // Connect a separate client socket to the server
       client_rcv = io_client(url, socketOptions);
 
-      // Log connection
+      // Check connection
       client_emit.on('ack', function () {
         client_rcv.on('ack', function () {
+
           done();
         });
       });
     });
 
     afterEach(function (done) {
-
       // Disconnect both sockets
       client_emit.disconnect(0);
       client_rcv.disconnect(0);
-
       done();
     });
 
