@@ -1,9 +1,6 @@
 
-//const config = require('../../../../client/game_sn/config');
 import { config } from '../../../../client/game_sn/config.mjs'
 import { PlayerBox, EnemyBox, ExplodeBox, StarBox } from '../../../../client/game_sn/box/boxes.mjs';
-
-
 
 /**
  * Enemy box tests
@@ -34,6 +31,21 @@ describe('EnemyBox ',
             var result = enemy.getPosition();
 
             expect(result).toEqual(expected);
+
+            done();
+          });
+
+        it('should reposition on update once y coord is greater than screenheight',
+          function (done) {
+
+            enemy.y = 601;
+            enemy.update();
+
+            var expected = 0;
+
+            var result = enemy.getPosition().y;
+
+            expect(result).toBeLessThan(expected);
 
             done();
           });
@@ -71,35 +83,6 @@ describe('EnemyBox ',
           });
       });
 
-    describe('OnScreen',
-      function () {
-        it('should return true after creation',
-          function (done) {
-
-            var expected = true;
-
-            var result = enemy.onScreen;
-
-            expect(result).toEqual(expected);
-
-            done();
-          });
-
-        it('should return false when the y position is greater than the screen height',
-          function (done) {
-
-            var expected = false;
-
-            for (var i = 0; i <= config.screenSize.height; i++)
-              enemy.update();
-
-            var result = enemy.onScreen;
-
-            expect(result).toEqual(expected);
-
-            done();
-          });
-      });
   });
 
 /**
