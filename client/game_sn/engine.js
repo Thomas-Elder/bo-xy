@@ -74,78 +74,67 @@ export class Engine {
 
       // Set the state var to pass to draw methods.
       var state = {
-        phase: true,
+        phase: 'intro',
         hud: self.hud,
         player: self.player, 
         enemies: self.enemies,
         explosions: self.explosions,
         farStars: self.boxManager.farStarBoxes,
         nearStars: self.boxManager.nearStarBoxes,
-        powerboxes: []
+        powerboxes: [],
+        score: self.enemiesDodged,
+        level: 0,
+        lives: 3
       };
 
       // First we need to do intro stuff, till introCount == introDuration
       if (introCount != self.config.introDuration) {
+        state.phase = 'intro';
+
         // Update everything we want on the screen during this
         self.boxManager.updateBackground();
         self.player.update();
 
         // Then draaw it all
-        self.display.drawClear();
-        self.display.drawBackground(state);
-        self.display.drawPlayer(state);
-        self.display.drawHud({
-          score: self.enemiesDodged,
-          level: 0,
-          lives: 3
-        });
+        self.display.draw(state);
 
         introCount++;
 
         // Then we need to do the same between levels... 
       } else if (levelChangeCount != self.config.levelChangeDuration) {
+        state.phase = 'inter';
+
         // Update everything we want on the screen during this
         self.boxManager.updateBackground();
         self.player.update();
         self.updateExplosions();
+        self.enemies.forEach((enemy) => { self.enemiesDodged += enemy.update(state.phase); });
 
         // Then draaw it all
-        self.display.drawClear();
-        self.display.drawBackground(state);
-        self.display.drawExplosions(state);
-        self.display.drawPlayer(state);
-        self.display.drawHud({
-          score: self.enemiesDodged,
-          level: self.level,
-          lives: self.lives
-        });
+        self.display.draw(state);
 
         levelChangeCount++;
 
         // Then we need to do the same at the end... 
       } else if (outroCount != self.config.outroDuration) {
+        state.phase = 'outro';
+
         self.boxManager.updateBackground();
         self.updateExplosions();
-
-        self.display.drawClear();
-        self.display.drawBackground(state);
-        self.display.drawExplosions(state);
-        self.display.drawHud({
-          score: self.enemiesDodged,
-          level: self.level,
-          lives: self.lives
-        });
+        self.enemies.forEach((enemy) => { self.enemiesDodged += enemy.update(state.phase); });
+        self.display.draw(state);
 
         outroCount++;
 
         // Else run the game
       } else if (!gameOver) {
+        state.phase = 'play';
 
         // Update the game  
         self.boxManager.updateBackground();
         self.player.update();
         self.updateExplosions();
-        self.enemies.forEach((enemy) => { self.enemiesDodged += enemy.update(); });
+        self.enemies.forEach((enemy) => { self.enemiesDodged += enemy.update(state.phase); });
         self.collision();
         self.lives = self.player.lives;
         self.score = self.boxManager.enemiesDodged;
@@ -161,16 +150,7 @@ export class Engine {
         }
 
         // And the draws...
-        self.display.drawClear();
-        self.display.drawBackground(state);
-        self.display.drawPlayer(state);
-        self.display.drawEnemies(state);
-        self.display.drawExplosions(state);
-        self.display.drawHud({
-          score: self.enemiesDodged,
-          level: self.level,
-          lives: self.lives
-        });
+        self.display.draw(state);
 
         // Check if game is over and clearInterval if so
         if (self.lives === 0 || self.level === config.numberOfLevels) {
