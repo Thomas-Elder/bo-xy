@@ -4,7 +4,7 @@ import {Hud} from './hud';
 import {Display} from './display';
 import {Controller} from './controller.mjs';
 import {config} from './config';
-//const config = require('./config');
+import {EnemyBox} from './box/boxes.mjs';
 
 /**
  * A class for managing the game.
@@ -18,6 +18,7 @@ export class Engine {
    * @param {*} contexts 
    */
   constructor(socket, contexts){
+    var self = this;
 
     this.socket       = socket;
     this.total_score  = 0;
@@ -39,7 +40,12 @@ export class Engine {
     window.onkeydown = function (event) { controller.keyDown(event); };
     window.onkeyup   = function (event) { controller.keyUp(event); };
 
-    this.boxManager = new BoxManager(config, controller);
+    this.boxManager = new BoxManager(this.config, controller);
+
+    this.enemies = new Array(self.config.numberOfEnemies);
+
+    for (var i = 0; i < self.config.numberOfEnemies; i++)
+      this.enemies[i] = new EnemyBox(1, self.config);
   }
 
   /**
@@ -62,7 +68,7 @@ export class Engine {
         phase: true,
         hud: self.hud,
         player: self.boxManager.playerBox, 
-        enemies: self.boxManager.enemyBoxes,
+        enemies: self.enemies,
         explosions: self.boxManager.explodeBoxes,
         farStars: self.boxManager.farStarBoxes,
         nearStars: self.boxManager.nearStarBoxes,
@@ -134,7 +140,7 @@ export class Engine {
         self.hud.update();
         self.boxManager.updatePlayer();
         self.boxManager.updateExplosions();
-        self.boxManager.updateEnemies(self.level);
+        self.enemies.forEach((enemy) => {enemy.update()});
         self.boxManager.enemyHit();
         self.lives = config.box.player.lives - self.boxManager.enemiesHit;
         self.score = self.boxManager.enemiesDodged;
