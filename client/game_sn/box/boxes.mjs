@@ -173,7 +173,7 @@ export class EnemyBox {
     this.screenWidth = config.screenSize.width;
     this.screenHeight = config.screenSize.height;
 
-    var newPos = Utility.getNewPosition(this.screenWidth - this.width, this.screenHeight);
+    var newPos = Utility.getNewPosition(this.screenWidth - this.width, this.screenHeight + this.height);
     this.x = newPos.x;
     this.y = newPos.y;
 
@@ -186,15 +186,19 @@ export class EnemyBox {
   }
 
   // Define the EnemyBox type's update method.
-  update() {
+  update(phase) {
     var reposition = false;
 
-    // If y > screenheight, reposition
-    if (this.y > this.screenHeight) {
-      var newPos = Utility.getNewPosition(this.screenWidth - this.width, this.screenHeight);
-      this.x = newPos.x;
-      this.y = newPos.y;
-      reposition = true;
+    // If we're playing, we reposition, otherwise we just let the boxes continue
+    // to fall until we're playing again.
+    if (phase == 'play') {
+      // If y > screenheight, reposition
+      if (this.y > this.screenHeight) {
+        var newPos = Utility.getNewPosition(this.screenWidth - this.width, this.screenHeight + this.height);
+        this.x = newPos.x;
+        this.y = newPos.y;
+        reposition = true;
+      }
     }
 
     // Move down the screen
