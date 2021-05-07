@@ -24,6 +24,16 @@ export class Display {
     this.tick = 0;
   }
 
+  draw(state){
+    this.drawClear();
+    this.drawBackground(state);
+    this.drawPlayer(state);
+    this.drawEnemies(state);
+    this.drawExplosions(state);
+    this.drawPowerBoxes(state);
+    this.drawHud(state);
+  }
+
   /**
    * drawClear
    * Clears the game_context and hud_context ready to draw game elements each frame.
