@@ -29,10 +29,10 @@ export class Utility {
     static overlap(a, b) {
 
         // no horizontal overlap
-        if (a.x >= b.x + b.width || b.x >= a.width) return false;
+        if (a.x >= b.x + b.width || b.x >= a.x + a.width) return false;
 
         // no vertical overlap
-        if (a.y >= b.height || b.y >= a.height) return false;
+        if (a.y >= b.y + b.height || b.y >= a.y + a.height) return false;
 
         return true;
     }
