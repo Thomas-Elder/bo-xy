@@ -62,11 +62,12 @@ export class BoxManager {
     // Calculate placement of enemy boxes based on width of screen and number of boxes.
     self.enemySpacing = (self.config.screenSize.width - self.config.box.enemy.size.width) / (self.config.numberOfEnemies - 1);
 
+    /*
     // Instantiate an array of new instances of type EnemyBox.
     for (var i = 0; i < self.enemyBoxes.length; i++) {
       var location = self.newEnemyLocation(self.config.screenSize.width, self.config.screenSize.height);
       self.enemyBoxes[i] = new EnemyBox(location, 0, self.config);
-    }
+    }*/
 
     // Instantiate the explode boxes array.
     self.explodeBoxes = [];
