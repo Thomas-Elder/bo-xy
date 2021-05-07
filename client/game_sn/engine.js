@@ -25,11 +25,10 @@ export class Engine {
     var self = this;
 
     this.socket       = socket;
-    this.total_score  = 0;
-    this.level_score  = 0;
     this.level        = 0;
     this.lives        = config.box.player.lives;
     this.enemiesHit = 0;
+    this.enemiesDodged = 0;
 
     this.max_level    = config.numberOfLevels;
     this.config = config;
@@ -96,7 +95,7 @@ export class Engine {
         self.display.drawBackground(state);
         self.display.drawPlayer(state);
         self.display.drawHud({
-          score: 0,
+          score: self.enemiesDodged,
           level: 0,
           lives: 3
         });
@@ -116,7 +115,7 @@ export class Engine {
         self.display.drawExplosions(state);
         self.display.drawPlayer(state);
         self.display.drawHud({
-          score: self.score,
+          score: self.enemiesDodged,
           level: self.level,
           lives: self.lives
         });
@@ -132,7 +131,7 @@ export class Engine {
         self.display.drawBackground(state);
         self.display.drawExplosions(state);
         self.display.drawHud({
-          score: self.score,
+          score: self.enemiesDodged,
           level: self.level,
           lives: self.lives
         });
@@ -146,7 +145,7 @@ export class Engine {
         self.boxManager.updateBackground();
         self.player.update();
         self.updateExplosions();
-        self.enemies.forEach((enemy) => {enemy.update()});
+        self.enemies.forEach((enemy) => { self.enemiesDodged += enemy.update(); });
         self.collision();
         self.lives = self.player.lives;
         self.score = self.boxManager.enemiesDodged;
@@ -154,11 +153,11 @@ export class Engine {
         // Check if the level changed
         // And set levelChangeCount =0 so the break plays
         // Then update self.level, and clearEnemies
-        var currentLevel = Math.floor(self.boxManager.enemiesDodged / 100); 
+        var currentLevel = Math.floor(self.enemiesDodged / 100); 
         if (self.level != currentLevel) {
           levelChangeCount = 0;
           self.level = currentLevel;
-          //self.boxManager.clearEnemies(self.level);
+          self.enemies.forEach((enemy) => { enemy.level++; });
         }
 
         // And the draws...
@@ -168,7 +167,7 @@ export class Engine {
         self.display.drawEnemies(state);
         self.display.drawExplosions(state);
         self.display.drawHud({
-          score: self.score,
+          score: self.enemiesDodged,
           level: self.level,
           lives: self.lives
         });
@@ -251,14 +250,10 @@ export class Engine {
   collision(){
     var self = this;
 
-    // are we getting here
-    console.log('in collision... ');
-
     if (!self.player.isBlinking) {
       
       self.enemies.forEach(function (enemy) {
         if (!enemy.hit) {
-          console.log('enemy is on screen... ')
           if (Utility.overlap(self.player, enemy)) {
             explosion.play();
             enemy.hit = true;
