@@ -31,18 +31,20 @@ export class Controller {
    */
   keyDown(event) {
 
-    event.preventDefault();
-
     var keyCode = event.which || event.keyCode;
 
-    if (keyCode == 37)
-      this.left = true;
-    else if (keyCode == 38)
-      this.up = true;
-    else if (keyCode == 39)
-      this.right = true;
-    else if (keyCode == 40)
-      this.down = true;
+    if (keyCode < 41 && keyCode > 36) {
+      event.preventDefault();
+
+      if (keyCode == 37)
+        this.left = true;
+      else if (keyCode == 38)
+        this.up = true;
+      else if (keyCode == 39)
+        this.right = true;
+      else if (keyCode == 40)
+        this.down = true;
+    }
   }
 
   /**
