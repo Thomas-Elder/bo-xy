@@ -4,7 +4,7 @@ import {Hud} from './hud';
 import {Display} from './display';
 import {Controller} from './controller.mjs';
 import {config} from './config';
-import {EnemyBox} from './box/boxes.mjs';
+import {EnemyBox, PlayerBox} from './box/boxes.mjs';
 
 /**
  * A class for managing the game.
@@ -42,10 +42,11 @@ export class Engine {
 
     this.boxManager = new BoxManager(this.config, controller);
 
-    this.enemies = new Array(self.config.numberOfEnemies);
+    this.player = new PlayerBox(this.config, controller);
+    this.enemies = new Array(this.config.numberOfEnemies);
 
-    for (var i = 0; i < self.config.numberOfEnemies; i++)
-      this.enemies[i] = new EnemyBox(1, self.config);
+    for (var i = 0; i < this.config.numberOfEnemies; i++)
+      this.enemies[i] = new EnemyBox(1, this.config);
   }
 
   /**
@@ -67,7 +68,7 @@ export class Engine {
       var state = {
         phase: true,
         hud: self.hud,
-        player: self.boxManager.playerBox, 
+        player: self.player, 
         enemies: self.enemies,
         explosions: self.boxManager.explodeBoxes,
         farStars: self.boxManager.farStarBoxes,
@@ -80,7 +81,7 @@ export class Engine {
         // Update everything we want on the screen during this
         self.boxManager.updateBackground();
         self.hud.update();
-        self.boxManager.updatePlayer();
+        self.player.update();
 
         // Then draaw it all
         self.display.drawClear();
@@ -99,7 +100,7 @@ export class Engine {
         // Update everything we want on the screen during this
         self.boxManager.updateBackground();
         self.hud.update();
-        self.boxManager.updatePlayer();
+        self.player.update();
         self.boxManager.updateExplosions();
 
         // Then draaw it all
@@ -138,7 +139,7 @@ export class Engine {
         // Update the game  
         self.boxManager.updateBackground();
         self.hud.update();
-        self.boxManager.updatePlayer();
+        self.player.update();
         self.boxManager.updateExplosions();
         self.enemies.forEach((enemy) => {enemy.update()});
         self.boxManager.enemyHit();

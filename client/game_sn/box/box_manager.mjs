@@ -57,7 +57,7 @@ export class BoxManager {
     self.interaction = new Interaction();
 
     // Instantiate a new instance of type PlayerBox.
-    self.playerBox = new PlayerBox(self.config, self.controller);
+    //self.playerBox = new PlayerBox(self.config, self.controller);
 
     // Calculate placement of enemy boxes based on width of screen and number of boxes.
     self.enemySpacing = (self.config.screenSize.width - self.config.box.enemy.size.width) / (self.config.numberOfEnemies - 1);
