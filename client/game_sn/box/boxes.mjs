@@ -165,6 +165,7 @@ export class PlayerBox {
 export class EnemyBox {
 
   constructor(level, config) {
+    this.level = level;
 
     this.width = config.box.enemy.size.width;
     this.height = config.box.enemy.size.height;
@@ -176,8 +177,10 @@ export class EnemyBox {
     this.x = newPos.x;
     this.y = newPos.y;
 
-    this.colour = config.box.enemy.colour[level];
-    this.speed = config.box.enemy.speed[level];
+    this.colours = config.box.enemy.colour;
+    this.speeds = config.box.enemy.speed;
+    this.colour = this.colours[this.level];
+    this.speed = this.speeds[this.level];
 
     this.hit = false;
   }
@@ -196,6 +199,10 @@ export class EnemyBox {
 
     // Move down the screen
     this.y += this.speed;
+
+    // Update colour and speed if needed.
+    this.colour = this.colours[this.level];
+    this.speed = this.speeds[this.level];
 
     return reposition;
   }
