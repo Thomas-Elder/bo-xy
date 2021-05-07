@@ -87,69 +87,48 @@ export class Engine {
         lives: 3
       };
 
-      // First we need to do intro stuff, till introCount == introDuration
+      // set the phase...
       if (introCount != self.config.introDuration) {
         state.phase = 'intro';
-
-        // Update everything we want on the screen during this
-        self.boxManager.updateBackground();
-        self.player.update();
-
-        // Then draaw it all
-        self.display.draw(state);
-
         introCount++;
 
-        // Then we need to do the same between levels... 
       } else if (levelChangeCount != self.config.levelChangeDuration) {
         state.phase = 'inter';
-
-        // Update everything we want on the screen during this
-        self.boxManager.updateBackground();
-        self.player.update();
-        self.updateExplosions();
-        self.enemies.forEach((enemy) => { self.enemiesDodged += enemy.update(state.phase); });
-
-        // Then draaw it all
-        self.display.draw(state);
-
         levelChangeCount++;
 
-        // Then we need to do the same at the end... 
       } else if (outroCount != self.config.outroDuration) {
         state.phase = 'outro';
-
-        self.boxManager.updateBackground();
-        self.updateExplosions();
-        self.enemies.forEach((enemy) => { self.enemiesDodged += enemy.update(state.phase); });
-        self.display.draw(state);
-
         outroCount++;
 
-        // Else run the game
-      } else if (!gameOver) {
+      } else {
+        self.enemies.forEach((enemy) => { enemy.level = self.level; });
         state.phase = 'play';
+      }
+      
+      // If it's not game over, run the game
+      if (!gameOver) {
 
-        // Update the game  
+        console.log('phase: ', state.phase)
+
         self.boxManager.updateBackground();
         self.player.update();
         self.updateExplosions();
         self.enemies.forEach((enemy) => { self.enemiesDodged += enemy.update(state.phase); });
         self.collision();
+
         self.lives = self.player.lives;
         self.score = self.boxManager.enemiesDodged;
 
         // Check if the level changed
         // And set levelChangeCount =0 so the break plays
-        // Then update self.level, and clearEnemies
-        var currentLevel = Math.floor(self.enemiesDodged / 100); 
+        // Then update self.level.
+        var currentLevel = Math.floor(self.enemiesDodged / 100);
         if (self.level != currentLevel) {
           levelChangeCount = 0;
           self.level = currentLevel;
-          self.enemies.forEach((enemy) => { enemy.level++; });
         }
 
-        // And the draws...
+        // Then draw
         self.display.draw(state);
 
         // Check if game is over and clearInterval if so
