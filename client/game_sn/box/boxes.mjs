@@ -173,9 +173,8 @@ export class EnemyBox {
     this.screenWidth = config.screenSize.width;
     this.screenHeight = config.screenSize.height;
 
-    var newPos = Utility.getNewPosition(this.screenWidth - this.width, this.screenHeight + this.height);
-    this.x = newPos.x;
-    this.y = newPos.y;
+    this.x = 0;
+    this.y = this.screenHeight + this.height;
 
     this.colours = config.box.enemy.colour;
     this.speeds = config.box.enemy.speed;
