@@ -184,17 +184,20 @@ export class EnemyBox {
 
   // Define the EnemyBox type's update method.
   update() {
+    var reposition = false;
 
     // If y > screenheight, reposition
     if (this.y > this.screenHeight) {
       var newPos = Utility.getNewPosition(this.screenWidth - this.width, this.screenHeight);
       this.x = newPos.x;
       this.y = newPos.y;
-
+      reposition = true;
     }
 
     // Move down the screen
     this.y += this.speed;
+
+    return reposition;
   }
 
   // Returns an object with x an y coords, the box's current position

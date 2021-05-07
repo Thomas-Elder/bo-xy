@@ -12,7 +12,7 @@ describe('EnemyBox ',
 
     beforeEach(
       function (done) {
-        enemy = new EnemyBox({ x: 1, y: 1 }, 0, config);
+        enemy = new EnemyBox(0, config);
         done();
       });
 
@@ -21,20 +21,8 @@ describe('EnemyBox ',
         done();
       });
 
-    describe('Position',
+    describe('Update',
       function () {
-        it('should maintain positions passed to the constructor',
-          function (done) {
-
-            var expected = { x: 1, y: 1 };
-
-            var result = enemy.getPosition();
-
-            expect(result).toEqual(expected);
-
-            done();
-          });
-
         it('should reposition on update once y coord is greater than screenheight',
           function (done) {
 
@@ -46,6 +34,19 @@ describe('EnemyBox ',
             var result = enemy.getPosition().y;
 
             expect(result).toBeLessThan(expected);
+
+            done();
+          });
+
+        it('should return true when update triggers a repositioning of the box',
+          function (done) {
+
+            enemy.y = 601;
+            var expected = true;
+
+            var result = enemy.update();
+
+            expect(result).toEqual(expected);
 
             done();
           });
@@ -72,12 +73,13 @@ describe('EnemyBox ',
         it('should update the position of the box when the update function is called',
           function (done) {
 
-            var expected = { x: 1, y: 2 };
+            var expected = { x: enemy.x, y: enemy.y + 1 };
 
             enemy.update();
             var result = enemy.getPosition();
 
-            expect(result).toEqual(expected);
+            expect(result.x).toEqual(expected.x);
+            expect(result.y).toEqual(expected.y);
 
             done();
           });
