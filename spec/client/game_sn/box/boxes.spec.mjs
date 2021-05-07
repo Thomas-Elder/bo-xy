@@ -23,11 +23,11 @@ describe('EnemyBox ',
 
     describe('Update',
       function () {
-        it('should reposition on update once y coord is greater than screenheight',
+        it('should reposition on update once y coord is greater than screenheight, if phase is play',
           function (done) {
 
             enemy.y = 601;
-            enemy.update();
+            enemy.update('play');
 
             var expected = 0;
 
@@ -38,13 +38,41 @@ describe('EnemyBox ',
             done();
           });
 
-        it('should return true when update triggers a repositioning of the box',
+        it('should not reposition on update once y coord is greater than screenheight, if phase is not play',
+          function (done) {
+
+            enemy.y = 601;
+            enemy.update('intro');
+
+            var expected = 602;
+
+            var result = enemy.getPosition().y;
+
+            expect(result).toEqual(expected);
+
+            done();
+          });
+
+        it('should return true when update triggers a repositioning of the box, if phase is play',
           function (done) {
 
             enemy.y = 601;
             var expected = true;
 
-            var result = enemy.update();
+            var result = enemy.update('play');
+
+            expect(result).toEqual(expected);
+
+            done();
+          });
+
+          it('should return false when update triggers a repositioning of the box, if phase is not play',
+          function (done) {
+
+            enemy.y = 601;
+            var expected = false;
+
+            var result = enemy.update('intro');
 
             expect(result).toEqual(expected);
 
